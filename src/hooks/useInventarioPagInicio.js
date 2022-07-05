@@ -19,7 +19,6 @@ const useInventarioPagInicio = () => {
         setHojasBlancas({});
       } else {
         setHojasBlancas(data[0]);
-        console.log(data);
       }
     });
 
