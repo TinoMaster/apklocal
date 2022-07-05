@@ -6,18 +6,20 @@ import PagPersonal from "../pagina personal/pagPersonal";
 import PagVentas from "../pagina ventas/pagVentas";
 import PagCuadre from "../pagina cuadre/pagCuadre";
 import PagProducto from "../pagina productos/pagProducto";
-import {CajaNotas} from "../notas/cajaNotas";
+import { CajaNotas } from "../notas/cajaNotas";
 
-const Contenedor = ({ setMenuActive, setNotasActive, notasActive }) => {
+const Contenedor = ({ setMenuActive, notasActive }) => {
   return (
     <div className=" relative rounded-md bg-white h-full  overflow-hidden">
-      {notasActive === true ? (
-        <div className="absolute w-full md:w-1/4 h-full shadow-xl shadow-violet-500/50 z-30 bg-white right-0">
-          <CajaNotas />
-        </div>
-      ) : (
-        <div className="absolute h-full bg-white right-0 translate-x-full"></div>
-      )}
+      <div
+        className={
+          notasActive
+            ? "absolute w-full md:w-1/4 h-full shadow-xl transition-transform shadow-violet-500/50 z-30 bg-white right-0"
+            : "absolute w-full md:w-1/4 h-full bg-white right-0 transition-transform translate-x-full"
+        }
+      >
+        <CajaNotas />
+      </div>
 
       <div
         onClick={() => setMenuActive(false)}

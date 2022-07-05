@@ -100,7 +100,7 @@ export const CajaNotas = () => {
   return (
     <div className="flex flex-col w-full h-full relative">
       {modalIsOpen && (
-        <div className="flex w-full h-full absolute z-50 bg-black/20 items-center justify-center">
+        <div className="flex w-full h-full  absolute z-50 bg-black/20 items-center justify-center">
           <div className="flex rounded-lg flex-col w-10/12 bg-white shadow-lg shadow-green-400/30 border-2 border-green-300 p-2">
             <h3 className="w-full text-center text-lg font-serif text-green-700">
               {dataToEdit ? "Editar Nota" : "Nueva nota"}
@@ -136,7 +136,7 @@ export const CajaNotas = () => {
               ></textarea>
               <div className="mt-2">
                 <label htmlFor="tel" className="text-sm text-green-700">
-                  <FontAwesomeIcon icon={faPhone}/> :{" "}
+                  <FontAwesomeIcon icon={faPhone} /> :{" "}
                 </label>
                 <input
                   type="number"
