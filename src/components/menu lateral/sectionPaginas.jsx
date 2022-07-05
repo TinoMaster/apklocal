@@ -15,7 +15,7 @@ const SectionPaginas = () => {
         Paginas
       </h6>
       <ul className="flex flex-col my-2 justify-center  items-center">
-        <li className="link w-full font-light rounded text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
           <NavLink
             className={({ isActive }) =>
               isActive ? "font-semibold text-teal-500" : ""
@@ -26,7 +26,7 @@ const SectionPaginas = () => {
           </NavLink>
         </li>
 
-        <li className="link w-full font-light rounded text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
           <NavLink
             className={({ isActive }) =>
               isActive ? "font-semibold text-teal-500" : ""
@@ -36,7 +36,7 @@ const SectionPaginas = () => {
             <FontAwesomeIcon className="mx-1" icon={faClipboard} /> Ventas
           </NavLink>
         </li>
-        <li className="link w-full font-light rounded text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
           <NavLink
             className={({ isActive }) =>
               isActive ? "font-semibold text-teal-500" : ""
@@ -47,7 +47,7 @@ const SectionPaginas = () => {
             Inventario
           </NavLink>
         </li>
-        <li className="link w-full font-light rounded text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
           <NavLink
             className={({ isActive }) =>
               isActive ? "font-semibold text-teal-500" : ""
