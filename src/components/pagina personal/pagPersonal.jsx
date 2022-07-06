@@ -3,7 +3,9 @@ import Trabajador from "./trabajador";
 
 const PagPersonal = () => {
   return (
-    <div className="flex p-4 flex-wrap w-full h-full">
+    <div className="flex p-4 justify-around flex-wrap w-full h-full overflow-y-scroll">
+      <Trabajador />
+      <Trabajador />
       <Trabajador />
     </div>
   );

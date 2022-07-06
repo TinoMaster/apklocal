@@ -3,19 +3,19 @@ import img from "../../assets/img/Bryam.jpg";
 
 const Trabajador = () => {
   return (
-    <div className="w-full max-h-80 md:w-2/5 md:h-2/5 bg-violet-500/90 rounded-xl shadow-xl shadow-violet-500/50 flex flex-col">
+    <div className="w-full h-96 md:w-2/5 md:h-2/5 border-2 mt-9 md:mt-0 bg-violet-500/90 rounded-xl shadow-xl shadow-violet-500/50 flex flex-col">
       {/* Primera caja superior */}
-      <div className="h-1/2 flex  rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
+      <div className="h-1/2 flex pb-4 rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
         <div className="flex flex-wrap w-1/4 justify-center items-center">
           <img
-            className="w-10/12 h-2/4 md:h-3/4 border-green-300"
+            className="w-10/12 h-2/5 md:h-3/4 rounded-xl border-violet-100"
             src={img}
             alt=""
           />
         </div>
         {/* Caja nombre descripcion */}
-        <div className="w-3/4 flex flex-wrap">
+        <div className="w-3/4 h-full flex flex-wrap">
           <h4 className="w-full h-1/3 p-2 text-sm md:text-base text-center text-slate-700 font-serif font-semibold">
             Bryam Gonzales Cueto
           </h4>
@@ -62,17 +62,17 @@ const Trabajador = () => {
             {/* Correo electronico */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
                 <h4 className="text-xs md:text-sm text-white font-serif font-semibold">Correo</h4>
-                <p className="text-xs md:text-sm text-white w-full">oscarmarcos2673@gmail.com</p>
+                <p className="text-xs md:text-sm text-center text-white w-full">oscarmarcos2673@gmail.com</p>
             </div>
             {/* Usuario */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
                 <h4 className="text-xs md:text-sm text-white font-serif font-semibold">Usuario</h4>
-                <p className="text-xs md:text-sm text-white text-center w-full">Bry@m</p>
+                <p className="text-xs md:text-sm text-white text-center w-full">Bryam</p>
             </div>
             {/* Contraseña */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
                 <h4 className="text-xs md:text-sm text-white font-serif font-semibold">Contraseña</h4>
-                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-white bg-green-500"/>
+                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-xs md:text-sm text-white bg-green-500"/>
             </div>
             {/* Venta este mes */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
