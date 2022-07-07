@@ -64,45 +64,49 @@ export const useEstadisticasPagInicio = () => {
   const [esteMes, setEsteMes] = useState({});
   const [error, setError] = useState({});
   const [bdPorAño, setbdPorAño] = useState({});
-  
-  const api = httpHelper();
 
   useEffect(() => {
-    api.get(url).then((data) => {
-      if (!data.length) {
-        setBdCuadre({});
-        setError({
-          name: "error de coneccion con la base de datos",
-          status: 404,
-          statusText: "Error de conexion",
-        });
-      } else {
-        setError({});
-        setBdCuadre(data);
-      }
-    });
-    api.get(urlDelMes).then((data) => {
-      if (!data.length) {
-        setEsteMes({});
-        setError({
-          name: "error de conexion con la base de datos",
-          status: 404,
-          statusText: "Error de conexion",
-        });
-      } else {
-        setError({});
-        setEsteMes(data);
-      }
-    });
-    api.get(urlGetAño).then((el) => {
-      if (!el.length) {
-        setbdPorAño({});
-        setError(el);
-      } else {
-        setbdPorAño(el);
-        setError({});
-      }
-    });
+    httpHelper()
+      .get(url)
+      .then((data) => {
+        if (!data.length) {
+          setBdCuadre({});
+          setError({
+            name: "error de coneccion con la base de datos",
+            status: 404,
+            statusText: "Error de conexion",
+          });
+        } else {
+          setError({});
+          setBdCuadre(data);
+        }
+      });
+    httpHelper()
+      .get(urlDelMes)
+      .then((data) => {
+        if (!data.length) {
+          setEsteMes({});
+          setError({
+            name: "error de conexion con la base de datos",
+            status: 404,
+            statusText: "Error de conexion",
+          });
+        } else {
+          setError({});
+          setEsteMes(data);
+        }
+      });
+    httpHelper()
+      .get(urlGetAño)
+      .then((el) => {
+        if (!el.length) {
+          setbdPorAño({});
+          setError(el);
+        } else {
+          setbdPorAño(el);
+          setError({});
+        }
+      });
   }, []);
 
   const totalRecaudadoAño = (bd) => {

@@ -14,28 +14,31 @@ const InventarioProvider = ({ children }) => {
 
   const urlGetInsumos = "http://localhost:5000/inventario/insumos";
   const urlGetMediosBasicos = "http://localhost:5000/inventario/mediosBasicos";
-  const api = httpHelper();
 
   useEffect(() => {
-    api.get(urlGetInsumos).then((res) => {
-      if (!res.length) {
-        setError(res);
-        setInsumos([]);
-      } else {
-        setError({});
-        setInsumos(res);
-      }
-    });
+    httpHelper()
+      .get(urlGetInsumos)
+      .then((res) => {
+        if (!res.length) {
+          setError(res);
+          setInsumos([]);
+        } else {
+          setError({});
+          setInsumos(res);
+        }
+      });
 
-    api.get(urlGetMediosBasicos).then((res) => {
-      if (!res.length) {
-        setError(res);
-        setMediosBasicos([]);
-      } else {
-        setError({});
-        setMediosBasicos(res);
-      }
-    });
+    httpHelper()
+      .get(urlGetMediosBasicos)
+      .then((res) => {
+        if (!res.length) {
+          setError(res);
+          setMediosBasicos([]);
+        } else {
+          setError({});
+          setMediosBasicos(res);
+        }
+      });
   }, []);
 
   const handlerChangeInsumoToEdit = (e) => {
@@ -54,13 +57,17 @@ const InventarioProvider = ({ children }) => {
     const urlEliminar = `http://localhost:5000/inventario/${id}`;
     console.log(id);
 
-    await api.del(urlEliminar);
-    api.get(urlGetInsumos).then((res) => {
-      setInsumos(res);
-    });
-    api.get(urlGetMediosBasicos).then((res) => {
-      setMediosBasicos(res);
-    });
+    await httpHelper().del(urlEliminar);
+    httpHelper()
+      .get(urlGetInsumos)
+      .then((res) => {
+        setInsumos(res);
+      });
+    httpHelper()
+      .get(urlGetMediosBasicos)
+      .then((res) => {
+        setMediosBasicos(res);
+      });
   };
 
   /* enviar edit de insumos */
@@ -86,10 +93,12 @@ const InventarioProvider = ({ children }) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    await api.put(urlEdit, options);
-    api.get(urlGetInsumos).then((response) => {
-      setInsumos(response);
-    });
+    await httpHelper().put(urlEdit, options);
+    httpHelper()
+      .get(urlGetInsumos)
+      .then((response) => {
+        setInsumos(response);
+      });
   };
   /* Enviar edit de Medios Basicos */
   const sendDataToEditMBasicos = async (id) => {
@@ -113,12 +122,16 @@ const InventarioProvider = ({ children }) => {
       headers: { "Content-Type": "application/json" },
     };
 
-    await api.put(urlEdit, options).then((response) => {
-      setMBasicoToEdit({});
-    });
-    api.get(urlGetMediosBasicos).then((response) => {
-      setMediosBasicos(response);
-    });
+    await httpHelper()
+      .put(urlEdit, options)
+      .then((response) => {
+        setMBasicoToEdit({});
+      });
+    httpHelper()
+      .get(urlGetMediosBasicos)
+      .then((response) => {
+        setMediosBasicos(response);
+      });
   };
 
   const data = {
