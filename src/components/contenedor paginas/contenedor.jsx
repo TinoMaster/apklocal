@@ -10,7 +10,7 @@ import { CajaNotas } from "../notas/cajaNotas";
 
 const Contenedor = ({ setMenuActive, notasActive }) => {
   return (
-    <div className=" relative rounded-md bg-white h-full  overflow-hidden">
+    <div className=" relative rounded-md h-full overflow-hidden">
       <div
         className={
           notasActive

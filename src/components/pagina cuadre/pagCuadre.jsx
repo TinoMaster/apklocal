@@ -21,7 +21,7 @@ const PagCuadre = () => {
   } = useForm(setErrorsForm);
 
   return (
-    <div className="flex flex-col w-full overflow-y-scroll h-full md:py-6 rounded-lg relative">
+    <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full md:py-6 rounded-lg relative">
       {ModalCuadre && <ModalResult />}
 
       <div className="flex flex-col md:flex-row w-full md:h-1/4 border-b-2">

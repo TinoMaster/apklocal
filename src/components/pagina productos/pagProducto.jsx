@@ -12,7 +12,7 @@ const PagProducto = () => {
   } = usePagProducto();
 
   return (
-    <div className="w-3/4 m-auto">
+    <div className="w-full md:w-3/4 m-auto max-w-1080p">
       <div className="w-full flex justify-center mt-5">
         <input
           type="radio"
@@ -24,7 +24,7 @@ const PagProducto = () => {
         />
         <label
           htmlFor="insumos"
-          className="p-3 rounded-l-lg bg-gray-500/80 hover:bg-violet-400 hover:cursor-pointer shadow-lg text-sm  text-white"
+          className="p-3 rounded-l-lg bg-gray-500/80 hover:bg-violet-400 hover:cursor-pointer shadow-lg text-xs  text-white"
         >
           Insumos
         </label>
@@ -37,7 +37,7 @@ const PagProducto = () => {
         />
         <label
           htmlFor="medioBasico"
-          className="p-3 rounded-r-lg bg-gray-500/80 hover:bg-violet-400 hover:cursor-pointer shadow-lg text-sm  text-white"
+          className="p-3 rounded-r-lg bg-gray-500/80 hover:bg-violet-400 hover:cursor-pointer shadow-lg text-xs  text-white"
         >
           Medio Basico
         </label>
@@ -47,17 +47,17 @@ const PagProducto = () => {
         <div className="w-11/12 md:w-3/4 m-auto flex flex-wrap mt-10">
           <div className="w-full rounded-md bg-violet-500/90 shadow-md flex justify-between">
             <div className=" w-1/3 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Nombre
               </h4>
             </div>
             <div className=" w-1/3 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Almacen
               </h4>
             </div>
             <div className=" w-1/3 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Local
               </h4>
             </div>
@@ -69,7 +69,7 @@ const PagProducto = () => {
                 onChange={handlerChangeInsumo}
                 name="nombre"
                 type="text"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/3 text-center border-x-2 p-1">
@@ -77,7 +77,7 @@ const PagProducto = () => {
                 onChange={handlerChangeInsumo}
                 name="almacen"
                 type="number"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/3 text-center border-x-2 p-1">
@@ -85,7 +85,7 @@ const PagProducto = () => {
                 onChange={handlerChangeInsumo}
                 name="local"
                 type="number"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
           </div>
@@ -95,11 +95,11 @@ const PagProducto = () => {
               onClick={() => handlerSubmitSalvarInsumo()}
               type="button"
               value="Enviar"
-              className="py-3 px-7 text-sm font-serif shadow-lg shadow-violet-300 rounded-lg bg-violet-500/90 hover:bg-violet-600 hover:shadow-violet-400 hover:cursor-pointer text-white"
+              className="py-3 px-7 text-xs font-serif shadow-lg shadow-violet-300 rounded-lg bg-violet-500/90 hover:bg-violet-600 hover:shadow-violet-400 hover:cursor-pointer text-white"
             />
           </div>
           {error !== "" && (
-            <p className="w-1/2 m-auto rounded-lg text-center mt-5 text-sm text-white p-3 bg-red-500/80">
+            <p className="w-1/2 m-auto rounded-lg text-center mt-5 text-xs text-white p-3 bg-red-500/80">
               {error}
             </p>
           )}
@@ -110,27 +110,27 @@ const PagProducto = () => {
         <div className="w-11/12 md:w-3/4 m-auto flex flex-wrap mt-10">
           <div className="w-full rounded-md bg-violet-500/90 shadow-md flex justify-between">
             <div className=" w-1/5 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Nombre
               </h4>
             </div>
             <div className=" w-1/5 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Modelo
               </h4>
             </div>
             <div className=" w-1/5 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 # Serie
               </h4>
             </div>
             <div className=" w-1/5 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Almacen
               </h4>
             </div>
             <div className=" w-1/5 text-center border-x-2">
-              <h4 className="p-2 text-white font-semibold text-sm font-serif">
+              <h4 className="p-2 text-white font-semibold text-xs font-serif">
                 Local
               </h4>
             </div>
@@ -142,7 +142,7 @@ const PagProducto = () => {
                 name="nombre"
                 onChange={handlerChangeMBasico}
                 type="text"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/5 text-center border-x-2 p-1">
@@ -150,7 +150,7 @@ const PagProducto = () => {
                 name="modelo"
                 onChange={handlerChangeMBasico}
                 type="text"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/5 text-center border-x-2 p-1">
@@ -158,7 +158,7 @@ const PagProducto = () => {
                 name="serie"
                 onChange={handlerChangeMBasico}
                 type="text"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/5 text-center border-x-2 p-1">
@@ -166,7 +166,7 @@ const PagProducto = () => {
                 name="almacen"
                 onChange={handlerChangeMBasico}
                 type="number"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
             <div className=" w-1/5 text-center border-x-2 p-1">
@@ -174,7 +174,7 @@ const PagProducto = () => {
                 name="local"
                 onChange={handlerChangeMBasico}
                 type="number"
-                className="w-full h-full text-center hover:outline-none text-sm focus:outline-none"
+                className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
           </div>
@@ -184,11 +184,11 @@ const PagProducto = () => {
               onClick={() => handlerSubmitSalvarMBasico()}
               type="button"
               value="Enviar"
-              className="py-3 px-7 text-sm font-serif shadow-lg shadow-violet-300 rounded-lg bg-violet-500/90 hover:bg-violet-600 hover:shadow-violet-400 hover:cursor-pointer text-white"
+              className="py-3 px-7 text-xs font-serif shadow-lg shadow-violet-300 rounded-lg bg-violet-500/90 hover:bg-violet-600 hover:shadow-violet-400 hover:cursor-pointer text-white"
             />
           </div>
           {error !== "" && (
-            <p className="w-1/2 m-auto rounded-lg text-center mt-5 text-sm text-white p-3 bg-red-500/80">
+            <p className="w-1/2 m-auto rounded-lg text-center mt-5 text-xs text-white p-3 bg-red-500/80">
               {error}
             </p>
           )}

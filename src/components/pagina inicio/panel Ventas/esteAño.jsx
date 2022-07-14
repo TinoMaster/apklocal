@@ -24,7 +24,7 @@ const EsteAño = () => {
   } = useEstadisticasPagInicio();
 
   return (
-    <div className="flex flex-col w-10/12 m-auto mt-10 md:mt-0 md:w-5/12 md:h-full shadow-lg shadow-black-400/50 bg-teal-400 rounded-lg">
+    <div className="flex flex-col w-11/12 m-auto mt-10 md:mt-0 md:w-5/12 md:h-full shadow-lg shadow-black-400/50 bg-teal-400 rounded-lg">
       <h3 className="font-serif font-normal text-2xl p-3 text-white">
         <FontAwesomeIcon icon={faCalendarDays} /> Este Año
       </h3>

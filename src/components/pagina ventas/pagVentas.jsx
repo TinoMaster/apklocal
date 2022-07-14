@@ -14,7 +14,7 @@ const PagVentas = () => {
   let totalDueño = 0;
 
   return (
-    <div className="container w-full h-full overflow-scroll m-auto">
+    <div className="w-full max-w-1080p h-full overflow-auto m-auto">
       <div className="cajaEstadisticas relative">
         <div className="flex flex-wrap m-2  justify-around bg-violet-200 rounded-lg mt-2">
           <input

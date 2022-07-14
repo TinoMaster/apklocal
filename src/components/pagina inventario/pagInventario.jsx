@@ -4,13 +4,11 @@ import MedioBasico from "./medio-basico";
 
 const PagInventario = () => {
   return (
-    <div className="">
-      <div className="relative w-full flex flex-wrap h-screen overflow-scroll">
-        {/* Caja Insumos */}
-        <Insumos />
-        {/* medio Basico */}
-        <MedioBasico />
-      </div>
+    <div className="relative max-w-1080p m-auto w-full flex flex-wrap h-screen overflow-auto">
+      {/* Caja Insumos */}
+      <Insumos />
+      {/* medio Basico */}
+      <MedioBasico />
     </div>
   );
 };

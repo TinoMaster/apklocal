@@ -10,6 +10,22 @@ const Login = () => {
   const [succes, setSucces] = useState(null);
   const [error, setError] = useState(null);
 
+  const confirmarAdmin = async () => {
+    await httpHelper()
+      .get("http://localhost:5000/admin")
+      .then((res) => {
+        if (res.length) {
+          setOpcion("inicio");
+        } else {
+          setOpcion("registro");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  confirmarAdmin();
+
   //Hadlers
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -66,7 +82,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen relative h-screen flex flex-wrap justify-center bg-violet-600">
+    <div className="w-screen relative h-screen flex flex-col items-center justify-center bg-violet-600">
       {error && (
         <p className="p-2 top-36 text-red-500 bg-white rounded-lg absolute">
           {error.message}
@@ -78,60 +94,48 @@ const Login = () => {
         </p>
       )}
 
-      <div className="flex items-start justify-center w-full">
-        <p
-          onClick={() => setOpcion("registro")}
-          className="p-4 rounded-md bg-white"
-        >
-          registro
-        </p>
-        <p
-          onClick={() => setOpcion("inicio")}
-          className="p-4 rounded-md bg-white"
-        >
-          inicio
-        </p>
-      </div>
-
-      <div className="w-11/12 md:w-1/5 h-2/3 flex flex-col overflow-hidden bg-white p-6 shadow-lg rounded-lg">
+      <div className="w-11/12 md:w-1/5 h-3/5 flex max-w-lg max-h-128 flex-col justify-around overflow-hidden bg-white p-6 shadow-xl shadow-black/40 rounded-lg">
         <div className="w-full h-80 flex items-center justify-center">
           <img src={img} alt="Logo" />
         </div>
-        <input
-          type="email"
-          name="nombre"
-          placeholder="Nombre"
-          className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
-          autoComplete="off"
-          onChange={opcion === "inicio" ? handleChange : handleChangeRegistro}
-        />
-        {opcion === "registro" && (
+
+        <div className="w-full flex flex-col">
           <input
             type="email"
-            name="usuario"
-            placeholder="Correo"
+            name="nombre"
+            placeholder="Nombre"
             className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
             autoComplete="off"
-            onChange={handleChangeRegistro}
+            onChange={opcion === "inicio" ? handleChange : handleChangeRegistro}
           />
-        )}
+          {opcion === "registro" && (
+            <input
+              type="email"
+              name="usuario"
+              placeholder="Correo"
+              className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
+              autoComplete="off"
+              onChange={handleChangeRegistro}
+            />
+          )}
 
-        <input
-          type="password"
-          name="contraseña"
-          placeholder="Contraseña"
-          className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
-          onChange={opcion === "inicio" ? handleChange : handleChangeRegistro}
-        />
-        {opcion === "registro" && (
           <input
             type="password"
-            name="confirmacion"
-            placeholder="Confirmar contraseña"
+            name="contraseña"
+            placeholder="Contraseña"
             className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
-            onChange={handleChangeRegistro}
+            onChange={opcion === "inicio" ? handleChange : handleChangeRegistro}
           />
-        )}
+          {opcion === "registro" && (
+            <input
+              type="password"
+              name="confirmacion"
+              placeholder="Confirmar contraseña"
+              className="w-3/5 mx-auto my-2 shadow-md p-2 rounded-md focus:outline-violet-300"
+              onChange={handleChangeRegistro}
+            />
+          )}
+        </div>
 
         <input
           type="button"
