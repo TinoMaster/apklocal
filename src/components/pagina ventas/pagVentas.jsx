@@ -192,7 +192,9 @@ const PagVentas = () => {
             <tr className="bg-violet-500 text-white sticky top-0 w-full">
               <th className="py-2 border-2 rounded-lg text-xs">Fecha</th>
               <th className="py-2 border-2 rounded-lg text-xs">Venta</th>
-              <th className="py-2 border-2 rounded-lg text-xs">Fondo</th>
+              <th className="py-2 border-2 hidden md:block rounded-lg text-xs">
+                Fondo
+              </th>
               <th className="py-2 border-2 rounded-lg text-xs">Salario</th>
               <th className="py-2 border-2 rounded-lg text-xs">Turno</th>
               <th className="py-2 border-2 rounded-lg text-xs">Dueño</th>
@@ -207,9 +209,9 @@ const PagVentas = () => {
                     key={dia.id}
                   >
                     <td className="text-center ">
-                      <h4 className="py-2 md:p-2 md:m-2 shadow-lg text-violet-500 font-medium rounded-lg bg-white text-xs">
+                      <h4 className="py-2 md:p-2 md:m-2 shadow-lg  text-violet-600 rounded-lg bg-white text-xs">
                         <FontAwesomeIcon
-                          className="text-violet-600"
+                          className="text-violet-600 hidden md:block"
                           icon={faCalendarDays}
                         />{" "}
                         {dia.fecha}
@@ -218,13 +220,13 @@ const PagVentas = () => {
                     <td className="text-center">
                       <h4 className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                         <FontAwesomeIcon
-                          className="mr-1 text-slate-600"
+                          className=" text-slate-600"
                           icon={faDollarSign}
                         />
                         {dia.miron}
                       </h4>
                     </td>
-                    <td className="text-center">
+                    <td className="text-center hidden md:block">
                       <h4 className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                         <FontAwesomeIcon
                           className="mr-1 text-slate-600"
@@ -237,7 +239,7 @@ const PagVentas = () => {
                       {!dia.turno.trabajador2 ? (
                         <p className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
-                            className="mr-1 text-slate-600"
+                            className="text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.salario1}
@@ -245,7 +247,7 @@ const PagVentas = () => {
                       ) : (
                         <p className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
-                            className="mr-1 text-slate-600"
+                            className="text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.salario1 + dia.salario2}
@@ -290,7 +292,7 @@ const PagVentas = () => {
               </h3>
             )}
           </table>
-          <div className="flex fixed bottom-10 right-36">
+          <div className="flex fixed right-2 bottom-2 md:bottom-10 md:right-36">
             <p className="bg-violet-500 py-2 px-4 rounded-xl text-white shadow-lg text-xs shadow-violet-500">{`Venta: ${totalVenta}`}</p>
             <p className="bg-violet-500 py-2 px-4 rounded-xl text-white shadow-lg ml-4 text-xs shadow-violet-500">{`Dueño: ${totalDueño}`}</p>
           </div>

@@ -30,7 +30,7 @@ function App() {
                       menuActive={menuActive}
                       setMenuActive={setMenuActive}
                     />
-                    <div className="fondo flex flex-col h-screen w-full ">
+                    <section className="container m-auto fondo flex flex-col h-screen w-full ">
                       <Menu
                         menuActive={menuActive}
                         setMenuActive={setMenuActive}
@@ -43,12 +43,12 @@ function App() {
                         setNotasActive={setNotasActive}
                         notasActive={notasActive}
                       />
-                    </div>
+                    </section>
                   </main>
                 </EstadisticasProvider>
               </InventarioProvider>
             }
-          />
+          /> 
         )}
       </Routes>
     </BrowserRouter>

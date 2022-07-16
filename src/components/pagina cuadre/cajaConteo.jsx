@@ -18,14 +18,14 @@ const CajaConteo = () => {
   );
 
   return (
-    <div className="w-full max-w-4xl md:h-full items-center relative justify-center sm:w-9/12 m-auto md:w-5/12 flex flex-col mb-12 md:m-0">
+    <div className="w-full max-w-4xl md:h-full items-center relative justify-center sm:w-9/12 m-auto md:w-6/12 flex flex-col mb-12 md:m-0">
       {errors && <p className="absolute top-3 text-sm bg-rose-500 shadow-md shadow-rose-400/75 text-white rounded-md ">{errors.name}</p>}
 
       <form
         action=""
-        className="flex flex-col h-full w-10/12 relative md:h-5/6 shadow mt-16 md:mt-0 rounded-xl md:w-3/4 "
+        className="flex flex-col h-full w-10/12 relative md:h-5/6 shadow mt-16 md:mt-0 rounded-lg md:w-3/5 "
       >
-        <h3 className="text-center p-3 font-serif bg-violet-500/80 text-white font-semibold rounded-t-xl">
+        <h3 className="text-center p-3 font-serif bg-violet-500/80 text-white font-semibold rounded-t-lg">
           <FontAwesomeIcon icon={faCoins} /> Desglose
         </h3>
 
@@ -161,7 +161,7 @@ const CajaConteo = () => {
           </div>
         </div>
 
-        <div className="flex w-full border-t-2 mt-6 md:mt-0 bg-slate-100 border-slate-300 justify-end p-4 rounded-xl">
+        <div className="flex w-full border-t-2 mt-6 md:mt-0 bg-slate-100 border-slate-300 justify-between p-2 md:p-4 rounded-xl">
           <input
             type="reset"
             onClick={() => {
@@ -169,19 +169,19 @@ const CajaConteo = () => {
               setResult(0);
             }}
             value="Resetear"
-            className="text-white text-sm font-sans w-24 shadow-lg px-3 py-1 mr-8 rounded-xl shadow-slate-500/60 font-semibold bg-slate-500 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600"
+            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-slate-500/60 font-semibold bg-slate-500 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600"
           />
           <input
             type="button"
             onClick={handlerSubmit}
-            className="text-white text-sm font-sans w-24 shadow-lg px-3 py-1 mr-8 rounded-xl shadow-violet-500/60 font-semibold bg-violet-500 hover:bg-violet-600 hover:cursor-pointer hover:shadow-violet-600"
+            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-violet-500/60 font-semibold bg-violet-500 hover:bg-violet-600 hover:cursor-pointer hover:shadow-violet-600"
             value="Procesar"
           />
           <input
             type="number"
             value={result}
             name="respuesta"
-            className="border-b-2 text-sm w-1/3 border-slate-400 text-center rounded-2xl font-sans md:font-medium md:text-md text-violet-600"
+            className="border-b-2 text-sm w-1/4 border-slate-400 text-center rounded-2xl font-sans md:font-medium md:text-md text-violet-600"
             placeholder="Resultado"
             readOnly
           />

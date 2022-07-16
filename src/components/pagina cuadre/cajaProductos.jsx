@@ -2,8 +2,8 @@ import React from "react";
 
 const CajaProductos = () => {
   return (
-    <div className="flex flex-col w-full mb-10 md:m-0 md:bg-white bg-slate-100 justify-center border-r-2 md:w-1/2">
-      <h5 className="w-full text-center text-slate-400 font-semibold text-lg font-serif p-3">
+    <div className="flex flex-col w-full mb-10 md:m-0 justify-center md:w-1/2">
+      <h5 className="w-full text-center text-slate-400 font-semibold text-sm md:text-lg font-serif p-3">
         Insumos
       </h5>
      {/*  <div className="w-full h-full flex flex-wrap items-center">
