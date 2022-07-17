@@ -171,7 +171,7 @@ export const CajaNotas = () => {
         </div>
       )}
 
-      <div className="w-full h-full overflow-scroll p-2">
+      <div className="w-full h-full overflow-auto p-2">
         <div className="flex flex-wrap relative justify-end w-full">
           <h2 className="w-full text-center text-slate-600 font-semibold text-base font-serif">
             Notas

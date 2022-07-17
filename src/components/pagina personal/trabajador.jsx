@@ -3,9 +3,9 @@ import img from "../../assets/img/Bryam.jpg";
 
 const Trabajador = () => {
   return (
-    <div className="w-full h-96 md:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-slate-800 rounded-xl shadow-xl shadow-violet-500/50 flex flex-col">
+    <div className="w-full h-96 md:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
       {/* Primera caja superior */}
-      <div className="h-1/2 flex pb-4 rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
+      <div className="h-1/2 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
         <div className="flex flex-wrap w-1/4 justify-center items-center">
           <img
@@ -57,36 +57,36 @@ const Trabajador = () => {
 
       {/* caja inferior */}
       <div className="h-1/2 flex flex-col rounded-b-lg">
-        <h4 className="h-1/3 w-full text-xs  p-2 text-white font-serif font-semibold text-center">Info:</h4>
+        <h4 className="h-1/3 w-full text-xs  p-2 text-slate-700 font-serif font-semibold text-center">Info:</h4>
         <div className="h-full w-full flex flex-wrap">
             {/* Correo electronico */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">Correo</h4>
-                <p className="text-xs  text-center text-white w-full">oscarmarcos2673@gmail.com</p>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">Correo</h4>
+                <p className="text-xs  text-center text-slate-700 w-full">oscarmarcos2673@gmail.com</p>
             </div>
             {/* Usuario */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">Usuario</h4>
-                <p className="text-xs  text-white text-center w-full">Bryam</p>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">Usuario</h4>
+                <p className="text-xs  text-slate-700 text-center w-full">Bryam</p>
             </div>
             {/* Contraseña */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">Contraseña</h4>
-                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-xs  text-white bg-green-500"/>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">Contraseña</h4>
+                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-xs  text-slate-700 bg-green-500"/>
             </div>
             {/* Venta este mes */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">este mes</h4>
-                <p className="text-xs  text-white">$ 12874</p>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">este mes</h4>
+                <p className="text-xs  text-slate-700">$ 12874</p>
             </div>
             {/* salario este año */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">este año</h4>
-                <p className="text-xs  text-white">$ 32014</p>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">este año</h4>
+                <p className="text-xs  text-slate-700">$ 32014</p>
             </div>
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-                <h4 className="text-xs  text-white font-serif font-semibold">general</h4>
-                <p className="text-xs  text-white">$ 84210</p>
+                <h4 className="text-xs  text-slate-700 font-serif font-semibold">general</h4>
+                <p className="text-xs  text-slate-700">$ 84210</p>
             </div>
         </div>
       </div>

@@ -9,6 +9,9 @@ module.exports = {
       maxWidth: {
         "1080p": "1920px",
       },
+      minHeight:{
+        "movil":"550px"
+      }
     },
   },
   plugins: [],

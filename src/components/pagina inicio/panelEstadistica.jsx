@@ -28,42 +28,42 @@ const PanelEstadisticas = () => {
       <div className="p-1">
         {/*Balance Total  */}
         <div className="m-2 p-2 rounded-md flex justify-between">
-          <h4 className="text-lg text-indigo-700 font-serif flex">
+          <h4 className="md:text-lg text-indigo-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-violet-500 mr-1 rounded-full p-1"
               icon={faHouse}
             />
             Balance total
           </h4>
-          <p className="text-base text-indigo-700">
+          <p className="text-sm md:text-base text-indigo-700">
             <FontAwesomeIcon icon={faDollar} /> {totalRecaudadoAño(bdCuadre)}
           </p>
         </div>
         {/* Dueño */}
         <div className="m-2 mb-6 shadow-md p-2 rounded-md flex justify-between">
-          <h4 className="text-lg text-emerald-700 font-serif flex">
+          <h4 className="md:text-lg text-emerald-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-emerald-400 mr-2 rounded-full py-1 px-2"
               icon={faUser}
             />
             Dueño
           </h4>
-          <p className="text-base text-emerald-700">
-            <FontAwesomeIcon icon={faDollar} />{" "}
+          <p className="text-sm md:text-base text-emerald-700">
+            <FontAwesomeIcon icon={faDollar} />
             {totalRecaudadoAñoDueño(bdCuadre)}
           </p>
         </div>
         {/* Mejor Venta */}
         <div className="m-2 shadow-md p-2 rounded-md flex flex-wrap justify-between">
-          <h4 className="text-lg text-gray-700 font-serif flex">
+          <h4 className="md:text-lg text-gray-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-gray-500 mr-2 rounded-full p-1"
               icon={faScaleBalanced}
             />
             Mejor Venta
           </h4>
-          <p className="text-base text-gray-700">
-            <FontAwesomeIcon icon={faDollar} /> 7699
+          <p className="text-sm md:text-base text-green-700">
+            <FontAwesomeIcon icon={faDollar} /> {mejorVenta(bdCuadre).miron}
           </p>
           <div className="w-full flex">
             <div className="w-1/2 flex p-3 justify-center">
@@ -84,49 +84,56 @@ const PanelEstadisticas = () => {
         </div>
         {/* Mejor Mes */}
         <div className="m-2 shadow-md p-2 rounded-md flex flex-wrap justify-between">
-          <h4 className="text-lg text-gray-700 font-serif flex">
+          <h4 className="md:text-lg text-gray-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-gray-500 mr-2 rounded-full p-1"
               icon={faCalendar}
             />
             Mejor Mes
           </h4>
-          <p className="text-base font-serif text-green-700">{mejorYpeorMes(bdCuadre)[0]}</p>
+          <p className="text-sm md:text-base font-serif text-green-700">
+            {mejorYpeorMes(bdCuadre)[0]}
+          </p>
           <div className="w-full flex">
             <div className="w-full flex p-3 justify-center">
               <p className="text-xs font-serif text-slate-700">Venta:</p>
-              <p className="text-xs ml-1 text-violet-600">{mejorYpeorMes(bdCuadre)[1]}</p>
+              <p className="text-xs ml-1 text-violet-600">{`$${
+                mejorYpeorMes(bdCuadre)[1]
+              }`}</p>
             </div>
-            
           </div>
         </div>
         {/* Peor mes */}
         <div className="m-2 shadow-md p-2 rounded-md flex flex-wrap justify-between">
-          <h4 className="text-lg text-gray-700 font-serif flex">
+          <h4 className="md:text-lg text-gray-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-gray-500 mr-2 rounded-full p-1"
               icon={faCalendar}
             />
             Peor Mes
           </h4>
-          <p className="text-base text-red-600/80 font-serif">{mejorYpeorMes(bdCuadre)[2]}</p>
+          <p className="text-sm md:text-base text-red-600/80 font-serif">
+            {mejorYpeorMes(bdCuadre)[2]}
+          </p>
           <div className="w-full flex">
             <div className="w-full flex p-3 justify-center">
               <p className="text-xs font-serif text-slate-700">Venta:</p>
-              <p className="text-xs ml-1 text-violet-600">{mejorYpeorMes(bdCuadre)[3]}</p>
+              <p className="text-xs ml-1 text-violet-600">{`$${
+                mejorYpeorMes(bdCuadre)[3]
+              }`}</p>
             </div>
           </div>
         </div>
         {/* Mejor Turno */}
         <div className="m-2 shadow-md p-2 rounded-md flex flex-wrap justify-between">
-          <h4 className="text-lg text-gray-700 font-serif flex">
+          <h4 className="md:text-lg text-gray-700 font-serif flex">
             <FontAwesomeIcon
               className="text-white bg-gray-500 mr-2 rounded-full p-1"
               icon={faUserTie}
             />
             Mejor Turno
           </h4>
-          <p className="text-base text-gray-700">Bryam y Nysaer</p>
+          <p className="text-sm md:text-base text-green-700">Bryam y Nysaer</p>
           <div className="w-full flex">
             <div className="w-full flex p-3 justify-center">
               <p className="text-xs font-serif text-slate-700">Vendido:</p>

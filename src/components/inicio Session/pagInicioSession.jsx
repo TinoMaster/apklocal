@@ -15,9 +15,11 @@ const Login = () => {
       .get("http://localhost:5000/admin")
       .then((res) => {
         if (res.length) {
+          setError(null);
           setOpcion("inicio");
         } else {
           setOpcion("registro");
+          setError("No hay conexion con la base de datos");
         }
       })
       .catch((err) => {
@@ -54,7 +56,7 @@ const Login = () => {
       });
   };
 
-  const enviarRagistro = async () => {
+  const enviarRagistro = async (e) => {
     const data = {
       nombre: registro.nombre,
       usuario: registro.usuario,
@@ -66,50 +68,54 @@ const Login = () => {
       headers: { "content-type": "application/json" },
     };
 
-    if (registro.contraseña === registro.confirmacion) {
-      await httpHelper()
-        .post("http://localhost:5000/registro", options)
-        .then((res) => {
-          setSucces("Usuario creado correctmente");
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
-        })
-        .catch((err) => {
-          setError(err);
-        });
-    } else setError("Las contraseñas no coinciden");
+    if (!error === null) {
+      if (registro.contraseña === registro.confirmacion) {
+        await httpHelper()
+          .post("http://localhost:5000/registro", options)
+          .then((res) => {
+            setSucces("Usuario creado correctmente");
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
+          })
+          .catch((err) => {
+            setError(err);
+          });
+      } else setError("Las contraseñas no coinciden");
+    } else {
+      e.preventDefault();
+    }
   };
 
   return (
-    <div className="w-screen relative h-screen flex flex-col items-center justify-center bg-violet-600">
+    <div className="w-screen relative h-screen flex flex-col overflow-auto items-center justify-center bg-violet-600">
       {error && (
-        <p className="p-2 top-36 text-red-500 bg-white rounded-lg absolute">
-          {error.message}
+        <p className="p-2 top-20 text-red-500 bg-white text-xs md:text-sm rounded-lg absolute">
+          {error}
         </p>
       )}
       {succes && (
-        <p className="p-2 top-36 text-green-500 bg-white rounded-lg absolute">
+        <p className="p-2 top-20 text-green-500 bg-white text-xs md:text-sm rounded-lg absolute">
           {succes}
         </p>
       )}
 
-      <div className="w-11/12 md:w-1/5 h-3/5 flex max-w-lg max-h-128 flex-col justify-around overflow-hidden bg-white p-4 shadow-xl shadow-black/40 rounded-lg">
-        <div className="w-full h-80 flex items-center justify-center">
+      <div className="w-11/12 overflow-hidden min-h-movil md:w-1/5 h-3/5 flex max-w-lg max-h-128 flex-col justify-around bg-white p-4 shadow-xl shadow-black/40 rounded-lg">
+        <div className="w-2/3 md:w-full m-auto h-80 flex items-center justify-center">
           <img src={img} alt="Logo" />
         </div>
 
         <form className="w-full flex flex-col">
           <label htmlFor="nombre" className="flex flex-col w-3/5 m-auto">
-            <span className="text-sm font-serif text-slate-500 ml-1">
+            <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
               Nombre:
             </span>
             <input
               id="nombre"
-              type="email"
+              type="text"
               name="nombre"
               placeholder="Escriba su nombre"
-              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
               autoComplete="off"
               onChange={
                 opcion === "inicio" ? handleChange : handleChangeRegistro
@@ -118,7 +124,7 @@ const Login = () => {
           </label>
           {opcion === "registro" && (
             <label htmlFor="email" className="flex flex-col w-3/5 m-auto">
-              <span className="text-sm font-serif text-slate-500 ml-1">
+              <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
                 Correo:
               </span>
               <input
@@ -126,7 +132,7 @@ const Login = () => {
                 type="email"
                 name="usuario"
                 placeholder="Correo"
-                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
                 autoComplete="off"
                 onChange={handleChangeRegistro}
               />
@@ -134,7 +140,7 @@ const Login = () => {
           )}
 
           <label htmlFor="pasword" className="flex flex-col w-3/5 m-auto">
-            <span className="text-sm font-serif text-slate-500 ml-1">
+            <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
               Contraseña:
             </span>
             <input
@@ -142,7 +148,7 @@ const Login = () => {
               type="password"
               name="contraseña"
               placeholder="Contraseña"
-              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
               onChange={
                 opcion === "inicio" ? handleChange : handleChangeRegistro
               }
@@ -151,7 +157,7 @@ const Login = () => {
 
           {opcion === "registro" && (
             <label htmlFor="repeat" className="flex flex-col w-3/5 m-auto">
-              <span className="text-sm font-serif text-slate-500 ml-1">
+              <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
                 Repetir contraseña:
               </span>
               <input
@@ -159,7 +165,7 @@ const Login = () => {
                 type="password"
                 name="confirmacion"
                 placeholder="Confirmar contraseña"
-                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
                 onChange={handleChangeRegistro}
               />
             </label>
