@@ -88,7 +88,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen relative h-screen flex flex-col overflow-auto items-center justify-center bg-violet-600">
+    <div className="w-screen relative h-screen flex flex-col overflow-auto items-center justify-center bg-gradient-to-br from-violet-600 to-purple-600">
       {error && (
         <p className="p-2 top-20 text-red-500 bg-white text-xs md:text-sm rounded-lg absolute">
           {error}

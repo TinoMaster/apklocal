@@ -211,10 +211,10 @@ const PagVentas = () => {
                       className="hover:bg-violet-200 hover:cursor-pointer rounded-lg bg-violet-50"
                       key={dia.id}
                     >
-                      <td className="text-center ">
-                        <h4 className="py-2 md:p-2 md:m-2 shadow-lg  text-violet-600 rounded-lg bg-white text-xs">
+                      <td className="text-center">
+                        <h4 className="py-2 flex justify-center items-baseline md:m-2 shadow-lg  text-violet-600 rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
-                            className="text-violet-600 hidden md:block"
+                            className="text-violet-600 hidden md:block mr-2"
                             icon={faCalendarDays}
                           />{" "}
                           {dia.fecha}
@@ -232,7 +232,7 @@ const PagVentas = () => {
                       <td className="text-center hidden md:block">
                         <h4 className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
-                            className="mr-1 text-slate-600"
+                            className=" text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.fondo}
@@ -272,7 +272,7 @@ const PagVentas = () => {
                       <td className="text-center flex">
                         <h4 className="w-full md:w-3/4 text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
-                            className="mr-1 text-slate-600"
+                            className=" text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.dueño}
