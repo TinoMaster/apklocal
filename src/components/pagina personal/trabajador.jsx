@@ -3,7 +3,7 @@ import img from "../../assets/img/Bryam.jpg";
 
 const Trabajador = () => {
   return (
-    <div className="w-full h-96 md:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
+    <div className="w-full h-96 md:w-10/12 lg:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
       {/* Primera caja superior */}
       <div className="h-1/2 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
@@ -72,7 +72,7 @@ const Trabajador = () => {
             {/* Contraseña */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">
                 <h4 className="text-xs  text-slate-700 font-serif font-semibold">Contraseña</h4>
-                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-xs  text-slate-700 bg-green-500"/>
+                <input type="button" value="Editar" className="px-1 rounded-md shadow-md text-xs  text-white font-serif bg-green-500"/>
             </div>
             {/* Venta este mes */}
             <div className="w-1/2 md:w-1/3 flex flex-col items-center">

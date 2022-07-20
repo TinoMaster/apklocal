@@ -14,7 +14,7 @@ const Inventario = () => {
       {/* inventario */}
       <div className="w-full h-full bg-white shadow-lg rounded-lg">
         {/* Hojas blancas */}
-        <div className="flex flex-wrap w-full md:w-2/4 rounded-lg md:h-1/2 bg-slate-50">
+        <div className="flex flex-wrap w-full lg:w-2/4 rounded-lg md:h-1/2 bg-slate-50">
           {/* hojas disponibles */}
           <div className="w-full md:w-1/2 h-full flex justify-center items-center">
             <div className="flex flex-wrap my-4">

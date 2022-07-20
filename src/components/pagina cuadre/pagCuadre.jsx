@@ -21,16 +21,16 @@ const PagCuadre = () => {
   } = useForm(setErrorsForm);
 
   return (
-    <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full md:py-6 rounded-lg relative">
+    <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative">
       {ModalCuadre && <ModalResult />}
 
-      <div className="flex flex-col md:flex-row w-full md:w-11/12 m-auto shadow-md shadow-violet-500/20 md:h-1/4 bg-violet-50 rounded-lg">
+      <div className="flex flex-col lg:flex-row w-full lg:w-11/12 m-auto shadow-md shadow-violet-500/20 lg:h-1/4 bg-violet-50 rounded-lg">
         <CajaTurno handleChangeInputRadio={handleChangeInputRadio} />
         <CajaHojas handlerChangeHojas={handlerChangeHojas} />
         <CajaProductos />
       </div>
 
-      <div className="flex justify-center my-5 md:my-0 md:mt-5 w-full">
+      <div className="flex justify-center my-5 lg:my-0 md:mt-5 w-full">
         <input
           onChange={(e) => {
             setForm({ ...form, fecha: e.target.value });
@@ -40,7 +40,7 @@ const PagCuadre = () => {
         />
       </div>
 
-      <div className="flex flex-col h-full w-full md:justify-center items-center  md:h-3/4 md:flex-row">
+      <div className="flex flex-col h-full w-full lg:justify-center items-center  lg:h-3/4 lg:flex-row">
         <CajaConteo errorsForm={errorsForm} setErrorsForm={setErrorsForm} />
         <CajaCuadre
           errorsForm={errorsForm}

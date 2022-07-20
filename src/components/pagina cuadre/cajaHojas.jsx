@@ -2,7 +2,7 @@ import React from "react";
 
 const CajaHojas = ({ handlerChangeHojas }) => {
   return (
-    <div className="flex w-full mb-5 md:m-0 bg-violet-100 md:bg-transparent justify-center md:w-1/4">
+    <div className="flex w-full mb-5 lg:m-0 bg-violet-100 lg:bg-transparent justify-center lg:w-1/4">
       <div className="flex flex-col items-start">
         <h5 className="w-full text-center text-slate-400 font-semibold text-sm font-serif p-3">
           Hojas

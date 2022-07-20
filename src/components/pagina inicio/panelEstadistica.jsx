@@ -20,7 +20,7 @@ const PanelEstadisticas = () => {
   } = useEstadisticasPagInicio();
 
   return (
-    <div className="w-full md:w-1/4 h-full bg-white p-2 flex flex-col rounded-md">
+    <div className="w-full md:w-4/5 m-auto lg:w-1/4 h-full bg-white p-2 flex flex-col rounded-md">
       <h4 className="m-1 text-md font-medium text-gray-500">
         Estadisticas generales
       </h4>

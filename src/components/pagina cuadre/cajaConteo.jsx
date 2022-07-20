@@ -18,12 +18,12 @@ const CajaConteo = () => {
   );
 
   return (
-    <div className="w-full max-w-4xl md:h-full items-center relative justify-center sm:w-9/12 m-auto md:w-6/12 flex flex-col mb-12 md:m-0">
+    <div className="w-full max-w-4xl min-h-[420px] md:h-full items-center relative justify-center sm:w-9/12 m-auto md:w-full lg:w-6/12 flex flex-col mb-12 lg:m-0">
       {errors && <p className="absolute top-3 text-sm bg-rose-500 shadow-md shadow-rose-400/75 text-white rounded-md ">{errors.name}</p>}
 
       <form
         action=""
-        className="flex flex-col h-full w-10/12 relative md:h-5/6 shadow mt-16 md:mt-0 rounded-lg md:w-3/5 "
+        className="flex flex-col h-full w-10/12 relative lg:h-5/6 shadow mt-16 md:mt-0 rounded-lg md:w-3/5 "
       >
         <h3 className="text-center p-3 font-serif bg-violet-500/80 text-white font-semibold rounded-t-lg">
           <FontAwesomeIcon icon={faCoins} /> Desglose

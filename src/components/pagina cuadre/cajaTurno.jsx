@@ -2,7 +2,7 @@ import React from "react";
 
 const CajaTurno = ({ handleChangeInputRadio }) => {
   return (
-    <div className="w-full md:w-1/3 mb-5 md:m-0">
+    <div className="w-full lg:w-1/3 mb-5 md:m-0">
       <h6 className="w-full text-center text-slate-400 font-semibold text-sm md:text-lg font-serif pt-3">
         Elegir Turno
       </h6>

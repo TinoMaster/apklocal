@@ -2,7 +2,7 @@ import React from "react";
 
 const CajaProductos = () => {
   return (
-    <div className="flex flex-col w-full mb-10 md:m-0 justify-center md:w-1/2">
+    <div className="flex flex-col w-full mb-10 lg:m-0 justify-center lg:w-1/2">
       <h5 className="w-full text-center text-slate-400 font-semibold text-sm md:text-lg font-serif p-3">
         Insumos
       </h5>

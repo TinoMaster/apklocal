@@ -270,21 +270,21 @@ const PagVentas = () => {
                         )}
                       </td>
                       <td className="text-center flex">
-                        <h4 className="w-full md:w-3/4 text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                        <h4 className="w-full text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
                             className=" text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.dueño}
                         </h4>
-                        <div className="hidden md:flex w-1/4 justify-around items-center">
+                        {/* <div className="hidden md:flex w-1/4 justify-around items-center">
                           <div className="bg-yellow-400/50 p-1 rounded-full hover:bg-yellow-500 hover:shadow-md">
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </div>
                           <div className="bg-red-400/50 p-1 rounded-full hover:bg-red-500 hover:shadow-md">
                             <FontAwesomeIcon icon={faTrashCan} />
                           </div>
-                        </div>
+                        </div> */}
                       </td>
                     </tr>
                   );

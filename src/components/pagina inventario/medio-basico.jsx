@@ -14,7 +14,7 @@ const MedioBasico = () => {
   } = useContext(InventarioContext);
 
   return (
-    <div className="w-full md:w-1/2 py-5 ">
+    <div className="w-full lg:w-1/2 py-5 ">
       <h4 className="py-5 text-center text-xl text-slate-600 font-serif font-semibold">
         Medio Basico
       </h4>

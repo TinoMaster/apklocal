@@ -12,7 +12,7 @@ const PagProducto = () => {
   } = usePagProducto();
 
   return (
-    <div className="w-full md:w-3/4 m-auto max-w-1080p">
+    <div className="w-full lg:w-3/4 m-auto max-w-1080p">
       <div className="w-full flex justify-center mt-5">
         <input
           type="radio"
@@ -64,7 +64,7 @@ const PagProducto = () => {
           </div>
 
           <div className="w-full my-2 rounded-md shadow-md flex justify-between">
-            <div className=" w-1/3 text-center border-x-2 p-1">
+            <div className=" w-1/3 text-center border-2 p-1 hover:border-violet-300">
               <input
                 onChange={handlerChangeInsumo}
                 name="nombre"
@@ -72,7 +72,7 @@ const PagProducto = () => {
                 className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
-            <div className=" w-1/3 text-center border-x-2 p-1">
+            <div className=" w-1/3 text-center border-2 p-1 hover:border-violet-300">
               <input
                 onChange={handlerChangeInsumo}
                 name="almacen"
@@ -80,7 +80,7 @@ const PagProducto = () => {
                 className="w-full h-full text-center hover:outline-none text-xs focus:outline-none"
               />
             </div>
-            <div className=" w-1/3 text-center border-x-2 p-1">
+            <div className=" w-1/3 text-center border-2 p-1 hover:border-violet-300">
               <input
                 onChange={handlerChangeInsumo}
                 name="local"

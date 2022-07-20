@@ -26,7 +26,7 @@ const CajaCuadre = ({
   const { result } = useContext(EstadisticasContext);
 
   return (
-    <div className="w-full max-w-4xl relative h-full items-center sm:w-9/12 m-auto justify-center md:w-6/12 flex flex-col">
+    <div className="w-full max-w-4xl relative h-full items-center sm:w-9/12 md:w-full m-auto justify-center lg:w-6/12 flex flex-col">
       {errorsForm && (
         <p className="absolute top-3 text-sm bg-rose-500 shadow-md shadow-rose-400/75 text-white rounded-md">
           {errorsForm.name}
@@ -34,7 +34,7 @@ const CajaCuadre = ({
       )}
       <form
         action=""
-        className="flex flex-col w-10/12 h-full md:h-5/6 shadow-xl  mt-16 md:mt-0 rounded-lg md:w-3/5 mb-10 md:mb-0"
+        className="flex flex-col w-10/12 h-full lg:h-5/6 shadow-xl  mt-16 md:mt-0 rounded-lg md:w-3/5 mb-10 lg:mb-0"
       >
         <h3 className="text-center p-3 font-serif bg-teal-400/90 text-white font-semibold rounded-t-lg">
           <FontAwesomeIcon icon={faListDots} /> Cuadre

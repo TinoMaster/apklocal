@@ -6,7 +6,7 @@ import Inventario from "./panel Ventas/inventario";
 const PanelVentas = () => {
   return (
     <div className="flex flex-col justify-between w-full md:w-full lg:w-3/4 md:h-full py-3">
-      <div className="flex flex-col md:flex-row md:h-1/2 w-full">
+      <div className="flex flex-col lg:flex-row lg:h-1/2 w-full">
         <EsteMes />
         <EsteAño />
       </div>
