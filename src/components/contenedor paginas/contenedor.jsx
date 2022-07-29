@@ -23,7 +23,7 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
 
       <div
         onClick={() => setMenuActive(false)}
-        className=" rounded-md bg-white h-full shadow-2xl shadow-violet-500/50 overflow-hidden"
+        className=" rounded-md bg-white h-full overflow-hidden"
       >
         <Routes>
           <Route path="/" element={<PagInicio />} />

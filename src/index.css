@@ -41,3 +41,8 @@ input:checked + label {
 .label-meses {
   @apply m-1 p-1 hover:cursor-pointer rounded-lg text-xs font-serif text-slate-500;
 }
+
+/* Modal pagina trabajadores */
+.input-worker{
+  @apply shadow-md shadow-violet-300/40 text-center text-xs focus:outline-none overflow-auto w-full font-sans rounded-md
+}

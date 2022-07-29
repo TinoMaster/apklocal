@@ -23,7 +23,7 @@ const CajaConteo = () => {
 
       <form
         action=""
-        className="flex flex-col h-full w-10/12 relative lg:h-5/6 shadow mt-16 md:mt-0 rounded-lg md:w-3/5 "
+        className="flex flex-col h-full w-10/12 relative lg:h-5/6 shadow-xl mt-16 md:mt-0 rounded-lg md:w-3/5 "
       >
         <h3 className="text-center p-3 font-serif bg-violet-500/80 text-white font-semibold rounded-t-lg">
           <FontAwesomeIcon icon={faCoins} /> Desglose
