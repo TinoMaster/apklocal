@@ -109,7 +109,7 @@ export const useEstadisticasPagInicio = () => {
       });
   }, []);
 
-  const totalRecaudadoAño = (bd) => {
+  const totalRecaudado = (bd) => {
     if (!bd.length) {
       return 0;
     } else {
@@ -119,7 +119,7 @@ export const useEstadisticasPagInicio = () => {
     }
   };
 
-  const totalRecaudadoAñoDueño = (bd) => {
+  const totalRecaudadoDueño = (bd) => {
     if (!bd.length) {
       return 0;
     } else {
@@ -129,17 +129,7 @@ export const useEstadisticasPagInicio = () => {
     }
   };
 
-  const totalRecaudadoMes = (bd) => {
-    if (!bd.length) {
-      return 0;
-    } else {
-      let totalAño = 0;
-      bd.forEach((dia) => (totalAño += dia.miron));
-      return totalAño;
-    }
-  };
-
-  const salarioEnElMes = (bd) => {
+  const totalSalario = (bd) => {
     if (!bd.length) {
       return 0;
     } else {
@@ -149,17 +139,7 @@ export const useEstadisticasPagInicio = () => {
     }
   };
 
-  const salarioEnElAño = (bd) => {
-    if (!bd.length) {
-      return 0;
-    } else {
-      let totalSalario = 0;
-      bd.forEach((dia) => (totalSalario += dia.salario1 + dia.salario2));
-      return totalSalario;
-    }
-  };
-
-  const mejorTurnoMes = (bd) => {
+  const mejorTurno = (bd) => {
     let mejorTurnoMes = "";
     let comp = 0;
     if (!bd.length) {
@@ -249,6 +229,44 @@ export const useEstadisticasPagInicio = () => {
     }
     return fondoAyer;
   };
+
+  const mejorYpeorMes1 = (bd) => {
+    let allMonths = {};
+
+    if (!bd.length) {
+      return 0;
+    } else {
+      bd.forEach((dia) => {
+        let fecha = dia.id;
+        let fechaSub = fecha.toString();
+        let fechaString = "";
+
+        if (fechaSub.length === 8) {
+          fechaString = fechaSub.substring(0, 6);
+        } else fechaString = fechaSub.substring(0, 5);
+
+        if (Object.keys(allMonths).length > 0) {
+          let existe = false;
+          for (const key in allMonths) {
+            if (key === fechaString) {
+              existe = true;
+              allMonths = {
+                ...allMonths,
+                [fechaString]: (allMonths[fechaString] += dia.miron),
+              };
+            }
+          }
+          if (!existe) {
+            allMonths = { ...allMonths, [fechaString]: 0 };
+          }
+        } else {
+          allMonths = { [fechaString]: 0 };
+        }
+      });
+    }
+    console.log(allMonths);
+  };
+  mejorYpeorMes1(bdCuadre);
 
   const mejorYpeorMes = (bd) => {
     let allMonths = {};
@@ -374,12 +392,10 @@ export const useEstadisticasPagInicio = () => {
 
   return {
     error,
-    totalRecaudadoAño,
-    totalRecaudadoMes,
-    totalRecaudadoAñoDueño,
-    salarioEnElAño,
-    salarioEnElMes,
-    mejorTurnoMes,
+    totalRecaudado,
+    totalRecaudadoDueño,
+    totalSalario,
+    mejorTurno,
     mejorVenta,
     salarioBryam,
     salarioJorge,

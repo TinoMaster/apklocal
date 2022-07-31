@@ -12,11 +12,11 @@ import imgNysaer from "../../../assets/img/Nysaer.jpg";
 
 const EsteMes = () => {
   const {
-    totalRecaudadoMes,
+    totalRecaudado,
     esteMes,
-    totalRecaudadoAñoDueño,
-    salarioEnElMes,
-    mejorTurnoMes,
+    totalRecaudadoDueño,
+    totalSalario,
+    mejorTurno,
     mejorVenta,
     salarioBryam,
     salarioJorge,
@@ -33,7 +33,7 @@ const EsteMes = () => {
           <div className="flex justify-between bg-yellow-100 p-3 rounded-t-lg">
             <h6 className="font-serif md:text-lg text-green-600">Venta Total</h6>
             <p className="text-sm  font-medium text-green-600">
-              {totalRecaudadoMes(esteMes)}{" "}
+              {totalRecaudado(esteMes)}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
@@ -41,7 +41,7 @@ const EsteMes = () => {
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-600">Dueño</h6>
             <p className="text-sm  text-slate-500 ">
-              {totalRecaudadoAñoDueño(esteMes)}{" "}
+              {totalRecaudadoDueño(esteMes)}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
@@ -49,7 +49,7 @@ const EsteMes = () => {
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-600">Salario</h6>
             <p className="text-sm text-slate-600 ">
-              {salarioEnElMes(esteMes)} <FontAwesomeIcon icon={faDollarSign} />
+              {totalSalario(esteMes)} <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
@@ -64,7 +64,7 @@ const EsteMes = () => {
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-600">Mejor Turno</h6>
             <p className="text-sm text-slate-600 ">
-              {mejorTurnoMes(esteMes)}
+              {mejorTurno(esteMes)}
             </p>
           </div>
 

@@ -12,9 +12,9 @@ import { useEstadisticasPagInicio } from "../../hooks/useEstadisticasPagInicio";
 
 const PanelEstadisticas = () => {
   const {
-    totalRecaudadoAño,
+    totalRecaudado,
     bdCuadre,
-    totalRecaudadoAñoDueño,
+    totalRecaudadoDueño,
     mejorVenta,
     mejorYpeorMes,
   } = useEstadisticasPagInicio();
@@ -36,7 +36,7 @@ const PanelEstadisticas = () => {
             Balance total
           </h4>
           <p className="text-sm md:text-base text-indigo-700">
-            <FontAwesomeIcon icon={faDollar} /> {totalRecaudadoAño(bdCuadre)}
+            <FontAwesomeIcon icon={faDollar} /> {totalRecaudado(bdCuadre)}
           </p>
         </div>
         {/* Dueño */}
@@ -50,7 +50,7 @@ const PanelEstadisticas = () => {
           </h4>
           <p className="text-sm md:text-base text-emerald-700">
             <FontAwesomeIcon icon={faDollar} />
-            {totalRecaudadoAñoDueño(bdCuadre)}
+            {totalRecaudadoDueño(bdCuadre)}
           </p>
         </div>
         {/* Mejor Venta */}

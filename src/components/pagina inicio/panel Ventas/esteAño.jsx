@@ -12,11 +12,11 @@ import imgNysaer from "../../../assets/img/Nysaer.jpg";
 
 const EsteAño = () => {
   const {
-    totalRecaudadoAño,
+    totalRecaudado,
     bdPorAño,
-    totalRecaudadoAñoDueño,
-    salarioEnElMes,
-    mejorTurnoMes,
+    totalRecaudadoDueño,
+    totalSalario,
+    mejorTurno,
     mejorVenta,
     salarioBryam,
     salarioJorge,
@@ -33,7 +33,7 @@ const EsteAño = () => {
           <div className="flex justify-between bg-teal-100 p-3 rounded-t-3xl">
             <h6 className="font-serif md:text-lg text-green-700">Venta Total</h6>
             <p className="text-sm md:text-base font-semibold text-green-700">
-              {totalRecaudadoAño(bdPorAño)}{" "}
+              {totalRecaudado(bdPorAño)}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
@@ -41,7 +41,7 @@ const EsteAño = () => {
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-700">Dueño</h6>
             <p className="text-sm text-slate-600">
-              {totalRecaudadoAñoDueño(bdPorAño)}{" "}
+              {totalRecaudadoDueño(bdPorAño)}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
@@ -49,7 +49,7 @@ const EsteAño = () => {
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-700">Salario</h6>
             <p className="text-sm text-slate-600">
-              {salarioEnElMes(bdPorAño)} <FontAwesomeIcon icon={faDollarSign} />
+              {totalSalario(bdPorAño)} <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
@@ -62,7 +62,7 @@ const EsteAño = () => {
 
           <div className="flex justify-between p-2 ">
             <h6 className="font-serif text-sm md:text-base text-slate-700">Mejor Turno</h6>
-            <p className="text-sm text-slate-600">{mejorTurnoMes(bdPorAño)}</p>
+            <p className="text-sm text-slate-600">{mejorTurno(bdPorAño)}</p>
           </div>
 
           <div className="bg-teal-200 ">
