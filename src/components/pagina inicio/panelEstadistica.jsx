@@ -92,7 +92,7 @@ const PanelEstadisticas = () => {
             Mejor Mes
           </h4>
           <p className="text-sm md:text-base font-serif text-green-700">
-            {mejorYpeorMes(bdCuadre)[0]}
+            {mejorYpeorMes(bdCuadre)[0] ? mejorYpeorMes(bdCuadre)[0] : 0}
           </p>
           <div className="w-full flex">
             <div className="w-full flex p-3 justify-center">

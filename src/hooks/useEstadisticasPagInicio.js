@@ -230,51 +230,13 @@ export const useEstadisticasPagInicio = () => {
     return fondoAyer;
   };
 
-  const mejorYpeorMes1 = (bd) => {
-    let allMonths = {};
-
-    if (!bd.length) {
-      return 0;
-    } else {
-      bd.forEach((dia) => {
-        let fecha = dia.id;
-        let fechaSub = fecha.toString();
-        let fechaString = "";
-
-        if (fechaSub.length === 8) {
-          fechaString = fechaSub.substring(0, 6);
-        } else fechaString = fechaSub.substring(0, 5);
-
-        if (Object.keys(allMonths).length > 0) {
-          let existe = false;
-          for (const key in allMonths) {
-            if (key === fechaString) {
-              existe = true;
-              allMonths = {
-                ...allMonths,
-                [fechaString]: (allMonths[fechaString] += dia.miron),
-              };
-            }
-          }
-          if (!existe) {
-            allMonths = { ...allMonths, [fechaString]: 0 };
-          }
-        } else {
-          allMonths = { [fechaString]: 0 };
-        }
-      });
-    }
-    console.log(allMonths);
-  };
-  mejorYpeorMes1(bdCuadre);
-
   const mejorYpeorMes = (bd) => {
     let allMonths = {};
     let sumaMeses = {};
     let mes = 0;
     let año = 0;
     let valorMejor = 0;
-    let valorPeor = 0;
+    let valorPeor = 500000;
     let mejorMes = "";
     let peorMes = "";
 
@@ -380,7 +342,6 @@ export const useEstadisticasPagInicio = () => {
         mejorMes = mes;
         valorMejor = sumaMeses[mes];
       }
-      valorPeor = sumaMeses[mes];
       if (sumaMeses[mes] >= 0 && sumaMeses[mes] <= valorPeor) {
         peorMes = mes;
         valorPeor = sumaMeses[mes];
