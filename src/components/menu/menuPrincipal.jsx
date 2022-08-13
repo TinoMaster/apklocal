@@ -1,5 +1,5 @@
 import React from "react";
-import Cookies from "universal-cookie";
+/* import Cookies from "universal-cookie"; */
 
 import logo from "../../assets/img/favicon.ico";
 import imgBryam from "../../assets/img/Bryam.jpg";
@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 
 function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
-  const cookies = new Cookies();
+  /* const cookies = new Cookies(); */
 
   const isNotasActive = () => {
     if (notasActive === false) setNotasActive(true);
@@ -15,7 +15,7 @@ function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
   };
 
   return (
-    <div className="flex overflow-hidden sticky top-0 justify-between z-50 items-center w-full h-16 shadow-sm shadow-violet-500/75 bg-violet-500 md:rounded-lg">
+    <div className="flex overflow-hidden sticky top-0 justify-between z-40 items-center w-full h-16 shadow-sm shadow-violet-500/75 bg-violet-500 md:rounded-lg">
       <div className="flex items-center p-3">
         <div
           onClick={() =>
