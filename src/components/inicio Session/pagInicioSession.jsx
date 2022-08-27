@@ -18,6 +18,7 @@ const Login = () => {
           setError(null);
           setOpcion("inicio");
         } else {
+          console.log(res);
           setOpcion("registro");
           setError("No hay conexion con la base de datos");
         }
