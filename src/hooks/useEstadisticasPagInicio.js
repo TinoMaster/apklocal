@@ -139,22 +139,40 @@ export const useEstadisticasPagInicio = () => {
     }
   };
 
-  const mejorTurno = (bd) => {
-    let mejorTurnoMes = "";
-    let comp = 0;
-    if (!bd.length) {
-      return "";
-    } else {
-      bd.forEach((dia) => {
-        if (comp < dia.miron) {
-          comp = dia.miron;
-          dia.turno.trabajador2 !== ""
-            ? (mejorTurnoMes = `${dia.turno.trabajador1} y ${dia.turno.trabajador2}`)
-            : (mejorTurnoMes = `${dia.turno.trabajador2}`);
+  const ventaPorTurno = (bd) => {
+    let result = {};
+
+    if (bd.length) {
+      result = bd.reduce((object, element) => {
+        const turno =
+          element.turno.trabajador1 +
+          (element.turno.trabajador2 ? " y " + element.turno.trabajador2 : "");
+
+        if (!object[turno]) {
+          object[turno] = element.miron;
+        } else {
+          object[turno] += element.miron;
         }
-      });
-      return mejorTurnoMes;
+
+        return result;
+      }, {});
     }
+    return Object.entries(result);
+  };
+
+  const mejorTurno = (bd) => {
+    const array = ventaPorTurno(bd);
+    const object = Object.fromEntries(array);
+    let turno = "";
+    let cont = 0;
+
+    for (const i in object) {
+      if (object[i] > cont) {
+        cont = object[i];
+        turno = i;
+      }
+    }
+    return [turno, cont];
   };
 
   const mejorVenta = (bd) => {

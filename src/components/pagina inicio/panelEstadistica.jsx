@@ -17,6 +17,7 @@ const PanelEstadisticas = () => {
     totalRecaudadoDueño,
     mejorVenta,
     mejorYpeorMes,
+    mejorTurno,
   } = useEstadisticasPagInicio();
 
   return (
@@ -133,11 +134,11 @@ const PanelEstadisticas = () => {
             />
             Mejor Turno
           </h4>
-          <p className="text-sm md:text-base text-green-700">Bryam y Nysaer</p>
+          <p className="text-sm md:text-base text-green-700">{mejorTurno(bdCuadre)[0]}</p>
           <div className="w-full flex">
             <div className="w-full flex p-3 justify-center">
               <p className="text-xs font-serif text-slate-700">Vendido:</p>
-              <p className="text-xs ml-1 text-violet-600">$168259</p>
+              <p className="text-xs ml-1 text-violet-600">{mejorTurno(bdCuadre)[1]}</p>
             </div>
           </div>
         </div>

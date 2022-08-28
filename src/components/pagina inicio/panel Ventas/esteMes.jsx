@@ -62,9 +62,12 @@ const EsteMes = () => {
           </div>
 
           <div className="flex justify-between p-2 ">
-            <h6 className="font-serif text-sm md:text-base text-slate-600">Mejor Turno</h6>
-            <p className="text-sm text-slate-600 ">
-              {mejorTurno(esteMes)}
+            <h6 className="font-serif text-sm md:text-base text-slate-700">
+              Mejor Turno
+            </h6>
+            <p className="text-sm text-slate-600">
+              {`( ${mejorTurno(esteMes)[0]} )`} <span>{`${mejorTurno(esteMes)[1]} `}</span>
+              <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
