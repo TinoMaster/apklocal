@@ -17,9 +17,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {!cookies.get("nombre") ? (
+        {/* {!cookies.get("nombre") ? (
           <Route path="*" element={<PagInicioSession />} />
-        ) : (
+        ) : ( */}
           <Route
             path="*"
             element={
@@ -49,7 +49,7 @@ function App() {
               </InventarioProvider>
             }
           /> 
-        )}
+       {/*  )} */}
       </Routes>
     </BrowserRouter>
   );

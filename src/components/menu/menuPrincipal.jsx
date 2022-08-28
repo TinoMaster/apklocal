@@ -21,10 +21,10 @@ function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
           onClick={() =>
             menuActive === true ? setMenuActive(false) : setMenuActive(true)
           }
-          className="mx-2 md:hidden rounded-full border-2 border-white overflow-hidden hover:cursor-pointer hover:border-indigo-400"
+          className="mx-2 md:hidden border-white overflow-hidden hover:cursor-pointer hover:border-indigo-400"
         >
           <FontAwesomeIcon
-            className="p-2 pb-1 md:hidden text-white text-base"
+            className="pt-2 md:hidden text-white text-3xl"
             icon={faBars}
           />
         </div>
