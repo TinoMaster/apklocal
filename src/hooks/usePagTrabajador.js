@@ -10,6 +10,10 @@ export const usePagTrabajador = () => {
     setWorkerData({ ...workerData, [name]: value });
   };
 
+  const validarData = ()=>{
+    
+  }
+
   return {
     modalWorker,
     setModalWorker,

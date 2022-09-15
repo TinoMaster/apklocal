@@ -12,8 +12,8 @@ const InventarioProvider = ({ children }) => {
   const [mediosBasicos, setMediosBasicos] = useState([]);
   const [mBasicoToEdit, setMBasicoToEdit] = useState({});
 
-  const urlGetInsumos = "http://localhost:5000/inventario/insumos";
-  const urlGetMediosBasicos = "http://localhost:5000/inventario/mediosBasicos";
+  const urlGetInsumos = "http://127.0.0.1:5000/inventario/insumos";
+  const urlGetMediosBasicos = "http://127.0.0.1:5000/inventario/mediosBasicos";
 
   useEffect(() => {
     httpHelper()

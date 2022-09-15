@@ -92,8 +92,8 @@ const EstadisticasProvider = ({ children }) => {
 
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
 
-  const urlGet = `http://localhost:5000/cuadre/${mesDelAño}`,
-    urlSave = `http://localhost:5000/cuadre`;
+  const urlGet = `http://127.0.0.1:5000/cuadre/${mesDelAño}`,
+    urlSave = `http://127.0.0.1:5000/cuadre`;
 
   const hojasGastadas = () => {
     let bn = resultForm.testInyectores.bn - testInyectores.bn;

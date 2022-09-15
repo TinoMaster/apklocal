@@ -55,9 +55,9 @@ const añoActual = () => {
   return año;
 };
 
-const url = "http://localhost:5000/cuadre";
-const urlDelMes = "http://localhost:5000/cuadre/" + mesActual();
-const urlGetAño = `http://localhost:5000/cuadre/${añoActual()}`;
+const url = "http://127.0.0.1:5000/cuadre";
+const urlDelMes = "http://127.0.0.1:5000/cuadre/" + mesActual();
+const urlGetAño = `http://127.0.0.1:5000/cuadre/${añoActual()}`;
 
 export const useEstadisticasPagInicio = () => {
   const [bdCuadre, setBdCuadre] = useState({});
