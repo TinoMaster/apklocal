@@ -102,7 +102,7 @@ export const CajaNotas = () => {
     <div className="flex flex-col w-full h-full relative">
       {modalIsOpen && (
         <ModalPortal>
-          <div className="flex w-full lg:w-1/2 h-full absolute z-50 items-center justify-center">
+          <div className="flex w-full md:w-1/2 lg:w-1/3 h-full absolute z-50 items-center justify-center">
             <div className="flex rounded-lg flex-col w-10/12 bg-white shadow-lg shadow-green-400/30 border-2 border-green-300 p-2">
               <h3 className="w-full text-center text-lg font-serif text-green-700">
                 {dataToEdit ? "Editar Nota" : "Nueva nota"}

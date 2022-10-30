@@ -7,8 +7,15 @@ import { ModalInsertTrabajador } from "./modalInsertTrabajador";
 import Trabajador from "./trabajador";
 
 const PagPersonal = () => {
-  const { modalWorker, setModalWorker, handlerChangeWorker } =
-    usePagTrabajador();
+  const {
+    modalWorker,
+    setModalWorker,
+    handlerChangeWorker,
+    handlerChangeWorkerImage,
+    imageModalWorker,
+    uploadWorker,
+    errorUploadWorker,
+  } = usePagTrabajador();
 
   return (
     <div className="flex max-w-1080p relative max-h-1080p justify-around flex-wrap w-full h-full overflow-auto">
@@ -23,6 +30,10 @@ const PagPersonal = () => {
           <ModalInsertTrabajador
             setModalWorker={setModalWorker}
             handlerChangeWorker={handlerChangeWorker}
+            handlerChangeWorkerImage={handlerChangeWorkerImage}
+            imageModalWorker={imageModalWorker}
+            uploadWorker={uploadWorker}
+            errorUploadWorker={errorUploadWorker}
           />
         </ModalPortal>
       )}

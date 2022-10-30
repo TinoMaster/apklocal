@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import { useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 
@@ -146,16 +147,17 @@ export const useEstadisticasPagInicio = () => {
       result = bd.reduce((object, element) => {
         const turno =
           element.turno.trabajador1 +
-          (element.turno.trabajador2 ? " y " + element.turno.trabajador2 : "");
+          (element.turno.trabajador2 !== ""
+            ? " y " + element.turno.trabajador2
+            : "");
 
         if (!object[turno]) {
           object[turno] = element.miron;
         } else {
           object[turno] += element.miron;
         }
-
         return result;
-      }, {});
+      }, result);
     }
     return Object.entries(result);
   };

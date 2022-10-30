@@ -3,14 +3,51 @@ import React from "react";
 export const ModalInsertTrabajador = ({
   setModalWorker,
   handlerChangeWorker,
+  handlerChangeWorkerImage,
+  imageModalWorker,
+  uploadWorker,
+  errorUploadWorker,
 }) => {
   return (
-    <div className="w-11/12 h-96 md:w-10/12 p-2 lg:w-6/12 lg:h-2/3 md:h-4/12 overflow-hidden md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
+    <div className="relative w-11/12 h-96 md:w-10/12 p-2 lg:w-6/12 lg:h-2/3 md:h-4/12 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
+      {/* Modal error */}
+      {errorUploadWorker?.error && (
+        <div className="absolute w-full flex justify-center -top-10">
+          <p className="bg-red-400/90 rounded-md p-2 text-white">{errorUploadWorker.message}</p>
+        </div>
+      )}
+
       {/* Primera caja superior */}
       <div className="h-3/5 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
         <div className="flex flex-wrap w-1/4 h-full justify-center items-center">
-          <div className="w-full h-1/2 m-auto border-2 border-violet-300 bg-black/10 shadow-md"></div>
+          {/* image */}
+          <div className="w-full h-1/2 m-auto border-2 border-violet-300 bg-black/10 shadow-md">
+            {imageModalWorker && (
+              <img
+                src={URL.createObjectURL(imageModalWorker)}
+                alt="imagen"
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
+          {/* input file */}
+          <div className="h-1/2">
+            <label
+              htmlFor="file"
+              className="p-2 bg-violet-200 rounded-md text-sm font-serif shadow-md hover:cursor-pointer hover:bg-violet-300"
+            >
+              Seleccionar imagen
+            </label>
+            <input
+              type="file"
+              name="image"
+              id="file"
+              className="hidden"
+              accept=".jpg"
+              onChange={handlerChangeWorkerImage}
+            />
+          </div>
         </div>
         {/* Caja nombre descripcion */}
         <div className="w-3/4 h-full flex flex-wrap">
@@ -138,6 +175,7 @@ export const ModalInsertTrabajador = ({
               className="bg-red-400 hover:bg-red-500 w-10/12 lg:w-auto mx-5 rounded-md shadow-md font-serif text-sm lg:text-lg py-1 px-2 text-white"
             />
             <input
+              onClick={() => uploadWorker()}
               type="submit"
               value="Registrar"
               className="bg-green-400 hover:bg-green-500 w-10/12 lg:w-auto mx-5 rounded-md shadow-md font-serif text-sm lg:text-lg py-1 px-2 text-white"
