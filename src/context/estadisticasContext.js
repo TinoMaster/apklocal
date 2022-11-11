@@ -83,6 +83,7 @@ const constMes = (num) => {
 const EstadisticasProvider = ({ children }) => {
   const [db, setDb] = useState([]);
   const [error, setError] = useState({});
+  const [success, setSuccess] = useState({});
   const [finalizar, setFinalizar] = useState(true);
   const [result, setResult] = useState(0);
   const [billetes, setBilletes] = useState([]);
@@ -91,6 +92,7 @@ const EstadisticasProvider = ({ children }) => {
   const [mesDelAño, setMesDelAño] = useState(mesActual);
 
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
+  const [loading, setLoading] = useState(false);
 
   const urlGet = `http://127.0.0.1:5000/cuadre/${mesDelAño}`,
     urlSave = `http://127.0.0.1:5000/cuadre`;
@@ -100,7 +102,6 @@ const EstadisticasProvider = ({ children }) => {
     let color = resultForm.testInyectores.color - testInyectores.color;
     let total = bn + color;
 
-    console.log(bn);
     return { bn, color, total };
   };
 
@@ -158,7 +159,6 @@ const EstadisticasProvider = ({ children }) => {
     data.dueño = resultForm.dueño;
 
     testIny = resultForm.testInyectores;
-    console.log(testIny);
 
     let api = httpHelper();
 
@@ -201,13 +201,20 @@ const EstadisticasProvider = ({ children }) => {
   };
 
   const validarData = async () => {
+    setLoading(true);
     if (resultForm.diferencia === 0) {
       setFinalizar(true);
       await createData();
       await restarHojasPagInicio();
       if (finalizar === true) {
+        setLoading(false);
+        setSuccess({
+          success: true,
+          message: "Registro satisfactorio",
+        });
         setTimeout(() => {
           setModalCuadre(false);
+          setSuccess({});
         }, 2000);
         window.location.reload();
       }
@@ -253,6 +260,8 @@ const EstadisticasProvider = ({ children }) => {
     validarData,
     setMesDelAño,
     hojasGastadas,
+    success,
+    loading,
   };
 
   return (

@@ -70,12 +70,12 @@ export const useEstadisticasPagInicio = () => {
     httpHelper()
       .get(url)
       .then((data) => {
-        if (!data.length) {
+        if (data.error) {
           setBdCuadre({});
           setError({
-            name: "error de coneccion con la base de datos",
-            status: 404,
-            statusText: "Error de conexion",
+            name: data.error,
+            status: data.statusCode,
+            statusText: data.message,
           });
         } else {
           setError({});
@@ -100,7 +100,7 @@ export const useEstadisticasPagInicio = () => {
     httpHelper()
       .get(urlGetAño)
       .then((el) => {
-        if (!el.length) {
+        if (!el?.length) {
           setbdPorAño({});
           setError(el);
         } else {

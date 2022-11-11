@@ -19,7 +19,7 @@ export const httpHelper = () => {
 
     setTimeout(() => {
       controller.abort();
-    }, 5000);
+    }, 20000);
 
     return fetch(endpoint, options)
       .then((res) =>

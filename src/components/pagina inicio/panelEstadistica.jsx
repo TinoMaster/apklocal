@@ -1,8 +1,4 @@
-import {
-  faDollar,
-  faHouse,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDollar, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useEstadisticasPagInicio } from "../../hooks/useEstadisticasPagInicio";
@@ -16,10 +12,12 @@ const PanelEstadisticas = () => {
     mejorVenta,
     mejorYpeorMes,
     mejorTurno,
+    error,
   } = useEstadisticasPagInicio();
 
   return (
     <div className="w-full md:w-4/5 m-auto lg:w-1/4 h-full bg-white p-2 flex flex-col rounded-md">
+      {!!error?.name && <p>{error.statusText}</p>}
       <h4 className="m-1 text-md font-medium text-gray-500">
         Estadisticas generales
       </h4>
