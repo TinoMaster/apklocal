@@ -11,7 +11,7 @@ const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
           setDataToEdit(worker);
           setModalUpdateWorker(true);
         }}
-        className="absolute text-sm bg-yellow-200 p-1 rounded-md right-0 shadow-md text-gray-600 hover:cursor-pointer hover:bg-yellow-300"
+        className="absolute text-sm bg-yellow-200 p-1 rounded-md md:right-0 shadow-md text-gray-600 hover:cursor-pointer hover:bg-yellow-300"
       >
         <FontAwesomeIcon icon={faPenToSquare} />
         Editar
@@ -95,13 +95,11 @@ const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
           {/* Contraseña */}
           <div className="w-1/2 md:w-1/3 flex flex-col items-center">
             <h4 className="text-xs  text-slate-700 font-serif font-semibold">
-              Contraseña
+              Role
             </h4>
-            <input
-              type="button"
-              value="Editar"
-              className="px-1 rounded-md shadow-md text-xs  text-white font-serif bg-green-500"
-            />
+            <p className="text-xs  text-slate-700 text-center w-full">
+              {worker.role}
+            </p>
           </div>
           {/* Venta este mes */}
           <div className="w-1/2 md:w-1/3 flex flex-col items-center">

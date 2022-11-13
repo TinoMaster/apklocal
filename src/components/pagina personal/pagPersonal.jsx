@@ -89,6 +89,7 @@ const PagPersonal = () => {
             errorUploadWorker={errorUploadWorker}
             imageModalWorker={imageModalWorker}
             updateWorker={updateWorker}
+            roles={roles}
           />
         </ModalPortal>
       )}

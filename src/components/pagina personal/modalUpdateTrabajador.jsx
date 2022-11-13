@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ModalEditPassword from "./modalEditPassword";
 
 export const ModalUpdateTrabajador = ({
   setModalUpdateWorker,
@@ -8,9 +9,12 @@ export const ModalUpdateTrabajador = ({
   errorUploadWorker,
   dataToEdit,
   updateWorker,
+  roles,
 }) => {
+  const [editRole, setEditRole] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
   return (
-    <div className="relative w-11/12 h-96 md:w-10/12 p-2 lg:w-6/12 lg:h-2/3 md:h-4/12 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
+    <div className="relative w-11/12 min-h-96 md:w-10/12 px-2 py-4 lg:w-6/12 lg:h-2/3 md:h-4/12 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
       {/* Modal error */}
       {errorUploadWorker?.error && (
         <div className="absolute w-full flex justify-center -top-10">
@@ -19,13 +23,19 @@ export const ModalUpdateTrabajador = ({
           </p>
         </div>
       )}
+      {!!editPassword && (
+        <ModalEditPassword
+          setEditPassword={setEditPassword}
+          id={dataToEdit._id}
+        />
+      )}
 
       {/* Primera caja superior */}
-      <div className="h-3/5 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
+      <div className="h-3/5 flex flex-wrap rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
-        <div className="flex flex-wrap w-1/4 h-full justify-center items-center">
+        <div className="flex flex-wrap w-full md:w-1/4 h-full justify-center items-center">
           {/* image */}
-          <div className="w-full h-1/2 m-auto border-2 border-violet-300 bg-black/10 shadow-md">
+          <div className="md:w-10/12 w-1/3 h-1/2 m-auto border-2 border-violet-300 bg-black/10 shadow-md">
             <img
               src={
                 imageModalWorker
@@ -37,12 +47,12 @@ export const ModalUpdateTrabajador = ({
             />
           </div>
           {/* input file */}
-          <div className="h-1/2">
+          <div className="w-full h-1/2 flex justify-center items-start">
             <label
               htmlFor="file"
-              className="p-2 bg-violet-200 rounded-md text-sm font-serif shadow-md hover:cursor-pointer hover:bg-violet-300"
+              className="px-2 py-1 bg-violet-200 rounded-md text-xs md:text-sm shadow-md hover:cursor-pointer hover:bg-violet-300 text-slate-700"
             >
-              Editar imagen
+              Editar
             </label>
             <input
               type="file"
@@ -55,8 +65,8 @@ export const ModalUpdateTrabajador = ({
           </div>
         </div>
         {/* Caja nombre descripcion */}
-        <div className="w-3/4 h-full flex flex-wrap">
-          <label className="w-full h-1/5 p-2 text-sm lg:text-lg md:text-base text-center text-slate-700 font-serif font-semibold">
+        <div className="md:w-3/4 h-full flex flex-wrap">
+          <label className="w-full h-1/5 p-2 text-xs lg:text-lg md:text-base text-center text-slate-700 font-serif font-semibold">
             Nombre
             <input
               autoComplete="off"
@@ -110,7 +120,7 @@ export const ModalUpdateTrabajador = ({
             </label>
           </div>
           {/* #Carnet */}
-          <div className="w-10/12 m-auto h-1/5 flex flex-col">
+          <div className="w-11/12 m-auto h-1/5 flex flex-col">
             <label className="text-center font-serif text-xs lg:text-lg  text-slate-700 font-semibold">
               ID
               <input
@@ -121,6 +131,39 @@ export const ModalUpdateTrabajador = ({
                 type="number"
                 defaultValue={dataToEdit.id}
               />
+            </label>
+          </div>
+          <div className="w-10/12 md:w-1/2 m-auto h-1/5 flex flex-col">
+            <label className="flex flex-col text-center font-serif text-xs lg:text-lg  text-slate-700 font-semibold">
+              Role
+              {!!editRole ? (
+                <select
+                  className="text-center focus:outline-none"
+                  name="role"
+                  id="role"
+                  onChange={handlerChangeUpdateWorker}
+                >
+                  {roles?.map((role) => (
+                    <option value={role.name} key={role._id}>
+                      {role.name}
+                    </option>
+                  ))}
+                  <option className="font-serif bg-slate-100" value="">
+                    {" "}
+                    + Añadir nuevo role
+                  </option>
+                </select>
+              ) : (
+                <h4 className="flex justify-center w-full relative h-1/3 p-2 text-xs md:text-base text-center text-slate-700 font-serif font-normal">
+                  {dataToEdit.role}{" "}
+                  <span
+                    onClick={() => setEditRole(true)}
+                    className="absolute right-0 bg-yellow-400 px-2 text-xs md:text-base rounded-md text-white hover:shadow-md hover:cursor-pointer"
+                  >
+                    editar
+                  </span>
+                </h4>
+              )}
             </label>
           </div>
         </div>
@@ -166,15 +209,14 @@ export const ModalUpdateTrabajador = ({
           </div>
           {/* Contraseña */}
           <div className="w-1/2 md:w-1/3 flex flex-col items-center">
-            <label className="text-xs lg:text-lg text-center text-slate-700 font-serif font-semibold">
+            <label className="flex flex-col text-xs lg:text-lg text-center text-slate-700 font-serif font-semibold">
               Contraseña
-              <input
-                autoComplete="off"
-                name="contraseña"
-                onChange={handlerChangeUpdateWorker}
-                type="password"
-                className="input-worker"
-              />
+              <button
+                onClick={() => setEditPassword(true)}
+                className=" px-2 py-1 text-white bg-green-500 rounded-md shadow hover:shadow-lg"
+              >
+                Cambiar
+              </button>
             </label>
           </div>
           <div className="w-full flex justify-center items-center">

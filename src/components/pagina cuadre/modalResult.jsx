@@ -7,6 +7,7 @@ import {
   faFaceFlushed,
 } from "@fortawesome/free-solid-svg-icons";
 import { ModalPortal } from "../modalPortal/modalPortal";
+import { PrimaryLoader } from "../loaders/primaryLoader";
 
 const ModalResult = () => {
   const {
@@ -32,11 +33,13 @@ const ModalResult = () => {
   return (
     <ModalPortal>
       <div className="flex z-50 flex-col justify-center rounded-lg w-full h-full fixed md:absolute bg-black/50">
-        <div className="flex flex-col justify-between w-11/12 h-10/12 md:w-1/3 relative m-auto md:h-3/5 bg-white rounded-lg shadow-2xl shadow-white/30 items-center">
+        <div className="flex flex-col justify-center w-11/12 h-10/12 md:w-1/3 relative m-auto md:h-3/5 bg-white rounded-lg shadow-2xl shadow-white/30 items-center">
           {/* Loading y success */}
-          <div className="absolute self-center">
-            {loading && <p>Cargando...</p>}
-            {success.success && <p className="p-2 bg-green-400 text-white">{success.message}</p>}
+          <div className="absolute bg-violet-500/30 rounded-md">
+            {loading && <PrimaryLoader />}
+            {success.success && (
+              <p className="p-2 bg-green-400 text-white">{success.message}</p>
+            )}
           </div>
           {resultForm.diferencia ? (
             <h3 className="bg-violet-500 shadow-lg rounded-t-lg p-2 text-center w-full">

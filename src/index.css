@@ -44,5 +44,5 @@ input:checked + label {
 
 /* Modal pagina trabajadores */
 .input-worker{
-  @apply shadow-md p-1 shadow-violet-300/40 text-center text-xs lg:text-xl focus:outline-none overflow-auto w-full font-sans rounded-md
+  @apply shadow-md p-1 my-2 shadow-violet-300/40 text-center text-xs lg:text-xl focus:outline-none overflow-auto w-full font-sans rounded-md
 }
