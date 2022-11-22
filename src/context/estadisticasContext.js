@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 import useInventarioPagInicio from "../hooks/useInventarioPagInicio";
+import apiConfig from "../config/api.config.json";
 
 const EstadisticasContext = createContext();
 const fecha = new Date();
@@ -94,8 +95,8 @@ const EstadisticasProvider = ({ children }) => {
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const [loading, setLoading] = useState(false);
 
-  const urlGet = `http://127.0.0.1:5000/cuadre/${mesDelAño}`,
-    urlSave = `http://127.0.0.1:5000/cuadre`;
+  const urlGet = `${apiConfig.api.url}/cuadre/${mesDelAño}`,
+    urlSave = `${apiConfig.api.url}/cuadre`;
 
   const hojasGastadas = () => {
     let bn = resultForm.testInyectores.bn - testInyectores.bn;
@@ -123,7 +124,7 @@ const EstadisticasProvider = ({ children }) => {
     };
 
     let api = httpHelper();
-    let urlEdit = `http://localhost:5000/inventario/${id}`;
+    let urlEdit = `${apiConfig.api.url}/inventario/${id}`;
 
     api.put(urlEdit, options);
   };
@@ -191,7 +192,7 @@ const EstadisticasProvider = ({ children }) => {
 
     if (finalizar === true) {
       await api.post(urlSave, options);
-      await api.post("http://localhost:5000/testInyectores", optionsTest);
+      await api.post(`${apiConfig.api.url}/testInyectores`, optionsTest);
     }
 
     api

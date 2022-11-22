@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
+import apiConfig from "../config/api.config.json";
 
-const UrlRegisterImageWorker =
-  "http://127.0.0.1:5000/trabajadores/registro/image";
-const UrlRegisterWorker = "http://127.0.0.1:5000/trabajadores/registro/worker";
-const UrlGetWorkers = "http://127.0.0.1:5000/trabajadores";
-const UrlGetRoles = "http://127.0.0.1:5000/roles";
-const UrlUpdateWorker = "http://127.0.0.1:5000/trabajadores/update";
+/* URLs */
+const UrlRegisterImageWorker = `${apiConfig.api.url}/trabajadores/registro/image`;
+const UrlRegisterWorker = `${apiConfig.api.url}/trabajadores/registro/worker`;
+const UrlGetWorkers = `${apiConfig.api.url}/trabajadores`;
+const UrlGetRoles = `${apiConfig.api.url}/roles`;
+const UrlUpdateWorker = `${apiConfig.api.url}/trabajadores/update`;
 
 export const usePagTrabajador = () => {
   const [modalInsertWorker, setModalInsertWorker] = useState(false);

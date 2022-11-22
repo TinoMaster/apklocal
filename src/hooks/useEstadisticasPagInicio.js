@@ -1,6 +1,7 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { useEffect, useState } from "react";
+import { AuthProvider } from "../context/authContext";
 import { httpHelper } from "../helpers/httpHelper";
+import apiConfig from "../config/api.config.json";
 
 const fecha = new Date();
 const mesActual = () => {
@@ -56,9 +57,9 @@ const añoActual = () => {
   return año;
 };
 
-const url = "http://127.0.0.1:5000/cuadre";
-const urlDelMes = "http://127.0.0.1:5000/cuadre/" + mesActual();
-const urlGetAño = `http://127.0.0.1:5000/cuadre/${añoActual()}`;
+const url = `${apiConfig.api.url}/cuadre`;
+const urlDelMes = `${apiConfig.api.url}/cuadre/${mesActual()}`;
+const urlGetAño = `${apiConfig.api.url}/cuadre/${añoActual()}`;
 
 export const useEstadisticasPagInicio = () => {
   const [bdCuadre, setBdCuadre] = useState({});

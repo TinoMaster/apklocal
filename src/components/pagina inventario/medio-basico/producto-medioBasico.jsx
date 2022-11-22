@@ -4,7 +4,8 @@ import {
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../../context/authContext";
 
 const ProductoMedioBasico = ({
   MBasico,
@@ -16,6 +17,8 @@ const ProductoMedioBasico = ({
   EliminarData,
 }) => {
   const [modalEditar, setModalEditar] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="w-full my-2 rounded-md shadow-md flex justify-between">
@@ -104,7 +107,7 @@ const ProductoMedioBasico = ({
           <h4 className="p-2 w-full text-xs md:text-sm text-slate-800 font-medium">
             {MBasico.local === 0 ? "-" : MBasico.local}
           </h4>
-          {!botonEditOff && (
+          {!botonEditOff && user?.role === "admin" && (
             <div
               onClick={() => {
                 setModalEditar(true);

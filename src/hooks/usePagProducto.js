@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
+import apiCofig from "../config/api.config.json";
 
 const fecha = new Date();
 
@@ -9,7 +10,7 @@ export const usePagProducto = () => {
   const [medioBasico, setMedioBasico] = useState({});
 
   const api = httpHelper();
-  const urlSave = "http://localhost:5000/inventario";
+  const urlSave = `${apiCofig.api.url}/inventario`;
 
   /* Insumos */
   const addZero = (num) => {
@@ -78,7 +79,7 @@ export const usePagProducto = () => {
     if (Object.keys(medioBasico).length === 0) {
       setError("Campo 'Nombre' , 'Almacen' y 'local' requeridos");
     } else {
-      setError("")
+      setError("");
       await api.post(urlSave, options);
       window.location.reload();
     }
@@ -102,6 +103,6 @@ export const usePagProducto = () => {
     handlerChangeInsumo,
     insumo,
     handlerChangeMBasico,
-    handlerSubmitSalvarMBasico
+    handlerSubmitSalvarMBasico,
   };
 };

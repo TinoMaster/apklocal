@@ -1,21 +1,26 @@
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../context/authContext";
 
 const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="w-full relative h-96 md:w-10/12 lg:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col">
       {/* Boton editar trabajador */}
-      <button
-        onClick={() => {
-          setDataToEdit(worker);
-          setModalUpdateWorker(true);
-        }}
-        className="absolute text-sm bg-yellow-200 p-1 rounded-md md:right-0 shadow-md text-gray-600 hover:cursor-pointer hover:bg-yellow-300"
-      >
-        <FontAwesomeIcon icon={faPenToSquare} />
-        Editar
-      </button>
+      {user?.role === "admin" && (
+        <button
+          onClick={() => {
+            setDataToEdit(worker);
+            setModalUpdateWorker(true);
+          }}
+          className="absolute text-sm bg-yellow-200 p-1 rounded-md md:right-0 shadow-md text-gray-600 hover:cursor-pointer hover:bg-yellow-300"
+        >
+          <FontAwesomeIcon icon={faPenToSquare} />
+          Editar
+        </button>
+      )}
+
       {/* Primera caja superior */}
       <div className="h-1/2 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}

@@ -8,8 +8,8 @@ import { NavLink } from "react-router-dom";
 
 const SectionEntradas = () => {
   return (
-    <div className="border-b-2 p-2">
-      <h6 className="text-white p-1 text-sm rounded font-medium inline bg-yellow-400 shadow-lg shadow-yellow-400/50">
+    <div className="flex p-2">
+      <h6 className="flex items-center text-white p-1 text-sm rounded font-medium bg-yellow-400 shadow-lg shadow-yellow-400/50">
         Entradas
       </h6>
       <ul className="flex flex-col my-2 justify-center items-center">

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import AuthContext from "../../context/authContext";
 import EstadisticasContext from "../../context/estadisticasContext";
 import { useForm } from "../../hooks/useForm";
 import CajaConteo from "./cajaConteo";
@@ -20,6 +21,8 @@ const PagCuadre = () => {
     handlerChangeHojas,
   } = useForm(setErrorsForm);
 
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative">
       {ModalCuadre && <ModalResult />}
@@ -30,15 +33,17 @@ const PagCuadre = () => {
         <CajaProductos />
       </div>
 
-      <div className="flex justify-center my-5 lg:my-0 md:mt-5 w-full">
-        <input
-          onChange={(e) => {
-            setForm({ ...form, fecha: e.target.value });
-          }}
-          className="bg-violet-400 p-1 text-white font-serif text-xs rounded-md shadow-md hover:cursor-pointer hover:bg-violet-500"
-          type="date"
-        />
-      </div>
+      {user?.role === "admin" && (
+        <div className="flex justify-center my-5 lg:my-0 md:mt-5 w-full">
+          <input
+            onChange={(e) => {
+              setForm({ ...form, fecha: e.target.value });
+            }}
+            className="bg-violet-400 p-1 text-white font-serif text-xs rounded-md shadow-md hover:cursor-pointer hover:bg-violet-500"
+            type="date"
+          />
+        </div>
+      )}
 
       <div className="flex flex-col h-full w-full lg:justify-center items-center  lg:h-3/4 lg:flex-row">
         <CajaConteo errorsForm={errorsForm} setErrorsForm={setErrorsForm} />

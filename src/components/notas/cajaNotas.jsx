@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashCan,
@@ -12,6 +12,7 @@ import { httpHelper } from "../../helpers/httpHelper";
 import Cookies from "universal-cookie";
 import { useNota } from "../../hooks/useNota";
 import { ModalPortal } from "../modalPortal/modalPortal";
+import AuthContext from "../../context/authContext";
 
 const modeloNota = {
   id: "",
@@ -34,6 +35,8 @@ export const CajaNotas = () => {
     modeloNota,
     dataToEdit
   );
+
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     httpHelper()
@@ -60,9 +63,10 @@ export const CajaNotas = () => {
   };
 
   const insertarNota = async (data) => {
+    const dataToSend = { ...data, creador: user.name };
     if (dataToEdit) {
       const options = {
-        body: data,
+        body: dataToSend,
         headers: { "Content-Type": "application/json" },
       };
       await httpHelper().put(
@@ -81,7 +85,7 @@ export const CajaNotas = () => {
       data.fecha = `${fecha.getDate()}/${
         fecha.getMonth() + 1
       }/${fecha.getFullYear()}`;
-      data.creador = cookies.get("nombre");
+      data.creador = user.name;
 
       const options = {
         body: data,

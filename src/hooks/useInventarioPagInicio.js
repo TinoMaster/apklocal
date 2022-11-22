@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
+import apiConfig from "../config/api.config.json";
 
 const testInicio = {
   bn: 0,
@@ -15,7 +16,7 @@ const useInventarioPagInicio = () => {
 
   useEffect(() => {
     httpHelper()
-      .get("http://localhost:5000/inventario/hojas")
+      .get(`${apiConfig.api.url}/inventario/hojas`)
       .then((data) => {
         if (!data.length) {
           setHojasBlancas({});
@@ -25,7 +26,7 @@ const useInventarioPagInicio = () => {
       });
 
     httpHelper()
-      .get("http://localhost:5000/testInyectores")
+      .get(`${apiConfig.api.url}/testInyectores`)
       .then((data) => {
         if (!data.length) {
           console.log("No se ah cargado");

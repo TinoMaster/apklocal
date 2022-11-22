@@ -1,7 +1,8 @@
 import { faEdit, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../../context/authContext";
 
 const ProductoInsumos = ({
   insumo,
@@ -13,6 +14,8 @@ const ProductoInsumos = ({
   botonEditOff,
 }) => {
   const [modalEditar, setModalEditar] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="w-full my-2 rounded-md shadow-md flex justify-between">
@@ -59,7 +62,7 @@ const ProductoInsumos = ({
           <h4 className="p-2 w-full text-center text-xs md:text-sm text-slate-800 font-medium">
             {insumo.local}
           </h4>
-          {!botonEditOff && (
+          {!botonEditOff && user?.role === "admin" && (
             <div
               onClick={() => {
                 setModalEditar(true);

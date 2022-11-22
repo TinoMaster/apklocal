@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
+import apiConfig from "../config/api.config.json";
 
 const InventarioContext = createContext();
 
@@ -12,8 +13,8 @@ const InventarioProvider = ({ children }) => {
   const [mediosBasicos, setMediosBasicos] = useState([]);
   const [mBasicoToEdit, setMBasicoToEdit] = useState({});
 
-  const urlGetInsumos = "http://127.0.0.1:5000/inventario/insumos";
-  const urlGetMediosBasicos = "http://127.0.0.1:5000/inventario/mediosBasicos";
+  const urlGetInsumos = `${apiConfig.api.url}/inventario/insumos`;
+  const urlGetMediosBasicos = `${apiConfig.api.url}/inventario/mediosBasicos`;
 
   useEffect(() => {
     httpHelper()
@@ -54,7 +55,7 @@ const InventarioProvider = ({ children }) => {
   };
 
   const EliminarData = async (id) => {
-    const urlEliminar = `http://localhost:5000/inventario/${id}`;
+    const urlEliminar = `${apiConfig.api.url}/inventario/${id}`;
     console.log(id);
 
     await httpHelper().del(urlEliminar);
@@ -72,7 +73,7 @@ const InventarioProvider = ({ children }) => {
 
   /* enviar edit de insumos */
   const sendDataToEdit = async (id) => {
-    const urlEdit = `http://localhost:5000/inventario/${id}`;
+    const urlEdit = `${apiConfig.api.url}/inventario/${id}`;
 
     const data = {
       id: insumoEdit.id,
@@ -102,7 +103,7 @@ const InventarioProvider = ({ children }) => {
   };
   /* Enviar edit de Medios Basicos */
   const sendDataToEditMBasicos = async (id) => {
-    const urlEdit = `http://localhost:5000/inventario/${id}`;
+    const urlEdit = `${apiConfig.api.url}/inventario/${id}`;
 
     const data = {
       nombre: mBasicoToEdit.nombre,

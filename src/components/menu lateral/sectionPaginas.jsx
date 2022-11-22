@@ -10,8 +10,8 @@ import { NavLink } from "react-router-dom";
 
 const SectionPaginas = () => {
   return (
-    <div className="border-b-2  p-2">
-      <h6 className="text-white p-1  rounded font-medium text-sm inline bg-teal-400 shadow-lg shadow-teal-400/50">
+    <div className="p-2 flex">
+      <h6 className="flex items-center text-white p-1 rounded font-medium text-sm bg-teal-400 shadow-lg shadow-teal-400/50">
         Paginas
       </h6>
       <ul className="flex flex-col my-2 justify-center  items-center">

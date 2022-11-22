@@ -64,7 +64,7 @@ const ModalEditPassword = ({ setEditPassword, id }) => {
           .then((el) => {
             el.success ? onSuccess(el) : onError(el);
           })
-      : setError({ error: true, message: "Debe completar todos los campos" });
+      : onError({ error: true, message: "Debe completar todos los campos" });
   };
 
   return (

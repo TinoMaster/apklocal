@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 /* import Cookies from "universal-cookie"; */
 
 import logo from "../../assets/img/favicon.ico";
-import imgBryam from "../../assets/img/Bryam.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "../../context/authContext";
 
 function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
-  /* const cookies = new Cookies(); */
+  const { user } = useContext(AuthContext);
 
   const isNotasActive = () => {
     if (notasActive === false) setNotasActive(true);
@@ -55,7 +55,7 @@ function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
         </div>
 
         <div className="w-9 mr-4 rounded-full border-2 border-teal-500 shadow-md overflow-hidden">
-          <img className="w-full" src={imgBryam} alt="Trabajador" />
+          <img className="w-full" src={user.image} alt="Trabajador" />
         </div>
       </div>
     </div>
