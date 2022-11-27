@@ -100,27 +100,27 @@ const ModalResult = () => {
                 Salario
               </h5>
               <p className="font-semibold text-xs text-green-800">
-                {resultForm.turno.trabajador1}
+                {resultForm?.turno?.trabajador1}
               </p>
               <input
                 type="text"
                 className="text-center text-xs font-serif focus:outline-none text-zinc-800 bg-transparent"
                 id="salario_principal"
                 value={
-                  resultForm.turno.trabajador1 === "Jorge" ||
-                  resultForm.turno.trabajador1 === "Bryam"
+                  resultForm?.turno?.trabajador1 === "Jorge" ||
+                  resultForm?.turno?.trabajador1 === "Bryam"
                     ? `$ ${salario.salario1}`
                     : `$ ${salario.salario1}`
                 }
                 readOnly
               />
 
-              {resultForm.turno.trabajador2 !== "" && (
+              {resultForm?.turno?.trabajador2 !== "" && (
                 <p className="font-semibold text-xs text-green-800">
-                  {resultForm.turno.trabajador2}
+                  {resultForm?.turno?.trabajador2}
                 </p>
               )}
-              {resultForm.turno.trabajador2 !== "" && (
+              {resultForm?.turno?.trabajador2 !== "" && (
                 <input
                   type="text"
                   className="text-center text-xs font-serif focus:outline-none text-zinc-800 bg-transparent"

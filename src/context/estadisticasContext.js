@@ -99,7 +99,7 @@ const EstadisticasProvider = ({ children }) => {
     urlSave = `${apiConfig.api.url}/cuadre`;
 
   const hojasGastadas = () => {
-    let bn = resultForm.testInyectores.bn - testInyectores.bn;
+    let bn = resultForm?.testInyectores?.bn - testInyectores?.bn;
     let color = resultForm.testInyectores.color - testInyectores.color;
     let total = bn + color;
 

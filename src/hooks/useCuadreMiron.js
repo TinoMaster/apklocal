@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EstadisticasContext from "../context/estadisticasContext";
+import apiConfig from "../config/api.config.json";
+import { httpHelper } from "../helpers/httpHelper";
 
 let idHojas = {
   bn: null,
@@ -7,14 +9,35 @@ let idHojas = {
   id: 111111,
 };
 
+let defaultTurno = {
+  trabajador1: "",
+  trabajador2: "",
+};
+
+const urlGetWorkers = `${apiConfig.api.url}/trabajadores`;
+
 export const UseCuadreMiron = (setErrorsForm) => {
   /* Este es lo mismo que useForm lo estoy convirtiendo para hacer nuevas pruebas para hacer dinamico el uso  de trabajadores */
   const [form, setForm] = useState({});
+  const [turno, setTurno] = useState(defaultTurno);
   const [cantHojas, setCantHojas] = useState(idHojas);
+  const [workers, setWorkers] = useState([]);
 
   const { setModalCuadre, setResultForm } = useContext(EstadisticasContext);
 
   /* Funciones: */
+  useEffect(() => {
+    httpHelper()
+      .get(urlGetWorkers)
+      .then((docs) => {
+        if (docs.success) {
+          setWorkers(docs.data);
+        } else {
+          console.log(docs);
+        }
+      });
+  }, []);
+
   const validarForm = (form) => {
     let err = {};
 
@@ -30,7 +53,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
     } else if (!form.efectivo) {
       err.name = `El campo "Efectivo" es requerido`;
       return err;
-    } else if (!form.turno) {
+    } else if (turno?.trabajador1 === "") {
       err.name = `Eliga el turno de trabajo`;
       return err;
     } else if (!cantHojas.bn || !cantHojas.color) {
@@ -40,8 +63,9 @@ export const UseCuadreMiron = (setErrorsForm) => {
 
     return err;
   };
-  const resultFinal = (form) => {
-    if (form.turno.trabajador2 === "") {
+
+  const resultFinal = async (form) => {
+    if (form?.turno?.trabajador2 === "") {
       if (form.miron >= 2000) {
         form.salario1 = Math.round(form.miron * 0.15 + 174);
         form.salario2 = "";
@@ -93,27 +117,17 @@ export const UseCuadreMiron = (setErrorsForm) => {
     setForm({ ...form, [name]: parseInt(value) });
   };
 
-  const handleChangeInputRadio = (e) => {
-    let turno = {};
-    if (e.target.id === "bryam")
-      turno = { trabajador1: "Bryam", trabajador2: "Nysaer" };
-    else if (e.target.id === "jorge")
-      turno = { trabajador1: "Jorge", trabajador2: "Nysaer" };
-    else if (e.target.id === "Jorge")
-      turno = { trabajador1: "Jorge(S)", trabajador2: "" };
-    else if (e.target.id === "Bryam")
-      turno = { trabajador1: "Bryam(S)", trabajador2: "" };
-    else if (e.target.id === "Nysaer")
-      turno = { trabajador1: "Nysaer(S)", trabajador2: "" };
-    else if (e.target.id === "BJ")
-      turno = { trabajador1: "Bryam", trabajador2: "Jorge" };
-    setForm({ ...form, turno: turno });
+  const handlerChoiceWorker = (e) => {
+    const { name, value } = e.target;
+    setTurno({ ...turno, [name]: value });
+    setForm({ ...form, turno: { ...turno, [name]: value } });
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
     if (Object.keys(validarForm(form)).length === 0) {
-      resultFinal(form);
+      await resultFinal(form);
       setModalCuadre(true);
+      console.log(form);
       setErrorsForm({});
     } else {
       setErrorsForm(validarForm(form));
@@ -131,9 +145,11 @@ export const UseCuadreMiron = (setErrorsForm) => {
   return {
     handleSubmitForm,
     handleChangeForm,
-    handleChangeInputRadio,
     form,
     setForm,
     handlerChangeHojas,
+    handlerChoiceWorker,
+    turno,
+    workers,
   };
 };

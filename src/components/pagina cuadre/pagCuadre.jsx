@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
 import EstadisticasContext from "../../context/estadisticasContext";
-import { useForm } from "../../hooks/useForm";
+import { UseCuadreMiron } from "../../hooks/useCuadreMiron";
 import CajaConteo from "./cajaConteo";
 import CajaCuadre from "./cajaCuadre";
 import CajaHojas from "./cajaHojas";
@@ -15,11 +15,13 @@ const PagCuadre = () => {
   const {
     handleSubmitForm,
     handleChangeForm,
-    handleChangeInputRadio,
     form,
     setForm,
     handlerChangeHojas,
-  } = useForm(setErrorsForm);
+    handlerChoiceWorker,
+    turno,
+    workers,
+  } = UseCuadreMiron(setErrorsForm);
 
   const { user } = useContext(AuthContext);
 
@@ -28,7 +30,11 @@ const PagCuadre = () => {
       {ModalCuadre && <ModalResult />}
 
       <div className="flex flex-col lg:flex-row w-full lg:w-11/12 m-auto shadow-md shadow-violet-500/20 lg:h-1/4 bg-violet-50 rounded-lg">
-        <CajaTurno handleChangeInputRadio={handleChangeInputRadio} />
+        <CajaTurno
+          handlerChoiceWorker={handlerChoiceWorker}
+          turno={turno}
+          workers={workers}
+        />
         <CajaHojas handlerChangeHojas={handlerChangeHojas} />
         <CajaProductos />
       </div>
