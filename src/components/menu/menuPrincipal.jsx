@@ -46,16 +46,16 @@ function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
       <div className="flex justify-end">
         <div
           onClick={isNotasActive}
-          className="flex items-center w-9 mx-4 rounded-full border-2 border-purple-500 shadow-md bg-white overflow-hidden hover:cursor-pointer md:hover:shadow-stone-200/50"
+          className="flex items-center w-9 mx-4 rounded-full border-2 border-yellow-200 shadow-md bg-white overflow-hidden transition-all hover:cursor-pointer md:hover:scale-105 md:hover:bg-violet-50"
         >
           <FontAwesomeIcon
-            className="w-full text-purple-600 md:text-xl"
+            className="w-full text-yellow-400 md:text-xl"
             icon={faNoteSticky}
           />
         </div>
 
-        <div className="w-9 mr-4 rounded-full border-2 border-teal-500 shadow-md overflow-hidden">
-          <img className="w-full" src={user.image} alt="Trabajador" />
+        <div className="w-9 mr-4 rounded-full py-1 border-2 bg-white border-teal-500 shadow-md overflow-hidden">
+          <img className="w-full h-full" src={user.image} alt="Trabajador" />
         </div>
       </div>
     </div>

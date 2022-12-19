@@ -13,7 +13,7 @@ export const ModalInsertTrabajador = ({
   roles,
 }) => {
   return (
-    <div className="relative w-11/12 h-96 md:w-10/12 p-2 lg:w-6/12 lg:h-2/3 md:h-4/12 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col items-center">
+    <div className="relative w-11/12 h-96 md:w-10/12 p-2 lg:w-6/12 lg:h-2/3 md:h-4/12 max-w-5xl max-h-128 md:mt-0 bg-slate-100 rounded-2xl shadow-xl flex flex-col items-center">
       {/* Modal error */}
       <div
         className={

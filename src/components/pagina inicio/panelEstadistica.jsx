@@ -13,6 +13,7 @@ const PanelEstadisticas = () => {
     mejorYpeorMes,
     mejorTurno,
     error,
+    pi,
   } = useEstadisticasPagInicio();
 
   return (

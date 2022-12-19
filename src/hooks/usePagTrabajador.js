@@ -224,7 +224,7 @@ export const usePagTrabajador = () => {
     httpHelper()
       .get(UrlGetWorkers)
       .then((el) => {
-        setWorkers(el);
+        el.success ? setWorkers(el.data) : setError(el);
       });
     httpHelper()
       .get(UrlGetRoles)

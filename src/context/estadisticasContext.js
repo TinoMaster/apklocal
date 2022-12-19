@@ -92,11 +92,25 @@ const EstadisticasProvider = ({ children }) => {
   const [resultForm, setResultForm] = useState({});
   const [mesDelAño, setMesDelAño] = useState(mesActual);
 
+  const [workers, setWorkers] = useState([]);
+
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const [loading, setLoading] = useState(false);
 
   const urlGet = `${apiConfig.api.url}/cuadre/${mesDelAño}`,
     urlSave = `${apiConfig.api.url}/cuadre`;
+
+  useEffect(() => {
+    httpHelper()
+      .get(`${apiConfig.api.url}/trabajadores`)
+      .then((docs) => {
+        if (docs.success) {
+          setWorkers(docs.data);
+        } else {
+          console.log(docs);
+        }
+      });
+  }, []);
 
   const hojasGastadas = () => {
     let bn = resultForm?.testInyectores?.bn - testInyectores?.bn;
@@ -263,6 +277,7 @@ const EstadisticasProvider = ({ children }) => {
     hojasGastadas,
     success,
     loading,
+    workers,
   };
 
   return (

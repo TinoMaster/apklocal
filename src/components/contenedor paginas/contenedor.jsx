@@ -7,6 +7,11 @@ import PagVentas from "../pagina ventas/pagVentas";
 import PagCuadre from "../pagina cuadre/pagCuadre";
 import PagProducto from "../pagina productos/pagProducto";
 import { CajaNotas } from "../notas/cajaNotas";
+import { PagTienda } from "../tienda/pagTienda";
+import { AddProduct } from "../tienda/add product";
+import { InventarioTienda } from "../tienda/inventario tienda";
+import { Historial } from "../tienda/historial";
+import { EstadisticasTienda } from "../tienda/estadisticas tienda";
 
 const Contenedor = ({ setMenuActive, notasActive }) => {
   return (
@@ -32,6 +37,12 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
           <Route path="/personal" element={<PagPersonal />} />
           <Route path="/cuadre" element={<PagCuadre />} />
           <Route path="/productos" element={<PagProducto />} />
+          <Route path="/tienda" element={<PagTienda />}>
+            <Route path="addProduct" element={<AddProduct />} />
+            <Route path="inventario" element={<InventarioTienda />} />
+            <Route path="historial" element={<Historial />} />
+            <Route path="estadisticas" element={<EstadisticasTienda />} />
+          </Route>
           <Route path="/*" element={<PagInicio />} />
         </Routes>
       </div>

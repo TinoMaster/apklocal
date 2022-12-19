@@ -1,6 +1,8 @@
 import {
   faCalendarDays,
   faDollarSign,
+  faPenToSquare,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
@@ -188,7 +190,7 @@ const PagVentas = () => {
         <div className="w-full p-2 relative">
           <table className="table-fixed w-full border-collapse relative mb-16">
             <thead>
-              <tr className="bg-violet-500 text-white sticky top-0 w-full">
+              <tr className="bg-violet-500 text-white sticky top-0 w-full z-20">
                 <th className="py-2 border-2 rounded-lg text-xs">Fecha</th>
                 <th className="py-2 border-2 rounded-lg text-xs">Venta</th>
                 <th className="py-2 border-2 hidden md:block rounded-lg text-xs">
@@ -267,22 +269,22 @@ const PagVentas = () => {
                           </p>
                         )}
                       </td>
-                      <td className="text-center flex">
-                        <h4 className="w-full text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                      <td className="text-center flex relative py-2">
+                        <h4 className="w-full text-slate-600 shadow-lg py-2 rounded-lg bg-white text-xs">
                           <FontAwesomeIcon
                             className=" text-slate-600"
                             icon={faDollarSign}
                           />
                           {dia.dueño}
                         </h4>
-                        {/* <div className="hidden md:flex w-1/4 justify-around items-center">
-                          <div className="bg-yellow-400/50 p-1 rounded-full hover:bg-yellow-500 hover:shadow-md">
-                            <FontAwesomeIcon icon={faPenToSquare} />
+                        <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
+                          <div className="outline outline-yellow-100 py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
+                            <FontAwesomeIcon className="text-xs" icon={faPenToSquare} />
                           </div>
-                          <div className="bg-red-400/50 p-1 rounded-full hover:bg-red-500 hover:shadow-md">
-                            <FontAwesomeIcon icon={faTrashCan} />
+                          <div className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md">
+                            <FontAwesomeIcon className="text-xs" icon={faTrashCan} />
                           </div>
-                        </div> */}
+                        </div>
                       </td>
                     </tr>
                   );

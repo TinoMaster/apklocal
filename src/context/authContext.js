@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
     httpHelper()
       .get(urlExistUser)
       .then((res) => {
-        if (res.length > 0) {
+        if (res.success) {
           setError({});
           setOpcion("inicio");
         } else {

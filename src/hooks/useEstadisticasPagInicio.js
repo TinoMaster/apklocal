@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AuthProvider } from "../context/authContext";
 import { httpHelper } from "../helpers/httpHelper";
 import apiConfig from "../config/api.config.json";
 
@@ -68,48 +67,51 @@ export const useEstadisticasPagInicio = () => {
   const [bdPorAño, setbdPorAño] = useState({});
 
   useEffect(() => {
-    httpHelper()
-      .get(url)
-      .then((data) => {
-        if (data.error) {
-          setBdCuadre({});
-          setError({
-            name: data.error,
-            status: data.statusCode,
-            statusText: data.message,
-          });
-        } else {
-          setError({});
-          setBdCuadre(data);
-        }
-      });
-    httpHelper()
-      .get(urlDelMes)
-      .then((data) => {
-        if (!data.length) {
-          setEsteMes({});
-          setError({
-            name: "error de conexion con la base de datos",
-            status: 404,
-            statusText: "Error de conexion",
-          });
-        } else {
-          setError({});
-          setEsteMes(data);
-        }
-      });
-    httpHelper()
-      .get(urlGetAño)
-      .then((el) => {
-        if (!el?.length) {
-          setbdPorAño({});
-          setError(el);
-        } else {
-          setbdPorAño(el);
-          setError({});
-        }
-      });
-  }, []);
+    if (!bdCuadre?.length) {
+      console.log("render",bdCuadre);
+      httpHelper()
+        .get(url)
+        .then((data) => {
+          if (data.error) {
+            setBdCuadre({});
+            setError({
+              name: data.error,
+              status: data.statusCode,
+              statusText: data.message,
+            });
+          } else {
+            setError({});
+            setBdCuadre(data);
+          }
+        });
+      httpHelper()
+        .get(urlDelMes)
+        .then((data) => {
+          if (!data.length) {
+            setEsteMes({});
+            setError({
+              name: "error de conexion con la base de datos",
+              status: 404,
+              statusText: "Error de conexion",
+            });
+          } else {
+            setError({});
+            setEsteMes(data);
+          }
+        });
+      httpHelper()
+        .get(urlGetAño)
+        .then((el) => {
+          if (!el?.length) {
+            setbdPorAño({});
+            setError(el);
+          } else {
+            setbdPorAño(el);
+            setError({});
+          }
+        });
+    }
+  }, [bdCuadre]);
 
   const totalRecaudado = (bd) => {
     if (!bd.length) {
@@ -194,51 +196,19 @@ export const useEstadisticasPagInicio = () => {
     }
   };
 
-  const salarioBryam = (bd) => {
-    let bryam = 0;
-    if (!bd.length) return 0;
+  const salarioTrabajador = (bd, worker) => {
+    let salario = 0;
+    if (!bd?.length) return 0;
     else {
       bd.forEach((dia) => {
         if (
-          dia.turno.trabajador1 === "Bryam" ||
-          dia.turno.trabajador1 === "Bryam(S)"
+          dia.turno.trabajador1 === worker ||
+          dia.turno.trabajador1 === `${worker}(S)`
         ) {
-          bryam += dia.salario1;
-        }
+          salario += dia.salario1;
+        } else if (dia.turno.trabajador2 === worker) salario += dia.salario2;
       });
-      return bryam;
-    }
-  };
-
-  const salarioJorge = (bd) => {
-    let jorge = 0;
-    if (!bd.length) return 0;
-    else {
-      bd.forEach((dia) => {
-        if (
-          dia.turno.trabajador1 === "Jorge" ||
-          dia.turno.trabajador1 === "Jorge(S)"
-        ) {
-          jorge += dia.salario1;
-        } else if (dia.turno.trabajador2 === "Jorge") jorge += dia.salario2;
-      });
-      return jorge;
-    }
-  };
-
-  const salarioNysaer = (bd) => {
-    let nysaer = 0;
-    if (!bd.length) return 0;
-    else {
-      bd.forEach((dia) => {
-        if (dia.turno.trabajador2 === "Nysaer") {
-          nysaer += dia.salario2;
-        }
-        if (dia.turno.trabajador1 === "Nysaer(S)") {
-          nysaer += dia.salario1;
-        }
-      });
-      return nysaer;
+      return salario;
     }
   };
 
@@ -379,9 +349,7 @@ export const useEstadisticasPagInicio = () => {
     totalSalario,
     mejorTurno,
     mejorVenta,
-    salarioBryam,
-    salarioJorge,
-    salarioNysaer,
+    salarioTrabajador,
     fondoAyer,
     bdCuadre,
     esteMes,

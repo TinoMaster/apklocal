@@ -5,6 +5,7 @@ import {
   faClipboard,
   faBoxesStacked,
   faPerson,
+  faShop,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
@@ -55,6 +56,16 @@ const SectionPaginas = () => {
             to="/personal"
           >
             <FontAwesomeIcon className="mx-1" icon={faPerson} /> Personal
+          </NavLink>
+        </li>
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base text-stone-500 p-2 pl-5 lg:pl-14 hover:bg-slate-100">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "font-semibold text-teal-500" : ""
+            }
+            to="/tienda/addProduct"
+          >
+            <FontAwesomeIcon className="mx-1" icon={faShop} /> Tienda
           </NavLink>
         </li>
       </ul>
