@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListDots } from "@fortawesome/free-solid-svg-icons";
-import EstadisticasContext from "../../context/estadisticasContext";
+import CuadreContext from "../../context/cuadreContext";
 
 const modeloInicial = {
   miron: "",
@@ -23,7 +23,7 @@ const CajaCuadre = ({
   form,
   setForm,
 }) => {
-  const { result } = useContext(EstadisticasContext);
+  const { result } = useContext(CuadreContext);
 
   return (
     <div className="w-full max-w-4xl relative h-full items-center sm:w-9/12 md:w-full m-auto justify-center lg:w-6/12 flex flex-col">

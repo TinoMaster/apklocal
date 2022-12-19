@@ -1,7 +1,7 @@
 import { faDollar, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useEstadisticasPagInicio } from "../../hooks/useEstadisticasPagInicio";
+import React, { useContext } from "react";
+import EstadisticasContext from "../../context/estadisticasContext";
 import { EstadisticasVentas } from "./panel Estadisticas/estadisticasVentas";
 
 const PanelEstadisticas = () => {
@@ -13,8 +13,7 @@ const PanelEstadisticas = () => {
     mejorYpeorMes,
     mejorTurno,
     error,
-    pi,
-  } = useEstadisticasPagInicio();
+  } = useContext(EstadisticasContext);
 
   return (
     <div className="w-full md:w-4/5 m-auto lg:w-1/4 h-full bg-white p-2 flex flex-col rounded-md">

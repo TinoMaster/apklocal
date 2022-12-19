@@ -6,10 +6,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import EstadisticasContext from "../../context/estadisticasContext";
+import CuadreContext from "../../context/cuadreContext";
 
 const PagVentas = () => {
-  const { db, setMesDelAño } = useContext(EstadisticasContext);
+  const { db, setMesDelAño } = useContext(CuadreContext);
   let totalVenta = 0;
   let totalDueño = 0;
 

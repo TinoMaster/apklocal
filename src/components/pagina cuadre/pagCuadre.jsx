@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
-import EstadisticasContext from "../../context/estadisticasContext";
+import CuadreContext from "../../context/cuadreContext";
 import { UseCuadreMiron } from "../../hooks/useCuadreMiron";
 import CajaConteo from "./cajaConteo";
 import CajaCuadre from "./cajaCuadre";
@@ -11,7 +11,7 @@ import ModalResult from "./modalResult";
 
 const PagCuadre = () => {
   const [errorsForm, setErrorsForm] = useState({});
-  const { ModalCuadre } = useContext(EstadisticasContext);
+  const { ModalCuadre } = useContext(CuadreContext);
   const {
     handleSubmitForm,
     handleChangeForm,

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import EstadisticasContext from "../context/estadisticasContext";
+import CuadreContext from "../context/cuadreContext";
 import apiConfig from "../config/api.config.json";
 import { httpHelper } from "../helpers/httpHelper";
 
@@ -23,7 +23,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [cantHojas, setCantHojas] = useState(idHojas);
   const [workers, setWorkers] = useState([]);
 
-  const { setModalCuadre, setResultForm } = useContext(EstadisticasContext);
+  const { setModalCuadre, setResultForm } = useContext(CuadreContext);
 
   /* Funciones: */
   useEffect(() => {

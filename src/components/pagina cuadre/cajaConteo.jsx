@@ -2,13 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import { useDesglose } from "../../hooks/useDesglose";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import EstadisticasContext from "../../context/estadisticasContext";
+import CuadreContext from "../../context/cuadreContext";
 
 const objectInputs = [];
 
 const CajaConteo = () => {
   const [errors, setErrors] = useState({});
-  const { result, setResult, setBilletes } = useContext(EstadisticasContext);
+  const { result, setResult, setBilletes } = useContext(CuadreContext);
 
   const { handlerBlur, handlerSubmit, setInputs } = useDesglose(
     objectInputs,
@@ -19,7 +19,11 @@ const CajaConteo = () => {
 
   return (
     <div className="w-full max-w-4xl min-h-[420px] md:h-full items-center relative justify-center sm:w-9/12 m-auto md:w-full lg:w-6/12 flex flex-col mb-12 lg:m-0">
-      {errors && <p className="absolute top-3 text-sm bg-rose-500 shadow-md shadow-rose-400/75 text-white rounded-md ">{errors.name}</p>}
+      {errors && (
+        <p className="absolute top-3 text-sm bg-rose-500 shadow-md shadow-rose-400/75 text-white rounded-md ">
+          {errors.name}
+        </p>
+      )}
 
       <form
         action=""

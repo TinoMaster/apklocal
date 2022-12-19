@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import EstadisticasContext from "../../context/estadisticasContext";
+import CuadreContext from "../../context/cuadreContext";
 import {
   faFaceLaughWink,
   faFaceSadCry,
@@ -22,7 +22,7 @@ const ModalResult = () => {
     hojasGastadas,
     success,
     loading,
-  } = useContext(EstadisticasContext);
+  } = useContext(CuadreContext);
 
   const salario = {
     salario1: resultForm.salario1,

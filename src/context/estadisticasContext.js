@@ -1,12 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { httpHelper } from "../helpers/httpHelper";
-import useInventarioPagInicio from "../hooks/useInventarioPagInicio";
 import apiConfig from "../config/api.config.json";
+import { httpHelper } from "../helpers/httpHelper";
 
-const EstadisticasContext = createContext();
 const fecha = new Date();
-
 const mesActual = () => {
+  const fecha = new Date();
   let mes = fecha.getMonth();
 
   switch (mes) {
@@ -53,233 +51,313 @@ const mesActual = () => {
   }
   return mes;
 };
-
-const addZero = (num) => {
-  let result = 0;
-  if (num.toString().length === 1) {
-    result = "0" + num;
-    parseInt(result);
-  } else result = num;
-  return result;
+const añoActual = () => {
+  let año = fecha.getFullYear();
+  return año;
 };
 
-const restZeroDay = (num) => {
-  let result = 0;
-  let prueba = num.substring(0, 1);
-  if (prueba === "0") {
-    result = num.substring(1, 2);
-    return result;
-  } else return num;
-};
+const url = `${apiConfig.api.url}/cuadre`;
+const urlDelMes = `${apiConfig.api.url}/cuadre/${mesActual()}`;
+const urlGetAño = `${apiConfig.api.url}/cuadre/${añoActual()}`;
 
-const constMes = (num) => {
-  let result = 0;
-  let prueba = num.substring(0, 1);
-  if (prueba === "0") {
-    result = num.substring(1, 2) - 1;
-    return result.toString();
-  } else return num - 1;
-};
+const EstadisticasContext = createContext();
 
 const EstadisticasProvider = ({ children }) => {
-  const [db, setDb] = useState([]);
+  const [bdCuadre, setBdCuadre] = useState({});
+  const [esteMes, setEsteMes] = useState({});
   const [error, setError] = useState({});
-  const [success, setSuccess] = useState({});
-  const [finalizar, setFinalizar] = useState(true);
-  const [result, setResult] = useState(0);
-  const [billetes, setBilletes] = useState([]);
-  const [ModalCuadre, setModalCuadre] = useState(false);
-  const [resultForm, setResultForm] = useState({});
-  const [mesDelAño, setMesDelAño] = useState(mesActual);
-
-  const [workers, setWorkers] = useState([]);
-
-  const { hojasBlancas, testInyectores } = useInventarioPagInicio();
-  const [loading, setLoading] = useState(false);
-
-  const urlGet = `${apiConfig.api.url}/cuadre/${mesDelAño}`,
-    urlSave = `${apiConfig.api.url}/cuadre`;
+  const [bdPorAño, setbdPorAño] = useState({});
 
   useEffect(() => {
-    httpHelper()
-      .get(`${apiConfig.api.url}/trabajadores`)
-      .then((docs) => {
-        if (docs.success) {
-          setWorkers(docs.data);
-        } else {
-          console.log(docs);
-        }
-      });
-  }, []);
-
-  const hojasGastadas = () => {
-    let bn = resultForm?.testInyectores?.bn - testInyectores?.bn;
-    let color = resultForm.testInyectores.color - testInyectores.color;
-    let total = bn + color;
-
-    return { bn, color, total };
-  };
-
-  const restarHojasPagInicio = () => {
-    let bn = resultForm.testInyectores.bn - testInyectores.bn;
-    let color = resultForm.testInyectores.color - testInyectores.color;
-    let total = bn + color;
-
-    let result = hojasBlancas.local - total;
-    let id = hojasBlancas._id;
-
-    let data = {
-      local: result > 0 ? result : 0,
-    };
-
-    let options = {
-      body: data,
-      headers: { "content-type": "application/json" },
-    };
-
-    let api = httpHelper();
-    let urlEdit = `${apiConfig.api.url}/inventario/${id}`;
-
-    api.put(urlEdit, options);
-  };
-
-  const createData = async () => {
-    const data = {};
-    let testIny = {};
-
-    if (resultForm.fecha) {
-      let mes = resultForm.fecha.substring(5, 7);
-      let dia = resultForm.fecha.substring(8, 10);
-      const nuevoDia = restZeroDay(dia);
-      const nuevoMes = parseInt(constMes(mes));
-      let año = resultForm.fecha.substring(0, 4);
-
-      data.id = parseInt(`${año}${nuevoMes}${dia}`);
-      data.fecha = `${nuevoDia}-${parseInt(nuevoMes) + 1}-${año}`;
-    } else {
-      data.id = parseInt(
-        `${fecha.getFullYear()}${fecha.getMonth()}${addZero(fecha.getDate())}`
-      );
-      data.fecha = `${fecha.getDate()}-${
-        fecha.getMonth() + 1
-      }-${fecha.getFullYear()}`;
-    }
-
-    data.miron = resultForm.miron;
-    data.efectivo = result;
-    data.fondo = resultForm.fondoHoy;
-    data.salario1 = resultForm.salario1;
-    data.salario2 = resultForm.salario2;
-    data.turno = resultForm.turno;
-    data.dueño = resultForm.dueño;
-
-    testIny = resultForm.testInyectores;
-
-    let api = httpHelper();
-
-    let options = {
-      body: data,
-      headers: { "content-type": "application/json" },
-    };
-
-    let optionsTest = {
-      body: testIny,
-      headers: { "content-type": "application/json" },
-    };
-
-    if (db.length > 0) {
-      for (const i of db) {
-        if (i.id === data.id) {
-          setError({
-            error: "true",
-            status: "500",
-            statusText: "Ya existe el cuadre de hoy",
-          });
-          setFinalizar(false);
-          break;
-        } else {
-          setError({});
-          setFinalizar(true);
-        }
-      }
-    }
-
-    if (finalizar === true) {
-      await api.post(urlSave, options);
-      await api.post(`${apiConfig.api.url}/testInyectores`, optionsTest);
-    }
-
-    api
-      .get(urlGet)
-      .then((el) => setDb(el))
-      .catch((err) => console.log(err));
-  };
-
-  const validarData = async () => {
-    setLoading(true);
-    if (resultForm.diferencia === 0) {
-      setFinalizar(true);
-      await createData();
-      await restarHojasPagInicio();
-      if (finalizar === true) {
-        setLoading(false);
-        setSuccess({
-          success: true,
-          message: "Registro satisfactorio",
+    if (!bdCuadre?.length) {
+      console.log("render", bdCuadre);
+      httpHelper()
+        .get(url)
+        .then((data) => {
+          if (data.error) {
+            setBdCuadre({});
+            setError({
+              name: data.error,
+              status: data.statusCode,
+              statusText: data.message,
+            });
+          } else {
+            setError({});
+            setBdCuadre(data);
+          }
         });
-        setTimeout(() => {
-          setModalCuadre(false);
-          setSuccess({});
-        }, 2000);
-        window.location.reload();
-      }
+      httpHelper()
+        .get(urlDelMes)
+        .then((data) => {
+          if (!data.length) {
+            setEsteMes({});
+            setError({
+              name: "error de conexion con la base de datos",
+              status: 404,
+              statusText: "Error de conexion",
+            });
+          } else {
+            setError({});
+            setEsteMes(data);
+          }
+        });
+      httpHelper()
+        .get(urlGetAño)
+        .then((el) => {
+          if (!el?.length) {
+            setbdPorAño({});
+            setError(el);
+          } else {
+            setbdPorAño(el);
+            setError({});
+          }
+        });
+    }
+  }, [bdCuadre]);
+
+  const totalRecaudado = (bd) => {
+    if (!bd.length) {
+      return 0;
     } else {
-      setFinalizar(false);
-      setError({
-        error: "true",
-        status: "500",
-        statusText: "El dia no esta cuadrado",
-      });
+      let totalAño = 0;
+      bd.forEach((dia) => (totalAño += dia.miron));
+      return totalAño;
     }
   };
 
-  useEffect(() => {
-    httpHelper()
-      .get(urlGet)
-      .then((el) => {
-        if (!el.length) {
-          setDb([]);
-          setError(el);
+  const totalRecaudadoDueño = (bd) => {
+    if (!bd.length) {
+      return 0;
+    } else {
+      let totalAño = 0;
+      bd.forEach((dia) => (totalAño += dia.dueño));
+      return totalAño;
+    }
+  };
+
+  const totalSalario = (bd) => {
+    if (!bd.length) {
+      return 0;
+    } else {
+      let totalSalario = 0;
+      bd.forEach((dia) => (totalSalario += dia.salario1 + dia.salario2));
+      return totalSalario;
+    }
+  };
+
+  const ventaPorTurno = (bd) => {
+    let result = {};
+
+    if (bd.length) {
+      result = bd.reduce((object, element) => {
+        const turno =
+          element.turno.trabajador1 +
+          (element.turno.trabajador2 !== ""
+            ? " y " + element.turno.trabajador2
+            : "");
+
+        if (!object[turno]) {
+          object[turno] = element.miron;
         } else {
-          setDb(el);
-          setError({});
+          object[turno] += element.miron;
+        }
+        return result;
+      }, result);
+    }
+    return Object.entries(result);
+  };
+
+  const mejorTurno = (bd) => {
+    const array = ventaPorTurno(bd);
+    const object = Object.fromEntries(array);
+    let turno = "";
+    let cont = 0;
+
+    for (const i in object) {
+      if (object[i] > cont) {
+        cont = object[i];
+        turno = i;
+      }
+    }
+    return [turno, cont];
+  };
+
+  const mejorVenta = (bd) => {
+    let result = {};
+    let comp = 0;
+    if (!bd.length) {
+      return 0;
+    } else {
+      bd.forEach((dia) => {
+        if (comp < dia.miron) {
+          comp = dia.miron;
+          result = dia;
         }
       });
-  }, [urlGet]);
+      return result;
+    }
+  };
+
+  const salarioTrabajador = (bd, worker) => {
+    let salario = 0;
+    if (!bd?.length) return 0;
+    else {
+      bd.forEach((dia) => {
+        if (
+          dia.turno.trabajador1 === worker ||
+          dia.turno.trabajador1 === `${worker}(S)`
+        ) {
+          salario += dia.salario1;
+        } else if (dia.turno.trabajador2 === worker) salario += dia.salario2;
+      });
+      return salario;
+    }
+  };
+
+  const fondoAyer = (bd) => {
+    let fondoAyer = 0;
+    if (!bd.length) return 0;
+    else {
+      bd.forEach((dia) => (fondoAyer = dia.fondo));
+    }
+    return fondoAyer;
+  };
+
+  const mejorYpeorMes = (bd) => {
+    let allMonths = {};
+    let sumaMeses = {};
+    let mes = 0;
+    let año = 0;
+    let valorMejor = 0;
+    let valorPeor = 500000;
+    let mejorMes = "";
+    let peorMes = "";
+
+    if (!bd.length) {
+      return 0;
+    } else {
+      bd.forEach((dia) => {
+        let fecha = dia.id;
+        let fechaSub = fecha.toString();
+        let fechaString = fechaSub.substring(0, 5);
+        allMonths = { ...allMonths, [fechaString]: {} };
+      });
+    }
+
+    if (!bd.length) {
+      return 0;
+    } else {
+      bd.forEach((dia) => {
+        let fecha = dia.id;
+        let fechaSub = fecha.toString();
+        let fechaString = fechaSub.substring(0, 5);
+
+        if (allMonths[fechaString]) {
+          allMonths[fechaString] = {
+            ...allMonths[fechaString],
+            [fechaSub.substring(5, 7)]: dia,
+          };
+        }
+      });
+    }
+
+    if (!bd.length) {
+      return 0;
+    } else {
+      bd.forEach((dia) => {
+        let fecha = dia.id;
+        let fechaSub = fecha.toString();
+        let fechaString = fechaSub.substring(0, 5);
+
+        if (allMonths[fechaString]) {
+          if (fechaSub.length === 7) {
+            mes = fechaSub.substring(4, 5);
+            año = fechaSub.substring(0, 4);
+          } else {
+            mes = fechaSub.substring(4, 6);
+            año = fechaSub.substring(0, 4);
+          }
+          switch (mes) {
+            case "0":
+              mes = `enero-${año}`;
+              break;
+            case "1":
+              mes = `febrero-${año}`;
+              break;
+            case "2":
+              mes = `marzo-${año}`;
+              break;
+            case "3":
+              mes = `abril-${año}`;
+              break;
+            case "4":
+              mes = `mayo-${año}`;
+              break;
+            case "5":
+              mes = `junio-${año}`;
+              break;
+            case "6":
+              mes = `julio-${año}`;
+              break;
+            case "7":
+              mes = `agosto-${año}`;
+              break;
+            case "8":
+              mes = `septiembre-${año}`;
+              break;
+            case "9":
+              mes = `octubre-${año}`;
+              break;
+            case "10":
+              mes = `noviembre-${año}`;
+              break;
+            case "11":
+              mes = `diciembre-${año}`;
+              break;
+
+            default:
+              mes = "enero";
+              break;
+          }
+
+          if (sumaMeses[mes] >= 0) {
+            sumaMeses[mes] += dia.miron;
+          } else {
+            sumaMeses[mes] = 0;
+            sumaMeses[mes] += dia.miron;
+          }
+        }
+      });
+    }
+
+    for (const mes in sumaMeses) {
+      if (sumaMeses[mes] >= 0 && sumaMeses[mes] >= valorMejor) {
+        mejorMes = mes;
+        valorMejor = sumaMeses[mes];
+      }
+      if (sumaMeses[mes] >= 0 && sumaMeses[mes] <= valorPeor) {
+        peorMes = mes;
+        valorPeor = sumaMeses[mes];
+      }
+    }
+
+    return [mejorMes, valorMejor, peorMes, valorPeor];
+  };
 
   const data = {
-    db,
-    setDb,
     error,
-    setError,
-    setFinalizar,
-    finalizar,
-    resultForm,
-    setResultForm,
-    result,
-    setResult,
-    billetes,
-    setBilletes,
-    ModalCuadre,
-    setModalCuadre,
-    validarData,
-    setMesDelAño,
-    hojasGastadas,
-    success,
-    loading,
-    workers,
+    totalRecaudado,
+    totalRecaudadoDueño,
+    totalSalario,
+    mejorTurno,
+    mejorVenta,
+    salarioTrabajador,
+    fondoAyer,
+    bdCuadre,
+    esteMes,
+    mejorYpeorMes,
+    bdPorAño,
   };
-
   return (
     <EstadisticasContext.Provider value={data}>
       {children}

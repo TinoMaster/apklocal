@@ -4,8 +4,8 @@ import {
   faCalendarDays,
   faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEstadisticasPagInicio } from "../../../hooks/useEstadisticasPagInicio";
 
+import CuadreContext from "../../../context/cuadreContext";
 import EstadisticasContext from "../../../context/estadisticasContext";
 
 const EsteAño = () => {
@@ -17,9 +17,9 @@ const EsteAño = () => {
     mejorTurno,
     mejorVenta,
     salarioTrabajador,
-  } = useEstadisticasPagInicio();
+  } = useContext(EstadisticasContext);
 
-  const { workers } = useContext(EstadisticasContext);
+  const { workers } = useContext(CuadreContext);
 
   return (
     <div className="flex flex-col w-11/12 m-auto mt-10 md:mt-0 md:w-3/4 md:my-2 lg:w-5/12 md:h-full shadow-lg shadow-black-400/50 bg-teal-400 rounded-lg">
