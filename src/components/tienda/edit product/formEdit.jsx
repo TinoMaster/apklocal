@@ -1,28 +1,32 @@
 import React from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { httpHelper } from "../../../helpers/httpHelper";
 import { PrimaryLoader } from "../../loaders/primaryLoader";
+import apiConfig from "../../../config/api.config.json";
 
-export const Form = ({
+export const FormEdit = ({
   isNewCategory,
   newCategory,
   isNewProvider,
   newProvider,
   handlers,
   loader,
-  sendForm,
-  resetForm,
+  editForm,
   providers,
   categories,
   formRef,
 }) => {
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  const location = useLocation();
+
+  let product;
+  if (location.state?._id) {
+    product = location.state;
+  }
+
   const inputProperties = [
-    /* {
-      title: "Cantidad",
-      name: "amount",
-      type: "number",
-      className:
-        "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
-      function: handlers.handlerInputTextForm,
-    }, */
     {
       title: "Color",
       name: "color",
@@ -30,6 +34,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.color,
     },
     {
       title: "Peso",
@@ -38,6 +43,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.weight,
     },
     {
       title: "Sabor",
@@ -46,6 +52,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.taste,
     },
     {
       title: "Modelo",
@@ -54,6 +61,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.model,
     },
     {
       title: "Tamaño",
@@ -62,6 +70,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.size,
     },
     {
       title: "Material",
@@ -70,6 +79,7 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: product.properties?.material,
     },
     {
       title: "Vence",
@@ -78,6 +88,8 @@ export const Form = ({
       className:
         "focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700",
       function: handlers.handlerInputsProperties,
+      defaultValue: "",
+      date: product.properties?.expiration,
     },
   ];
 
@@ -111,6 +123,7 @@ export const Form = ({
               onChange={handlers.handlerInputTextForm}
               className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
               type="text"
+              defaultValue={product?.name}
             />
           </label>
         </div>
@@ -123,12 +136,13 @@ export const Form = ({
             <p className="text-lg mr-1 font-serif text-center w-1/4">
               Proveedor:
             </p>
-            {newProvider ? (
+            {!newProvider ? (
               <input
                 name="provider"
                 onChange={handlers.handlerInputTextForm}
                 className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
                 type="text"
+                defaultValue={product.provider}
               />
             ) : (
               <select
@@ -152,7 +166,7 @@ export const Form = ({
             )}
           </label>
           <label className="w-full flex justify-end" htmlFor="newProvider">
-            <p className="">Nuevo proveedor</p>
+            <p className="">Proveedor existente</p>
             <input
               className="mx-2"
               type="checkbox"
@@ -170,12 +184,13 @@ export const Form = ({
             <p className="text-lg mr-1 font-serif text-center w-1/4">
               Categoria:
             </p>
-            {newCategory ? (
+            {!newCategory ? (
               <input
                 name="category"
                 onChange={handlers.handlerInputTextForm}
                 className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
                 type="text"
+                defaultValue={product.category}
               />
             ) : (
               <select
@@ -198,7 +213,7 @@ export const Form = ({
             )}
           </label>
           <label className="w-full flex justify-end" htmlFor="newCategory">
-            <p className="">Nueva Categoria</p>
+            <p className="">Categoria existente</p>
             <input
               className="mx-2"
               type="checkbox"
@@ -223,6 +238,7 @@ export const Form = ({
               className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
               type="number"
               onChange={handlers.handlerInputTextForm}
+              defaultValue={product.cost}
             />
           </label>
           <label
@@ -235,6 +251,7 @@ export const Form = ({
               className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
               type="number"
               onChange={handlers.handlerInputTextForm}
+              defaultValue={product.sell}
             />
           </label>
         </fieldset>
@@ -246,7 +263,7 @@ export const Form = ({
           {inputProperties?.map((input) => (
             <label
               key={input.name}
-              className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-around my-2"
+              className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-around my-2 relative"
               htmlFor=""
             >
               <p className="text-lg mr-1 font-serif text-center w-1/2 ">
@@ -257,7 +274,16 @@ export const Form = ({
                 className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
                 type={input.type}
                 onChange={input.function}
+                defaultValue={input?.defaultValue}
               />
+              <p className="absolute -right-24">
+                {input?.date &&
+                  new Date(input?.date).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "numeric",
+                    day: "numeric",
+                  })}
+              </p>
             </label>
           ))}
         </fieldset>
@@ -278,6 +304,7 @@ export const Form = ({
               className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
               type="number"
               onChange={handlers.handlerInputTextForm}
+              defaultValue={product.amount}
             />
           </label>
           <label
@@ -290,26 +317,26 @@ export const Form = ({
               className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
               type="number"
               onChange={handlers.handlerInputTextForm}
+              defaultValue={product.local_amount}
             />
           </label>
         </fieldset>
         {/* Panel botones */}
         <div className="w-full flex justify-end px-5">
           <input
-            value={"Resetear"}
-            onClick={resetForm}
-            className="p-2 mx-2 bg-slate-300 rounded-md shadow-md hover:bg-yellow-400/80 transition-all hover:text-slate-700 hover:cursor-pointer"
-            type="reset"
+            value={"Cancelar"}
+            onClick={() => navigate("/tienda/inventario")}
+            className="p-2 mx-2 bg-slate-300 z-20 rounded-md shadow-md hover:bg-red-400/80 transition-all hover:text-slate-700 hover:cursor-pointer"
+            type="button"
           />
           <button
             onClick={(e) => {
               e.preventDefault();
-              sendForm();
-              resetForm();
+              editForm(product);
             }}
-            className="p-2 mx-2 bg-slate-300 rounded-md shadow-md hover:bg-green-400/80 transition-all hover:text-slate-700"
+            className="p-2 mx-2 bg-slate-300 rounded-md shadow-md hover:bg-yellow-400/80 transition-all hover:text-slate-700"
           >
-            Guardar
+            Editar
           </button>
         </div>
       </fieldset>

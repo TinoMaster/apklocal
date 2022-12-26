@@ -20,9 +20,17 @@ export const InventarioTienda = () => {
         </NavLink>
       </div>
       {/* Existencias */}
-      <ProductListShop products={inventarioTienda.productsAvailable} title={"Existencias"} />
+      <ProductListShop
+        props={inventarioTienda}
+        products={inventarioTienda.productsAvailable}
+        title={"Existencias"}
+      />
       {/* Agotado */}
-      <ProductListShop title={"Agotado"} />
+      <ProductListShop
+        title={"Agotado"}
+        products={inventarioTienda.productsNotAvailable}
+        props={inventarioTienda}
+      />
     </div>
   );
 };

@@ -2,9 +2,9 @@ import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { UseAddProduct } from "../../../hooks/tienda/useAddProduct";
-import { Form } from "./form";
+import { FormEdit } from "./formEdit";
 
-export const AddProduct = () => {
+export const EditProduct = () => {
   const {
     newCategory,
     isNewCategory,
@@ -13,18 +13,20 @@ export const AddProduct = () => {
     handlers,
     error,
     loader,
-    sendForm,
     success,
     resetForm,
     providers,
     categories,
     formRef,
+    editForm
   } = UseAddProduct();
   return (
     <div className="flex flex-wrap justify-center items-start">
-      <h2 className="p-2 text-xl text-slate-600 font-serif font-semibold">Agregar Producto Nuevo</h2>
+      <h2 className="p-2 text-xl text-slate-600 font-serif font-semibold">
+        Editar Producto Existente
+      </h2>
       {/* Error */}
-      <div className="w-full flex justify-center mt-14 absolute">
+      <div className="w-full flex justify-center mt-14 absolute z-10">
         <p
           className={
             error.error
@@ -44,7 +46,7 @@ export const AddProduct = () => {
         </p>
       </div>
       {/* Success */}
-      <div className="w-full flex justify-center mt-14 absolute">
+      <div className="w-full flex justify-center mt-14 absolute z-10">
         <p
           className={
             success.success
@@ -64,14 +66,14 @@ export const AddProduct = () => {
         </p>
       </div>
       <div className="w-full">
-        <Form
+        <FormEdit
           isNewCategory={isNewCategory}
           newCategory={newCategory}
           newProvider={newProvider}
           isNewProvider={isNewProvider}
           handlers={handlers}
           loader={loader}
-          sendForm={sendForm}
+          editForm={editForm}
           resetForm={resetForm}
           providers={providers}
           categories={categories}
