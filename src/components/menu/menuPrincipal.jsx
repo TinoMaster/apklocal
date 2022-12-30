@@ -54,7 +54,7 @@ function Menu({ menuActive, setMenuActive, setNotasActive, notasActive }) {
           />
         </div>
 
-        <div className="w-9 mr-4 rounded-full py-1 border-2 bg-white border-teal-500 shadow-md overflow-hidden">
+        <div className="w-9 h-9 mr-4 rounded-full py-1 border-2 bg-white border-teal-500 shadow-md overflow-hidden">
           <img className="w-full h-full" src={user.image} alt="Trabajador" />
         </div>
       </div>

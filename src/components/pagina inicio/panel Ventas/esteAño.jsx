@@ -71,7 +71,7 @@ const EsteAño = () => {
               Mejor Turno
             </h6>
             <p className="text-sm text-slate-600">
-              {`( ${mejorTurno(bdPorAño)[0]} )`}{" "}
+              <span className="font-serif mr-2">{`${mejorTurno(bdPorAño)[0]}`} </span>
               <span>{`${mejorTurno(bdPorAño)[1]} `}</span>
               <FontAwesomeIcon icon={faDollarSign} />
             </p>

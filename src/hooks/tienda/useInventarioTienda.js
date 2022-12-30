@@ -7,6 +7,7 @@ export const UseInventarioTienda = () => {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState({});
+  const [optionsMovil, setOptionsMovil] = useState(false);
 
   const [change, setChange] = useState(true);
 
@@ -65,6 +66,8 @@ export const UseInventarioTienda = () => {
     loader,
     deleteProduct,
     success,
+    optionsMovil,
+    setOptionsMovil,
   };
   return { inventarioTienda };
 };

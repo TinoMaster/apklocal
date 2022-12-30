@@ -9,7 +9,7 @@ import React, { useContext } from "react";
 import CuadreContext from "../../context/cuadreContext";
 
 const PagVentas = () => {
-  const { db, setMesDelAño } = useContext(CuadreContext);
+  const { db, setMesDelAño, EliminarDiaCuadre } = useContext(CuadreContext);
   let totalVenta = 0;
   let totalDueño = 0;
 
@@ -279,10 +279,19 @@ const PagVentas = () => {
                         </h4>
                         <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
                           <div className="outline outline-yellow-100 py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
-                            <FontAwesomeIcon className="text-xs" icon={faPenToSquare} />
+                            <FontAwesomeIcon
+                              className="text-xs"
+                              icon={faPenToSquare}
+                            />
                           </div>
-                          <div className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md">
-                            <FontAwesomeIcon className="text-xs" icon={faTrashCan} />
+                          <div
+                            onClick={() => EliminarDiaCuadre(dia.id)}
+                            className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
+                          >
+                            <FontAwesomeIcon
+                              className="text-xs"
+                              icon={faTrashCan}
+                            />
                           </div>
                         </div>
                       </td>

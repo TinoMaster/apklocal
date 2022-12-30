@@ -11,21 +11,22 @@ export const ProductListShop = ({ props, title, products }) => {
   return (
     <div className="w-full h-1/2 my-1 flex flex-col">
       <h3 className="text-slate-500 font-semibold text-lg p-2">{title}</h3>
+
       <div className="flex flex-col bg-slate-50 h-full shadow-inner shadow-black/10 overflow-auto">
         <div className="flex sticky top-0">
-          <p className="w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
+          <p className="w-1/4 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
             Producto
           </p>
-          <p className="w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
+          <p className="hidden md:w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
             Proveedor
           </p>
-          <p className="w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
+          <p className="w-1/4 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
             Precio
           </p>
-          <p className="w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
+          <p className="w-1/4 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
             Almacen
           </p>
-          <p className="w-1/5 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
+          <p className="w-1/4 text-center py-1 bg-slate-100 font-semibold text-slate-500 font-serif">
             Local
           </p>
         </div>
@@ -53,27 +54,36 @@ export const ProductListShop = ({ props, title, products }) => {
               key={product?.name}
               className="flex relative hover:bg-black/10 hover:cursor-pointer font-serif"
             >
-              <div className="w-1/5 justify-center items-baseline py-1 text-slate-700">
+              {/* Product */}
+              <div className="w-1/4 justify-center items-baseline py-1 text-slate-700">
                 <p className="text-center">{product?.name}</p>
               </div>
-              <p className="w-1/5 text-center py-1 text-slate-700">
+              <p className="hidden w-1/5 text-center py-1 text-slate-700">
                 {product?.provider}
               </p>
-              <p className="w-1/5 text-center py-1 text-slate-700">
+              <p className="w-1/4 text-center py-1 text-slate-700">
                 {`${product?.sell}.00`}
                 <FontAwesomeIcon
                   className="ml-1 text-slate-600"
                   icon={faDollar}
                 />
               </p>
-              <p className="w-1/5 text-center py-1 text-slate-700">
+              <p className="w-1/4 text-center py-1 text-slate-700">
                 {product?.amount}
               </p>
-              <p className="w-1/5 text-center py-1 text-slate-700">
+              <p className="w-1/4 text-center py-1 text-slate-700">
                 {product.local_amount ? product.local_amount : "0"}
               </p>
-              <div className="flex items-center justify-between absolute right-0">
-                <div className="p-1">
+              {/* Botones */}
+              <div className="hidden md:flex items-center justify-between absolute right-0">
+                <div
+                  onClick={() => {
+                    navigate(`/tienda/seeProduct/${product._id}`, {
+                      state: product,
+                    });
+                  }}
+                  className="p-1"
+                >
                   <FontAwesomeIcon
                     className="text-slate-500 hover:text-green-400"
                     icon={faEye}

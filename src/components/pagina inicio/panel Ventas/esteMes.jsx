@@ -71,7 +71,9 @@ const EsteMes = () => {
               Mejor Turno
             </h6>
             <p className="text-sm text-slate-600">
-              {`( ${mejorTurno(esteMes)[0]} )`}{" "}
+              <span className="font-serif mr-2">
+                {`${mejorTurno(esteMes)[0]}`}
+              </span>
               <span>{`${mejorTurno(esteMes)[1]} `}</span>
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
@@ -87,7 +89,10 @@ const EsteMes = () => {
             {workers
               ?.filter((worker) => worker.role !== "admin")
               ?.map((worker) => (
-                <div key={worker.id} className="flex flex-col items-center pt-3 w-1/3">
+                <div
+                  key={worker.id}
+                  className="flex flex-col items-center pt-3 w-1/3"
+                >
                   <div className="w-10 h-10 rounded-full border-2 border-yellow-400 overflow-hidden">
                     <img className="w-full" src={worker.image} alt="Jorge" />
                   </div>

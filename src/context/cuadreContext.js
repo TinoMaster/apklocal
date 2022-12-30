@@ -243,6 +243,13 @@ const CuadreProvider = ({ children }) => {
     }
   };
 
+  const EliminarDiaCuadre = (id) => {
+    const urlDeleteDay = `${apiConfig.api.url}/cuadre/delete/${id}`;
+    httpHelper()
+      .del(urlDeleteDay)
+      .then((res) => console.log(res));
+  };
+
   useEffect(() => {
     httpHelper()
       .get(urlGet)
@@ -275,6 +282,7 @@ const CuadreProvider = ({ children }) => {
     validarData,
     setMesDelAño,
     hojasGastadas,
+    EliminarDiaCuadre,
     success,
     loading,
     workers,
