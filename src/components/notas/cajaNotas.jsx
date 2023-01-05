@@ -9,10 +9,10 @@ import {
 import { Notas } from "./notas";
 import { useState, useEffect } from "react";
 import { httpHelper } from "../../helpers/httpHelper";
-import Cookies from "universal-cookie";
 import { useNota } from "../../hooks/useNota";
 import { ModalPortal } from "../modalPortal/modalPortal";
 import AuthContext from "../../context/authContext";
+import apiConfig from "../../config/api.config.json";
 
 const modeloNota = {
   id: "",
@@ -27,9 +27,7 @@ export const CajaNotas = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [panelBotones, setPanelBotones] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
-  const urlNotas = "http://localhost:5000/notas";
-
-  const cookies = new Cookies();
+  const urlNotas = `${apiConfig.api.url}/notas`;
 
   const { nota, handleChangeNota, handlerSubmit } = useNota(
     modeloNota,
@@ -40,7 +38,7 @@ export const CajaNotas = () => {
 
   useEffect(() => {
     httpHelper()
-      .get(urlNotas)
+      .get(`${apiConfig.api.url}/notas`)
       .then((el) => {
         if (!el.length) {
           setNotas([]);
@@ -70,7 +68,7 @@ export const CajaNotas = () => {
         headers: { "Content-Type": "application/json" },
       };
       await httpHelper().put(
-        `http://localhost:5000/notas/${dataToEdit.id}`,
+        `${apiConfig.api.url}/notas/${dataToEdit.id}`,
         options
       );
       await httpHelper()
@@ -220,7 +218,7 @@ export const CajaNotas = () => {
           {notas.length === 0 ? (
             <p>No hay Notas</p>
           ) : (
-            notas.map((nota) => (
+            notas?.map((nota) => (
               <Notas
                 key={nota.id}
                 nombre={nota.nombre}

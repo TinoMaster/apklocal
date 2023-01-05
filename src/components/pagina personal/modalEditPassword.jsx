@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { httpHelper } from "../../helpers/httpHelper";
 import { PrimaryLoader } from "../loaders/primaryLoader";
+import apiConfig from "../../config/api.config.json"
 
-const urlChangePassword = "http://localhost:5000/trabajadores/password/update";
+const urlChangePassword = `${apiConfig}/trabajadores/password/update`;
 
 const ModalEditPassword = ({ setEditPassword, id }) => {
   const [dataPassword, setDataPassword] = useState({});

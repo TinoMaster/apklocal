@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <div className="w-screen relative h-screen flex flex-col overflow-auto items-center justify-center bg-gradient-to-br from-violet-600 to-purple-600">
       {error?.error && (
-        <p className="p-2 top-20 text-red-500 bg-white text-xs md:text-sm rounded-lg absolute">
+        <p className="p-2 top-20 z-10 text-red-500 bg-white text-xs md:text-sm rounded-lg absolute">
           {error.message}
         </p>
       )}
@@ -19,7 +19,7 @@ const Login = () => {
         </p>
       )}
 
-      <div className="w-11/12 md:w-2/4 overflow-hidden min-h-movil lg:w-2/5 xl:w-1/5 md:h-auto h-3/5 flex max-w-lg min-h-128 flex-col justify-around bg-white p-4 shadow-xl shadow-black/40 rounded-lg">
+      <div className="w-11/12 md:w-2/4 overflow-hidden  lg:w-2/5 xl:w-1/5 md:h-auto flex max-w-lg min-h-[600px] min-w-[350px] flex-col justify-around bg-white p-4 shadow-xl shadow-black/40 rounded-lg">
         <h3 className=" text-2xl text-center text-violet-600 font-semibold">
           {opcion === "inicio" ? "Iniciar Session" : "Registrarse"}
         </h3>
@@ -29,8 +29,8 @@ const Login = () => {
 
         <form className="w-full flex flex-col">
           {opcion === "registro" && (
-            <label htmlFor="nombre" className="flex flex-col w-3/5 m-auto">
-              <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
+            <label htmlFor="nombre" className="flex flex-col w-4/5 m-auto">
+              <span className="font-serif text-slate-500 ml-1">
                 Nombre:
               </span>
               <input
@@ -38,7 +38,7 @@ const Login = () => {
                 type="text"
                 name="nombre"
                 placeholder="Escriba su nombre"
-                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 my-2 p-1 rounded-md focus:outline-violet-300"
                 autoComplete="off"
                 onChange={
                   opcion === "inicio" ? handleChange : handleChangeRegistro
@@ -47,8 +47,8 @@ const Login = () => {
             </label>
           )}
 
-          <label htmlFor="email" className="flex flex-col w-3/5 m-auto">
-            <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
+          <label htmlFor="email" className="flex flex-col w-4/5 m-auto">
+            <span className="font-serif text-slate-500 ml-1">
               Correo:
             </span>
             <input
@@ -56,14 +56,14 @@ const Login = () => {
               type="email"
               name="usuario"
               placeholder="Correo"
-              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 my-2 p-1 rounded-md focus:outline-violet-300"
               autoComplete="off"
               onChange={handleChange}
             />
           </label>
 
-          <label htmlFor="pasword" className="flex flex-col w-3/5 m-auto">
-            <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
+          <label htmlFor="pasword" className="flex flex-col w-4/5 m-auto">
+            <span className="font-serif text-slate-500 ml-1">
               Contraseña:
             </span>
             <input
@@ -71,7 +71,7 @@ const Login = () => {
               type="password"
               name="contraseña"
               placeholder="Contraseña"
-              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+              className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 my-2 p-1 rounded-md focus:outline-violet-300"
               onChange={
                 opcion === "inicio" ? handleChange : handleChangeRegistro
               }
@@ -79,8 +79,8 @@ const Login = () => {
           </label>
 
           {opcion === "registro" && (
-            <label htmlFor="repeat" className="flex flex-col w-3/5 m-auto">
-              <span className="text-xs md:text-sm font-serif text-slate-500 ml-1">
+            <label htmlFor="repeat" className="flex flex-col w-4/5 m-auto">
+              <span className="font-serif text-slate-500 ml-1">
                 Repetir contraseña:
               </span>
               <input
@@ -88,7 +88,7 @@ const Login = () => {
                 type="password"
                 name="confirmacion"
                 placeholder="Confirmar contraseña"
-                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 text-xs md:text-sm my-2 p-1 rounded-md focus:outline-violet-300"
+                className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 my-2 p-1 rounded-md focus:outline-violet-300"
                 onChange={handleChangeRegistro}
               />
             </label>

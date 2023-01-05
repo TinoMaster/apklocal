@@ -35,13 +35,20 @@ const AuthProvider = ({ children }) => {
     httpHelper()
       .get(urlExistUser)
       .then((res) => {
-        if (res.success) {
+        if (res.error) {
+          setError(res);
+          setOpcion("inicio");
+        } else if (res.success && res.data.length > 0) {
           setError({});
           setOpcion("inicio");
-        } else {
+        } else if (res.success && res.data.length === 0) {
+          setError({});
           setOpcion("registro");
+        } else {
+          setError({ error: true, message: "Revise su conexion a internet" });
         }
-      });
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   //Hadlers
@@ -52,7 +59,8 @@ const AuthProvider = ({ children }) => {
     setRegistro({ ...registro, [e.target.name]: e.target.value });
   };
 
-  const validarRegistro = () => {};
+  /* const validarRegistroInicio = () => {};
+  const validarRegistroPagPersonal = () => {}; */
 
   const validarLogin = () => {
     let validator = false;

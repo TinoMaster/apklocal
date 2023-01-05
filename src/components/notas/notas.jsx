@@ -6,6 +6,7 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { httpHelper } from "../../helpers/httpHelper";
+import apiConfig from "../../config/api.config.json"
 
 export const Notas = ({
   children,
@@ -20,7 +21,7 @@ export const Notas = ({
   setDataToEdit,
   nota,
 }) => {
-  const urlNota = `http://localhost:5000/notas/${id}`;
+  const urlNota = `${apiConfig.api.url}/notas/${id}`;
 
   const eliminarNota = async () => {
     let opcion = window.confirm("Estas seguro que desea borrar la nota");
@@ -28,7 +29,7 @@ export const Notas = ({
     if (opcion === true) {
       await httpHelper().del(urlNota);
       httpHelper()
-        .get("http://localhost:5000/notas")
+        .get(`${apiConfig.api.url}/notas`)
         .then((resp) => setNotas(resp));
     }
   };
