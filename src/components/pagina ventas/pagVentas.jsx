@@ -9,13 +9,21 @@ import React, { useContext } from "react";
 import CuadreContext from "../../context/cuadreContext";
 
 const PagVentas = () => {
-  const { db, setMesDelAño, EliminarDiaCuadre } = useContext(CuadreContext);
+  const {
+    yearChoice,
+    dbMensual,
+    setMesDelAño,
+    EliminarDiaCuadre,
+    handlerChangeSelectYear,
+  } = useContext(CuadreContext);
   let totalVenta = 0;
   let totalDueño = 0;
+  const fecha = new Date();
 
   return (
     <div className="w-full max-w-1080p h-full overflow-auto m-auto">
       <div className="cajaEstadisticas relative">
+        {/* Meses */}
         <div className="flex flex-wrap m-2  justify-around bg-violet-200 rounded-lg mt-2">
           <input
             className="input-hide"
@@ -27,7 +35,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="enero"
-            onClick={() => setMesDelAño("enero")}
+            onClick={() => setMesDelAño(`1-${yearChoice}`)}
           >
             Enero
           </label>
@@ -41,7 +49,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="febrero"
-            onClick={() => setMesDelAño("febrero")}
+            onClick={() => setMesDelAño(`2-${yearChoice}`)}
           >
             Febrero
           </label>
@@ -55,7 +63,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="marzo"
-            onClick={() => setMesDelAño("marzo")}
+            onClick={() => setMesDelAño(`3-${yearChoice}`)}
           >
             Marzo
           </label>
@@ -69,7 +77,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="abril"
-            onClick={() => setMesDelAño("abril")}
+            onClick={() => setMesDelAño(`4-${yearChoice}`)}
           >
             Abril
           </label>
@@ -83,7 +91,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="mayo"
-            onClick={() => setMesDelAño("mayo")}
+            onClick={() => setMesDelAño(`5-${yearChoice}`)}
           >
             Mayo
           </label>
@@ -97,7 +105,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="junio"
-            onClick={() => setMesDelAño("junio")}
+            onClick={() => setMesDelAño(`6-${yearChoice}`)}
           >
             Junio
           </label>
@@ -111,7 +119,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="julio"
-            onClick={() => setMesDelAño("julio")}
+            onClick={() => setMesDelAño(`7-${yearChoice}`)}
           >
             Julio
           </label>
@@ -125,7 +133,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="agosto"
-            onClick={() => setMesDelAño("agosto")}
+            onClick={() => setMesDelAño(`8-${yearChoice}`)}
           >
             Agosto
           </label>
@@ -139,7 +147,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="septiembre"
-            onClick={() => setMesDelAño("septiembre")}
+            onClick={() => setMesDelAño(`9-${yearChoice}`)}
           >
             Septiembre
           </label>
@@ -153,7 +161,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="octubre"
-            onClick={() => setMesDelAño("octubre")}
+            onClick={() => setMesDelAño(`10-${yearChoice}`)}
           >
             Octubre
           </label>
@@ -167,7 +175,7 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="noviembre"
-            onClick={() => setMesDelAño("noviembre")}
+            onClick={() => setMesDelAño(`11-${yearChoice}`)}
           >
             Noviembre
           </label>
@@ -181,10 +189,23 @@ const PagVentas = () => {
           <label
             className="label-meses"
             htmlFor="diciembre"
-            onClick={() => setMesDelAño("diciembre")}
+            onClick={() => setMesDelAño(`12-${yearChoice}`)}
           >
             Diciembre
           </label>
+        </div>
+        {/* Escoger año */}
+        <div className="">
+          <label htmlFor=""></label>
+          <select
+            name=""
+            id=""
+            className="p-1 border-2 rounded-md ml-2 bg-violet-200 text-slate-700 focus:outline-none"
+            onChange={handlerChangeSelectYear}
+          >
+            <option value={fecha.getFullYear()}>{fecha.getFullYear()}</option>
+            <option value="2022">2022</option>
+          </select>
         </div>
 
         <div className="w-full p-2 relative">
@@ -202,8 +223,8 @@ const PagVentas = () => {
               </tr>
             </thead>
             <tbody>
-              {db.length !== 0 ? (
-                db.map((dia) => {
+              {dbMensual.length !== 0 ? (
+                dbMensual.map((dia) => {
                   totalVenta += dia.miron;
                   totalDueño += dia.dueño;
                   return (

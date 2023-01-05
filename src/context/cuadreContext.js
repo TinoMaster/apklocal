@@ -5,50 +5,51 @@ import apiConfig from "../config/api.config.json";
 
 const CuadreContext = createContext();
 const fecha = new Date();
+const añoActual = fecha.getFullYear();
 
 const mesActual = () => {
   let mes = fecha.getMonth();
 
   switch (mes) {
     case 0:
-      mes = "enero";
+      mes = `1-${añoActual}`;
       break;
     case 1:
-      mes = "febrero";
+      mes = `2-${añoActual}`;
       break;
     case 2:
-      mes = "marzo";
+      mes = `3-${añoActual}`;
       break;
     case 3:
-      mes = "abril";
+      mes = `4-${añoActual}`;
       break;
     case 4:
-      mes = "mayo";
+      mes = `5-${añoActual}`;
       break;
     case 5:
-      mes = "junio";
+      mes = `6-${añoActual}`;
       break;
     case 6:
-      mes = "julio";
+      mes = `7-${añoActual}`;
       break;
     case 7:
-      mes = "agosto";
+      mes = `8-${añoActual}`;
       break;
     case 8:
-      mes = "septiembre";
+      mes = `9-${añoActual}`;
       break;
     case 9:
-      mes = "octubre";
+      mes = `10-${añoActual}`;
       break;
     case 10:
-      mes = "noviembre";
+      mes = `11-${añoActual}`;
       break;
     case 11:
-      mes = "diciembre";
+      mes = `12-${añoActual}`;
       break;
 
     default:
-      mes = "enero";
+      mes = `1-${añoActual}`;
       break;
   }
   return mes;
@@ -82,7 +83,7 @@ const constMes = (num) => {
 };
 
 const CuadreProvider = ({ children }) => {
-  const [db, setDb] = useState([]);
+  const [dbMensual, setDbMensual] = useState([]);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState({});
   const [finalizar, setFinalizar] = useState(true);
@@ -91,6 +92,7 @@ const CuadreProvider = ({ children }) => {
   const [ModalCuadre, setModalCuadre] = useState(false);
   const [resultForm, setResultForm] = useState({});
   const [mesDelAño, setMesDelAño] = useState(mesActual);
+  const [yearChoice, setYearChoice] = useState(añoActual);
 
   const [workers, setWorkers] = useState([]);
 
@@ -111,6 +113,10 @@ const CuadreProvider = ({ children }) => {
         }
       });
   }, []);
+
+  const handlerChangeSelectYear = (e) => {
+    setYearChoice(e.target.value);
+  };
 
   const hojasGastadas = () => {
     let bn = resultForm?.testInyectores?.bn - testInyectores?.bn;
@@ -187,8 +193,8 @@ const CuadreProvider = ({ children }) => {
       headers: { "content-type": "application/json" },
     };
 
-    if (db.length > 0) {
-      for (const i of db) {
+    if (dbMensual.length > 0) {
+      for (const i of dbMensual) {
         if (i.id === data.id) {
           setError({
             error: "true",
@@ -211,7 +217,7 @@ const CuadreProvider = ({ children }) => {
 
     api
       .get(urlGet)
-      .then((el) => setDb(el))
+      .then((el) => setDbMensual(el))
       .catch((err) => console.log(err));
   };
 
@@ -255,18 +261,18 @@ const CuadreProvider = ({ children }) => {
       .get(urlGet)
       .then((el) => {
         if (!el.length) {
-          setDb([]);
+          setDbMensual([]);
           setError(el);
         } else {
-          setDb(el);
+          setDbMensual(el);
           setError({});
         }
       });
   }, [urlGet]);
 
   const data = {
-    db,
-    setDb,
+    dbMensual,
+    setDbMensual,
     error,
     setError,
     setFinalizar,
@@ -286,6 +292,8 @@ const CuadreProvider = ({ children }) => {
     success,
     loading,
     workers,
+    yearChoice,
+    handlerChangeSelectYear,
   };
 
   return (
