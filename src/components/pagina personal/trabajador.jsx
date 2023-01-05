@@ -24,12 +24,13 @@ const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
       {/* Primera caja superior */}
       <div className="h-1/2 flex rounded-t-lg bg-white rounded-b-2xl shadow-lg shadow-white/40">
         {/* Caja imagen */}
-        <div className="flex flex-wrap w-1/4 justify-center items-center">
-          <img
+        <div className="flex border-2 flex-wrap w-1/4 justify-center items-center">
+          {/* <img
             className="w-10/12 h-2/5 md:h-3/4 rounded-xl object-cover border-violet-100"
             src={worker.image}
             alt=""
-          />
+          /> */}
+          <p className="text-2xl text-slate-600">{worker.usuario.slice(0,2)}</p>
         </div>
         {/* Caja nombre descripcion */}
         <div className="w-3/4 h-full flex flex-wrap">

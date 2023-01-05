@@ -3,6 +3,11 @@ import { createContext } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 import apiConfig from "../config/api.config.json";
 
+/* import bryam from "../assets/img/Bryam.jpg"
+import jorge from "../assets/img/Jorge.jpg"
+import nysaer from "../assets/img/Nysaer.jpg"
+import local from "../assets/img/suennovirtual.jpg" */
+
 const AuthContext = createContext();
 
 const urlExistUser = `${apiConfig.api.url}/trabajadores`;
@@ -15,7 +20,7 @@ const USER_ROLE = "ROLE_USER";
 
 const USER = {
   name: window.localStorage.getItem(USER_NAME),
-  image: window.localStorage.getItem(USER_IMAGE),
+  image: "Pendiente",
   role: window.localStorage.getItem(USER_ROLE),
 };
 

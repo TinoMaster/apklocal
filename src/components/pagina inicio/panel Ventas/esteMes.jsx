@@ -93,8 +93,9 @@ const EsteMes = () => {
                   key={worker.id}
                   className="flex flex-col items-center pt-3 w-1/3"
                 >
-                  <div className="w-10 h-10 rounded-full border-2 border-yellow-400 overflow-hidden">
-                    <img className="w-full" src={worker.image} alt="Jorge" />
+                  <div className="flex justify-center items-center w-10 h-10 rounded-full border-2 bg-yellow-400 border-yellow-400 overflow-hidden">
+                    {/* <img className="w-full" src={worker.image} alt="Jorge" /> */}
+                    <p className="text-white">{worker?.usuario.slice(0,1)}</p>
                   </div>
                   <h3 className="text-sm md:text-base text-yellow-600">
                     {worker.usuario}
