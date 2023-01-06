@@ -3,11 +3,6 @@ import { createContext } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 import apiConfig from "../config/api.config.json";
 
-/* import bryam from "../assets/img/Bryam.jpg"
-import jorge from "../assets/img/Jorge.jpg"
-import nysaer from "../assets/img/Nysaer.jpg"
-import local from "../assets/img/suennovirtual.jpg" */
-
 const AuthContext = createContext();
 
 const urlExistUser = `${apiConfig.api.url}/trabajadores`;
@@ -106,6 +101,7 @@ const AuthProvider = ({ children }) => {
     const validacion = await validarLogin();
 
     if (!validacion) {
+      setLoader(false);
       setError({ error: true, message: "Debe llenar los campos" });
     } else {
       setError({});
@@ -117,8 +113,13 @@ const AuthProvider = ({ children }) => {
         .post(urlLogin, options)
         .then((res) => {
           if (res.success) {
+            setLoader(false);
             onLogin(res);
+          } else if (res.error) {
+            setLoader(false);
+            setError(res);
           } else {
+            setLoader(false);
             console.log(res);
           }
         });

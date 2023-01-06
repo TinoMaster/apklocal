@@ -3,67 +3,64 @@ import apiConfig from "../config/api.config.json";
 import { httpHelper } from "../helpers/httpHelper";
 
 const fecha = new Date();
+const añoActual = fecha.getFullYear();
 const mesActual = () => {
   const fecha = new Date();
   let mes = fecha.getMonth();
 
   switch (mes) {
     case 0:
-      mes = "enero";
+      mes = `1-${añoActual}`;
       break;
     case 1:
-      mes = "febrero";
+      mes = `2-${añoActual}`;
       break;
     case 2:
-      mes = "marzo";
+      mes = `3-${añoActual}`;
       break;
     case 3:
-      mes = "abril";
+      mes = `4-${añoActual}`;
       break;
     case 4:
-      mes = "mayo";
+      mes = `5-${añoActual}`;
       break;
     case 5:
-      mes = "junio";
+      mes = `6-${añoActual}`;
       break;
     case 6:
-      mes = "julio";
+      mes = `7-${añoActual}`;
       break;
     case 7:
-      mes = "agosto";
+      mes = `8-${añoActual}`;
       break;
     case 8:
-      mes = "septiembre";
+      mes = `9-${añoActual}`;
       break;
     case 9:
-      mes = "octubre";
+      mes = `10-${añoActual}`;
       break;
     case 10:
-      mes = "noviembre";
+      mes = `11-${añoActual}`;
       break;
     case 11:
-      mes = "diciembre";
+      mes = `12-${añoActual}`;
       break;
 
     default:
-      mes = "enero";
+      mes = `1-${añoActual}`;
       break;
   }
   return mes;
 };
-const añoActual = () => {
-  let año = fecha.getFullYear();
-  return año;
-};
 
 const url = `${apiConfig.api.url}/cuadre`;
-const urlDelMes = `${apiConfig.api.url}/cuadre/${mesActual()}`;
-const urlGetAño = `${apiConfig.api.url}/cuadre/${añoActual()}`;
+const urlDelMes = `${apiConfig.api.url}/cuadre/getMonth/${mesActual()}`;
+const urlGetAño = `${apiConfig.api.url}/cuadre/getYear/${añoActual}`;
 
 const EstadisticasContext = createContext();
 
 const EstadisticasProvider = ({ children }) => {
-  const [bdCuadre, setBdCuadre] = useState({});
+  const [bdCuadre, setBdCuadre] = useState([]);
   const [esteMes, setEsteMes] = useState({});
   const [error, setError] = useState({});
   const [bdPorAño, setbdPorAño] = useState({});
@@ -73,7 +70,7 @@ const EstadisticasProvider = ({ children }) => {
       .get(url)
       .then((data) => {
         if (data.error) {
-          setBdCuadre({});
+          setBdCuadre([]);
           setError({
             name: data.error,
             status: data.statusCode,
@@ -341,6 +338,21 @@ const EstadisticasProvider = ({ children }) => {
     return [mejorMes, valorMejor, peorMes, valorPeor];
   };
 
+  const existsYears = (bd) => {
+    let result = [];
+
+    result = bd?.reduce((array, element) => {
+      const año = element.fecha.split("-")[2];
+
+      if (!array?.includes(año)) {
+        array?.push(año);
+      }
+      return result;
+    }, result);
+    return result.sort((a, b) => b - a);
+  };
+  const years = existsYears(bdCuadre);
+
   const data = {
     error,
     totalRecaudado,
@@ -354,6 +366,7 @@ const EstadisticasProvider = ({ children }) => {
     esteMes,
     mejorYpeorMes,
     bdPorAño,
+    years,
   };
   return (
     <EstadisticasContext.Provider value={data}>

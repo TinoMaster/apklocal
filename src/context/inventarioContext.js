@@ -18,7 +18,7 @@ const InventarioProvider = ({ children }) => {
 
   useEffect(() => {
     httpHelper()
-      .get(urlGetInsumos)
+      .get(`${apiConfig.api.url}/inventario/insumos`)
       .then((res) => {
         if (!res.length) {
           setError(res);
@@ -30,7 +30,7 @@ const InventarioProvider = ({ children }) => {
       });
 
     httpHelper()
-      .get(urlGetMediosBasicos)
+      .get(`${apiConfig.api.url}/inventario/mediosBasicos`)
       .then((res) => {
         if (!res.length) {
           setError(res);

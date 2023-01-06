@@ -99,7 +99,7 @@ const CuadreProvider = ({ children }) => {
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const [loading, setLoading] = useState(false);
 
-  const urlGet = `${apiConfig.api.url}/cuadre/${mesDelAño}`,
+  const urlGet = `${apiConfig.api.url}/cuadre/getMonth/${mesDelAño}`,
     urlSave = `${apiConfig.api.url}/cuadre`;
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import CuadreContext from "../../context/cuadreContext";
+import EstadisticasContext from "../../context/estadisticasContext";
 
 const PagVentas = () => {
   const {
@@ -16,9 +17,9 @@ const PagVentas = () => {
     EliminarDiaCuadre,
     handlerChangeSelectYear,
   } = useContext(CuadreContext);
+  const { years } = useContext(EstadisticasContext);
   let totalVenta = 0;
   let totalDueño = 0;
-  const fecha = new Date();
 
   return (
     <div className="w-full max-w-1080p h-full overflow-auto m-auto">
@@ -203,8 +204,12 @@ const PagVentas = () => {
             className="p-1 border-2 rounded-md ml-2 bg-violet-200 text-slate-700 focus:outline-none"
             onChange={handlerChangeSelectYear}
           >
-            <option value={fecha.getFullYear()}>{fecha.getFullYear()}</option>
-            <option value="2022">2022</option>
+            {years.length > 0 ?
+              years?.map((año) => (
+                <option key={año} value={año}>
+                  {año}
+                </option>
+              )): <option>...</option>}
           </select>
         </div>
 
