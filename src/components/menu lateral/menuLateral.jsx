@@ -2,12 +2,20 @@ import React, { useContext } from "react";
 import SectionEntradas from "./sectionEntradas";
 import SectionPaginas from "./sectionPaginas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faDollar,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../context/authContext";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import EstadisticasContext from "../../context/estadisticasContext";
+import useInventarioPagInicio from "../../hooks/useInventarioPagInicio";
 
 const MenuLateral = ({ menuActive, setMenuActive }) => {
   const { logout, user, isAuth } = useContext(AuthContext);
+  const { fondoAyer, bdCuadre } = useContext(EstadisticasContext);
+  const { testInyectores } = useInventarioPagInicio();
   return (
     <div
       onClick={() => setMenuActive(false)}
@@ -26,6 +34,28 @@ const MenuLateral = ({ menuActive, setMenuActive }) => {
       </h1>
       <SectionPaginas />
       <SectionEntradas />
+
+      {/* Test Ayer y Fondo */}
+      <div className="flex flex-col w-10/12 m-auto shadow shadow-violet-500/20 p-3 rounded-md text-slate-500 text-sm">
+        <h3 className="self-center text-lg font-serif">Cuadre anterior:</h3>
+        <div className="flex justify-between">
+          <p className="">Fondo:</p>
+          <p className="">
+            <FontAwesomeIcon className="text-xs" icon={faDollar} />{" "}
+            {fondoAyer(bdCuadre)}
+          </p>
+        </div>
+        <div className="flex justify-between">
+          <p className="">Color:</p>
+          <p className="">{testInyectores.color}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="">B/N:</p>
+          <p className="">{testInyectores.bn}</p>
+        </div>
+      </div>
+
+      {/* User */}
       {!!isAuth && (
         <button className="bg-black/5 absolute bottom-0 w-full flex justify-between p-2">
           <div className="flex ">
@@ -37,7 +67,7 @@ const MenuLateral = ({ menuActive, setMenuActive }) => {
           </div>
           <p
             onClick={() => logout()}
-            className="p-2 text-slate-700 hover:bg-black/10 rounded-md hover:shadow-md"
+            className="p-2 text-slate-700 bg-black/10 shadow-md hover:bg-black/10 rounded-md hover:shadow-md"
           >
             {" "}
             <FontAwesomeIcon icon={faRightFromBracket} /> Salir

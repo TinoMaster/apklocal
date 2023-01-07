@@ -42,13 +42,6 @@ export const usePagTrabajador = () => {
 
   const validarData = () => {
     setErrorUploadWorker({});
-    if (!imageModalWorker) {
-      setErrorUploadWorker({
-        error: true,
-        message: "Debe seleccionar una imagen",
-      });
-      return false;
-    }
     if (!inputWorkerData.nombre) {
       setErrorUploadWorker({
         error: true,
@@ -152,39 +145,28 @@ export const usePagTrabajador = () => {
 
   const uploadWorker = async () => {
     const validacion = await validarData();
+
     if (!validacion) {
       return false;
     } else {
-      const formData = new FormData();
-      await formData.append("image", imageModalWorker);
-      const res = await axios.post(UrlRegisterImageWorker, formData);
-      if (!res.data.success) {
-        setErrorUploadWorker({
-          error: true,
-          message: "No se ah podido subir la imagen",
+      const options = {
+        body: inputWorkerData,
+        headers: { "Content-Type": "application/json" },
+      };
+      httpHelper()
+        .post(UrlRegisterWorker, options)
+        .then((res) => {
+          if (res.error) {
+            setError(res);
+          } else {
+            setError({});
+            setSuccess(res);
+            setModalInsertWorker(false);
+            setTimeout(() => {
+              setSuccess({});
+            }, 3000);
+          }
         });
-      } else {
-        setErrorUploadWorker({});
-        console.log(inputWorkerData);
-        const options = {
-          body: inputWorkerData,
-          headers: { "Content-Type": "application/json" },
-        };
-        httpHelper()
-          .post(UrlRegisterWorker, options)
-          .then((res) => {
-            if (res.error) {
-              setError(res);
-            } else {
-              setError({});
-              setSuccess(res);
-              setModalInsertWorker(false);
-              setTimeout(() => {
-                setSuccess({});
-              }, 3000);
-            }
-          });
-      }
     }
   };
 

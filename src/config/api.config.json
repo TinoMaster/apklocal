@@ -1,6 +1,6 @@
 {
   "api": {
-    "url2": "https://apilocal.onrender.com",
-    "url": "http://localhost:5000"
+    "url": "https://apilocal.onrender.com",
+    "url2": "http://localhost:5000"
   }
 }

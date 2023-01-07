@@ -21,6 +21,7 @@ const PagCuadre = () => {
     handlerChoiceWorker,
     turno,
     workers,
+    restHojas,
   } = UseCuadreMiron(setErrorsForm);
 
   const { user } = useContext(AuthContext);
@@ -35,7 +36,7 @@ const PagCuadre = () => {
           turno={turno}
           workers={workers}
         />
-        <CajaHojas handlerChangeHojas={handlerChangeHojas} />
+        <CajaHojas handlerChangeHojas={handlerChangeHojas} restHojas={restHojas} />
         <CajaProductos />
       </div>
 

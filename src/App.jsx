@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/inicio Session/pagInicioSession";
 import { Layout } from "./components/layout";
 import AuthContext, { AuthProvider } from "./context/authContext";
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           {!isAuth ? (
             <Route path="*" element={<Login />} />
@@ -17,7 +17,7 @@ function App() {
             <Route path="*" element={<Layout />} />
           )}
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }

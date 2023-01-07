@@ -1,6 +1,9 @@
 import React from "react";
+import useInventarioPagInicio from "../../hooks/useInventarioPagInicio";
 
-const CajaHojas = ({ handlerChangeHojas }) => {
+const CajaHojas = ({ handlerChangeHojas, restHojas }) => {
+  const { testInyectores } = useInventarioPagInicio();
+
   return (
     <div className="flex w-full mb-5 lg:m-0 bg-violet-100 lg:bg-transparent justify-center lg:w-1/4">
       <div className="flex flex-col items-start">
@@ -8,7 +11,7 @@ const CajaHojas = ({ handlerChangeHojas }) => {
           Hojas
         </h5>
         <div className="flex flex-col w-full h-full py-4">
-          <div className="flex my-5">
+          <div className="flex relative my-5">
             <label
               htmlFor="hojasColor"
               className="w-1/3 shadow-teal-300/60 bg-teal-400 text-xs font-serif shadow-md mr-3 p-1 rounded-lg text-white font-semibold"
@@ -16,15 +19,18 @@ const CajaHojas = ({ handlerChangeHojas }) => {
               Color
             </label>
             <input
-              onChange={handlerChangeHojas}
+              onChange={(e) => handlerChangeHojas(e, testInyectores)}
               name="color"
               type="number"
               id="hojasColor"
-              className="text-center text-xs text-slate-700 rounded-lg bg-transparent border-2 focus:outline-none focus:border-teal-300"
+              className="text-center text-xs text-slate-500 font-semibold rounded-lg bg-transparent border-2 focus:outline-none focus:border-teal-300"
             />
+            <p className="absolute text-green-500 -right-10 text-sm">
+              {restHojas.color > 0 && restHojas.color}
+            </p>
           </div>
 
-          <div className="flex">
+          <div className="flex relative">
             <label
               htmlFor="hojasBN"
               className="w-1/3 text-center bg-gray-400 text-xs font-serif shadow-md mr-3 p-1 rounded-lg text-white font-semibold"
@@ -32,12 +38,15 @@ const CajaHojas = ({ handlerChangeHojas }) => {
               b/n
             </label>
             <input
-              onChange={handlerChangeHojas}
+              onChange={(e) => handlerChangeHojas(e, testInyectores)}
               name="bn"
               type="number"
               id="hojasBN"
-              className="text-center text-xs text-slate-700 rounded-md bg-transparent border-2 focus:outline-none focus:border-slate-400 "
+              className="text-center text-xs text-slate-500 font-semibold rounded-md bg-transparent border-2 focus:outline-none focus:border-slate-400 "
             />
+            <p className="absolute text-green-500 -right-10 text-sm">
+              {restHojas.bn > 0 && restHojas.bn}
+            </p>
           </div>
         </div>
       </div>

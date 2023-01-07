@@ -22,6 +22,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [turno, setTurno] = useState(defaultTurno);
   const [cantHojas, setCantHojas] = useState(idHojas);
   const [workers, setWorkers] = useState([]);
+  const [restHojas, setRestHojas] = useState({ color: 0, bn: 0 });
 
   const { setModalCuadre, setResultForm } = useContext(CuadreContext);
 
@@ -136,10 +137,11 @@ export const UseCuadreMiron = (setErrorsForm) => {
   };
 
   /* Handlers de caja de hojas */
-  const handlerChangeHojas = (e) => {
+  const handlerChangeHojas = (e, testAnterior) => {
     const { name, value } = e.target;
-
+   
     setCantHojas({ ...cantHojas, [name]: value });
+    setRestHojas({ ...restHojas, [name]: value - testAnterior[name] });
   };
 
   return {
@@ -151,5 +153,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
     handlerChoiceWorker,
     turno,
     workers,
+    restHojas,
   };
 };
