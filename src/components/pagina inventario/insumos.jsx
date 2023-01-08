@@ -23,17 +23,17 @@ const Insumos = () => {
       <div className="w-11/12 md:w-3/4 m-auto flex flex-col">
         {/* Encabezado */}
         <div className="w-full rounded-md bg-teal-500 shadow-md flex justify-between">
-          <div className=" w-1/3 text-center border-x-2">
+          <div className=" w-1/3 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Nombre
             </h4>
           </div>
-          <div className=" w-1/3 text-center border-x-2">
+          <div className=" w-1/3 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Almacen
             </h4>
           </div>
-          <div className=" w-1/3 text-center border-x-2">
+          <div className=" w-1/3 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Local
             </h4>

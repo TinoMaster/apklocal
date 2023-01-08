@@ -22,11 +22,11 @@ const EsteMes = () => {
   const { workers } = useContext(CuadreContext);
 
   return (
-    <div className="flex flex-col w-11/12 m-auto mt-5 md:mt-0 md:w-3/4 md:my-10 lg:w-5/12 md:h-full shadow-lg shadow-black-400/50 bg-yellow-400 rounded-lg">
-      <h3 className="font-serif font-normal text-lg md:text-2xl p-3 text-white">
+    <div className="flex flex-col w-11/12 m-auto mt-5 md:mt-0 md:w-3/4 md:my-10 lg:w-5/12 md:h-full min-h-[450px] shadow-lg shadow-black-400/50 bg-white/5 rounded-lg">
+      <h3 className="font-serif font-normal text-lg md:text-2xl p-3">
         <FontAwesomeIcon icon={faCalendarDays} /> Este Mes
       </h3>
-      <div className="h-full bg-white rounded-t-lg rounded-b-lg flex flex-col">
+      <div className="h-full rounded-t-3xl rounded-b-lg flex flex-col">
         <div className="flex flex-col w-full h-full">
           <div className="flex justify-between bg-yellow-100 p-3 rounded-t-lg">
             <h6 className="font-serif md:text-lg text-green-600">
@@ -38,39 +38,31 @@ const EsteMes = () => {
           </div>
 
           <div className="flex justify-between p-2 ">
-            <h6 className="font-serif text-sm md:text-base text-slate-600">
-              Dueño
-            </h6>
-            <p className="text-sm  text-slate-500 ">
+            <h6 className="font-serif text-sm md:text-base">Dueño</h6>
+            <p className="text-sm  ">
               {totalRecaudadoDueño(esteMes)}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
           <div className="flex justify-between p-2 ">
-            <h6 className="font-serif text-sm md:text-base text-slate-600">
-              Salario
-            </h6>
-            <p className="text-sm text-slate-600 ">
+            <h6 className="font-serif text-sm md:text-base">Salario</h6>
+            <p className="text-sm ">
               {totalSalario(esteMes)} <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
           <div className="flex justify-between p-2 ">
-            <h6 className="font-serif text-sm md:text-base text-slate-600">
-              Mejor Venta
-            </h6>
-            <p className="text-sm text-slate-600 ">
+            <h6 className="font-serif text-sm md:text-base">Mejor Venta</h6>
+            <p className="text-sm ">
               {mejorVenta(esteMes).miron}{" "}
               <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
           <div className="flex justify-between p-2 ">
-            <h6 className="font-serif text-sm md:text-base text-slate-700">
-              Mejor Turno
-            </h6>
-            <p className="text-sm text-slate-600">
+            <h6 className="font-serif text-sm md:text-base">Mejor Turno</h6>
+            <p className="text-sm">
               <span className="font-serif mr-2">
                 {`${mejorTurno(esteMes)[0]}`}
               </span>
@@ -95,7 +87,7 @@ const EsteMes = () => {
                 >
                   <div className="flex justify-center items-center w-10 h-10 rounded-full border-2 bg-yellow-400 border-yellow-400 overflow-hidden">
                     {/* <img className="w-full" src={worker.image} alt="Jorge" /> */}
-                    <p className="text-white">{worker?.usuario.slice(0,1)}</p>
+                    <p className="text-white">{worker?.usuario.slice(0, 1)}</p>
                   </div>
                   <h3 className="text-sm md:text-base text-yellow-600">
                     {worker.usuario}

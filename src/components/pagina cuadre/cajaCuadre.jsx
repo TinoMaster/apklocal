@@ -40,7 +40,7 @@ const CajaCuadre = ({
           <FontAwesomeIcon icon={faListDots} /> Cuadre
         </h3>
 
-        <div className="flex flex-col h-full justify-between p-5 bg-white">
+        <div className="flex flex-col h-full justify-between p-5 bg-white/5">
           <div className="flex flex-col items-center">
             <label htmlFor="miron" className="labelCajaCuadre">
               Total Miron
@@ -108,16 +108,16 @@ const CajaCuadre = ({
           </div>
         </div>
 
-        <div className="flex w-full border-t-2 bg-slate-100 border-slate-300 justify-center p-4 rounded-xl">
+        <div className="flex w-full border-t-2 bg-white/10 border-slate-300 justify-center p-4 rounded-b-xl">
           <input
             type="button"
-            className="text-white text-xs md:text-sm font-sans shadow-lg px-3 py-1 mr-3 rounded-lg shadow-teal-500/60 font-semibold bg-teal-400 hover:bg-teal-500 hover:cursor-pointer hover:shadow-teal-600"
+            className="text-xs md:text-sm font-sans shadow-lg px-3 py-1 mr-3 rounded-lg font-semibold bg-white/5 hover:bg-teal-500 bg-teal-400 hover:cursor-pointer hover:shadow-teal-600 shadow-teal-400/40 transition-all text-slate-200"
             onClick={handleSubmitForm}
             value="Terminar"
           />
           <input
             type="reset"
-            className="text-white text-xs md:text-sm font-sans shadow-lg px-3 py-1 ml-3 rounded-lg shadow-slate-500/60 font-semibold bg-slate-500 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600"
+            className="text-xs md:text-sm font-sans shadow-lg px-3 py-1 ml-3 rounded-lg font-semibold bg-white/5  bg-slate-500 shadow-slate-400/50 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600 transition-all text-slate-200"
             onClick={() => setForm(modeloInicial)}
             value="Resetear"
           />

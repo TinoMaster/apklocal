@@ -24,29 +24,33 @@ const PagCuadre = () => {
     restHojas,
   } = UseCuadreMiron(setErrorsForm);
 
-  const { user } = useContext(AuthContext);
+  const { user, darkMode } = useContext(AuthContext);
 
   return (
     <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative">
       {ModalCuadre && <ModalResult />}
 
-      <div className="flex flex-col lg:flex-row w-full lg:w-11/12 m-auto shadow-md shadow-violet-500/20 lg:h-1/4 bg-violet-50 rounded-lg">
+      <div className="flex flex-col lg:flex-row w-full lg:w-11/12 m-auto shadow-md shadow-violet-500/20 lg:h-1/4 bg-white/10 rounded-lg">
         <CajaTurno
           handlerChoiceWorker={handlerChoiceWorker}
           turno={turno}
           workers={workers}
+          darkMode={darkMode}
         />
-        <CajaHojas handlerChangeHojas={handlerChangeHojas} restHojas={restHojas} />
+        <CajaHojas
+          handlerChangeHojas={handlerChangeHojas}
+          restHojas={restHojas}
+        />
         <CajaProductos />
       </div>
 
       {user?.role === "admin" && (
-        <div className="flex justify-center my-5 lg:my-0 md:mt-5 w-full">
+        <div className="flex justify-center my-5  md:mt-5 w-full">
           <input
             onChange={(e) => {
               setForm({ ...form, fecha: e.target.value });
             }}
-            className="bg-violet-400 p-1 text-white font-serif text-xs rounded-md shadow-md hover:cursor-pointer hover:bg-violet-500"
+            className="bg-white/10 p-1 font-serif text-xs rounded-md shadow-md hover:cursor-pointer hover:bg-violet-500 hover:text-white transition-colors"
             type="date"
           />
         </div>

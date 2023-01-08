@@ -35,7 +35,7 @@ export const Notas = ({
   };
 
   return (
-    <div className="w-10/12 mx-auto my-4 flex shadow-lg rounded-lg p-2 relative">
+    <div className="w-10/12 mx-auto my-4 flex shadow-lg rounded-lg p-2 relative bg-white/5">
       {panelBotones && (
         <div className="flex absolute w-1/4 justify-around">
           <FontAwesomeIcon
@@ -57,18 +57,18 @@ export const Notas = ({
       )}
 
       <div className="flex flex-col items-center w-full">
-        <h3 className="w-full text-center text-slate-700 font-serif">
+        <h3 className="w-full text-center font-serif">
           {nombre}
         </h3>
         <p className="w-full text-center text-sm font-semibold text-green-700 p-2">
           {children}
         </p>
         <div className="flex flex-col w-full">
-          <p className="w-full text-left text-sm text-slate-700">
+          <p className="w-full text-left text-sm">
             <FontAwesomeIcon className="text-sm text-green-700 mr-1" icon={faPhone} /> {telefono}
           </p>
           <div className="flex w-full justify-end items-baseline">
-            <p className="text-xs text-slate-700 font-semibold mr-3">{fecha}</p>
+            <p className="text-xs font-semibold mr-3">{fecha}</p>
             <p className="text-sm text-slate-400 font-semibold">{creador}</p>
           </div>
         </div>

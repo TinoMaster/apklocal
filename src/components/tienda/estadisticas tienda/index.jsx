@@ -5,8 +5,8 @@ export const EstadisticasTienda = () => {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Menu */}
-      <div className="w-full bg-slate-200 p-2 rounded-md flex justify-between items-baseline">
-        <h2 className="text-xl font-serif text-slate-600 font-semibold">Estadisticas</h2>
+      <div className="w-full bg-white/10 p-2 rounded-md flex justify-between items-baseline">
+        <h2 className="text-xl font-serif font-semibold">Estadisticas</h2>
         {/* Links */}
         <div className="flex">
           <label className="flex p-2" htmlFor="resumen">
@@ -20,6 +20,9 @@ export const EstadisticasTienda = () => {
         </div>
       </div>
       {/* Container */}
+      <Container />
+      <Container />
+      <Container />
       <Container />
     </div>
   );

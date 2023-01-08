@@ -21,8 +21,8 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
       <div
         className={
           notasActive
-            ? "absolute w-full md:w-1/4 h-full shadow-xl transition-transform shadow-violet-500/50 z-30 bg-white right-0"
-            : "absolute w-full md:w-1/4 h-full bg-white right-0 transition-transform translate-x-full"
+            ? "absolute w-full md:w-1/4 h-full shadow-xl transition-transform shadow-violet-500/50 z-30  right-0"
+            : "absolute w-full md:w-1/4 h-full  right-0 transition-transform translate-x-full"
         }
       >
         <CajaNotas />
@@ -30,7 +30,7 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
 
       <div
         onClick={() => setMenuActive(false)}
-        className=" rounded-md bg-white h-full overflow-hidden"
+        className="rounded-md  h-full overflow-hidden"
       >
         <Routes>
           <Route path="/" element={<PagInicio />} />

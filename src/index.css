@@ -16,18 +16,18 @@
 }
 
 .labelBilletes {
-  @apply text-slate-500 text-xs font-bold  rounded-md px-1 mt-4 md:mt-0;
+  @apply  text-xs font-bold  rounded-md px-1 mt-4 md:mt-0;
 }
 
 .billetes {
-  @apply w-3/4 md:w-2/3 p-1 border-none shadow-lg shadow-violet-300/50 bg-transparent text-xs font-semibold rounded-md text-zinc-800 font-sans border-2 border-slate-300/50 text-center focus:outline-none
+  @apply w-3/4 md:w-2/3 p-1 border-none shadow-inner shadow-black/20 bg-transparent text-xs font-semibold rounded-md font-sans border-2 border-slate-300/50 text-center focus:outline-none
 focus:border-slate-300 mt-1;
 }
 .labelCajaCuadre {
-  @apply  p-1 mb-1 text-xs font-serif text-slate-500 font-bold rounded-lg;
+  @apply  p-1 mb-1 text-xs font-serif font-bold rounded-lg;
 }
 .imputsCajaCuadre {
-  @apply border-2 w-1/2 text-center p-1 text-sm rounded-md border-none  shadow-lg shadow-teal-300/50  focus:outline-none;
+  @apply border-2 w-1/2 text-center p-1 text-sm rounded-md border-none bg-transparent  shadow-inner shadow-black/20  focus:outline-none;
 }
 
 input:checked + label {

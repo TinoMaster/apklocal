@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../../context/authContext";
 import { PrimaryLoader } from "../../loaders/primaryLoader";
 
 export const Form = ({
@@ -80,15 +81,16 @@ export const Form = ({
       function: handlers.handlerInputsProperties,
     },
   ];
+  const { darkMode } = useContext(AuthContext);
 
   return (
     <form
       ref={formRef}
-      className="w-full my-5 flex flex-wrap justify-center"
+      className="w-full my-10 flex flex-wrap justify-center"
       action=""
     >
       {/* Standard */}
-      <fieldset className="w-full flex relative flex-wrap justify-center lg:w-2/5 border-2 p-3 focus-within:text-slate-600 text-slate-500 focus-within:bg-violet-50 rounded-lg shadow-lg transition-all">
+      <fieldset className="w-full flex relative flex-wrap justify-center lg:w-2/5 border-2 p-3 bg-white/5  focus-within:bg-white/10 rounded-lg shadow-lg transition-all">
         {loader && (
           <div className="w-full h-full absolute flex justify-center items-center">
             <div className="inline bg-black/10 rounded-md">
@@ -102,14 +104,14 @@ export const Form = ({
         {/* Inputs */}
         <div className="flex flex-wrap my-2 w-full">
           <label
-            className="font-medium items-center w-full focus-within:text-slate-600 text-slate-500 flex justify-between"
+            className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/4">Nombre:</p>
             <input
               name="name"
               onChange={handlers.handlerInputTextForm}
-              className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
+              className="focus:outline-none p-1 rounded-md w-3/4 focus:border-green-200 bg-white/5 shadow-inner shadow-black/20 px-2"
               type="text"
             />
           </label>
@@ -117,7 +119,7 @@ export const Form = ({
         {/* Proveedor */}
         <div className="flex flex-wrap my-2 w-full">
           <label
-            className="font-medium items-center w-full focus-within:text-slate-600 text-slate-500 flex justify-between"
+            className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/4">
@@ -127,21 +129,25 @@ export const Form = ({
               <input
                 name="provider"
                 onChange={handlers.handlerInputTextForm}
-                className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
+                className="focus:outline-none p-1 rounded-md w-3/4 focus:border-green-200 bg-white/5 shadow-inner shadow-black/20 px-2"
                 type="text"
               />
             ) : (
               <select
                 name="provider"
                 onChange={handlers.handlerInputTextForm}
-                className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
+                className="focus:outline-none p-1 rounded-md w-3/4 focus:border-green-200 bg-white/5 shadow-inner shadow-black/20 px-2"
                 type="text"
                 defaultValue={""}
               >
                 <option value=""></option>
                 {providers?.map((el) => (
                   <option
-                    className="font-semibold font-serif text-slate-500"
+                    className={
+                      darkMode
+                        ? "font-semibold font-serif bg-darkMode"
+                        : "font-semibold font-serif bg-lightMode"
+                    }
                     key={el}
                     value={el}
                   >
@@ -164,7 +170,7 @@ export const Form = ({
         </div>
         <div className="flex flex-wrap my-2 w-full">
           <label
-            className="font-medium items-center w-full focus-within:text-slate-600 text-slate-500 flex justify-between"
+            className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/4">
@@ -174,20 +180,24 @@ export const Form = ({
               <input
                 name="category"
                 onChange={handlers.handlerInputTextForm}
-                className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
+                className="focus:outline-none p-1 rounded-md w-3/4 focus:border-green-200 bg-white/5 shadow-inner shadow-black/20 px-2"
                 type="text"
               />
             ) : (
               <select
                 onChange={handlers.handlerInputTextForm}
                 name="category"
-                className="focus:outline-none border-2 rounded-md w-3/4 focus:border-green-200 shadow-inner px-2 text-slate-700"
+                className="focus:outline-none p-1 rounded-md w-3/4 focus:border-green-200 bg-white/5 shadow-inner shadow-black/20 px-2"
                 type="text"
               >
                 <option value=""></option>
                 {categories?.map((el) => (
                   <option
-                    className="font-semibold font-serif text-slate-500"
+                    className={
+                      darkMode
+                        ? "font-semibold font-serif bg-darkMode"
+                        : "font-semibold font-serif bg-lightMode"
+                    }
                     key={el}
                     value={el}
                   >
@@ -214,25 +224,25 @@ export const Form = ({
             $
           </legend>
           <label
-            className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-center"
+            className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/2 ">Costo:</p>
             <input
               name="cost"
-              className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
+              className="focus:outline-none rounded-md w-1/2  bg-white/5 shadow-black/20 shadow-inner pl-2"
               type="number"
               onChange={handlers.handlerInputTextForm}
             />
           </label>
           <label
-            className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-center"
+            className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/2">Venta:</p>
             <input
               name="sell"
-              className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
+              className="focus:outline-none rounded-md w-1/2 shadow-black/20  shadow-inner bg-white/5 pl-2"
               type="number"
               onChange={handlers.handlerInputTextForm}
             />
@@ -246,7 +256,7 @@ export const Form = ({
           {inputProperties?.map((input) => (
             <label
               key={input.name}
-              className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-around my-2"
+              className="font-medium items-center w-1/2 flex justify-around my-2"
               htmlFor=""
             >
               <p className="text-lg mr-1 font-serif text-center w-1/2 ">
@@ -254,7 +264,7 @@ export const Form = ({
               </p>
               <input
                 name={input.name}
-                className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
+                className="focus:outline-none bg-white/5 shadow-black/20 rounded-md w-1/2  shadow-inner pl-2"
                 type={input.type}
                 onChange={input.function}
               />
@@ -267,7 +277,7 @@ export const Form = ({
             Cantidad
           </legend>
           <label
-            className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-center"
+            className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/2 ">
@@ -275,19 +285,19 @@ export const Form = ({
             </p>
             <input
               name="amount"
-              className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
+              className="focus:outline-none rounded-md w-1/2 bg-white/5 shadow-black/20 shadow-inner pl-2"
               type="number"
               onChange={handlers.handlerInputTextForm}
             />
           </label>
           <label
-            className="font-medium items-center w-1/2 focus-within:text-slate-600 text-slate-500 flex justify-center"
+            className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
             <p className="text-lg mr-1 font-serif text-center w-1/2">Local:</p>
             <input
               name="local_amount"
-              className="focus:outline-none border-2 rounded-md w-1/2 focus:border-green-200 shadow-inner pl-2 text-slate-700"
+              className="focus:outline-none rounded-md w-1/2 bg-white/5 shadow-black/20 shadow-inner pl-2"
               type="number"
               onChange={handlers.handlerInputTextForm}
             />
@@ -298,7 +308,7 @@ export const Form = ({
           <input
             value={"Resetear"}
             onClick={resetForm}
-            className="p-2 mx-2 bg-slate-300 rounded-md shadow-md hover:bg-yellow-400/80 transition-all hover:text-slate-700 hover:cursor-pointer"
+            className="p-2 mx-2 bg-white/5 rounded-md shadow-md hover:bg-yellow-400/80 transition-all hover hover:cursor-pointer"
             type="reset"
           />
           <button
@@ -307,7 +317,7 @@ export const Form = ({
               sendForm();
               resetForm();
             }}
-            className="p-2 mx-2 bg-slate-300 rounded-md shadow-md hover:bg-green-400/80 transition-all hover:text-slate-700"
+            className="p-2 mx-2 bg-white/5 rounded-md shadow-md hover:bg-green-400/80 transition-all hover"
           >
             Guardar
           </button>

@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState({});
 
+  const [darkMode, setDarkMode] = useState(false);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -137,6 +138,8 @@ const AuthProvider = ({ children }) => {
     user,
     isAuth,
     logout,
+    darkMode,
+    setDarkMode,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

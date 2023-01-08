@@ -34,7 +34,7 @@ export const CajaNotas = () => {
     dataToEdit
   );
 
-  const { user } = useContext(AuthContext);
+  const { user, darkMode } = useContext(AuthContext);
 
   useEffect(() => {
     httpHelper()
@@ -101,7 +101,13 @@ export const CajaNotas = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full relative">
+    <div
+      className={
+        darkMode
+          ? "flex flex-col w-full h-full relative bg-darkMode transition-all delay-75"
+          : "flex flex-col w-full h-full relative bg-lightMode transition-all delay-75"
+      }
+    >
       {modalIsOpen && (
         <ModalPortal>
           <div className="flex w-full md:w-1/2 lg:w-1/3 h-full absolute z-50 items-center justify-center">
@@ -182,21 +188,21 @@ export const CajaNotas = () => {
             Notas
           </h2>
 
-          <div className="flex w-2/4 p-2 mt-1 justify-between bg-white shadow-sm rounded-md">
+          <div className="flex w-2/4 p-2 mt-1 justify-between bg-transparent shadow-black/20 shadow-sm rounded-md">
             <FontAwesomeIcon
               icon={faCirclePlus}
-              className="p-2 bg-green-400 rounded-full text-white shadow-lg shadow-green-300/40 hover:cursor-pointer hover:bg-green-500"
+              className="p-2 bg-green-400/80 rounded-full text-white shadow-lg shadow-green-300/20 hover:cursor-pointer hover:bg-green-500"
               title="Agregar"
               onClick={crearNota}
             />
             <FontAwesomeIcon
-              className="p-2 bg-yellow-400 rounded-full text-white shadow-lg shadow-yellow-300/40 hover:cursor-pointer hover:bg-yellow-500"
+              className="p-2 bg-yellow-400/80 rounded-full text-white shadow-lg shadow-yellow-300/20 hover:cursor-pointer hover:bg-yellow-500"
               title="Editar"
               icon={faPenToSquare}
               onClick={abrirPanel}
             />
             <FontAwesomeIcon
-              className="p-2 bg-red-400 rounded-full text-white shadow-lg shadow-red-300/40 hover:cursor-pointer hover:bg-red-500"
+              className="p-2 bg-red-400/80 rounded-full text-white shadow-lg shadow-red-300/20 hover:cursor-pointer hover:bg-red-500"
               title="Eliminar"
               icon={faTrashCan}
               onClick={abrirPanel}

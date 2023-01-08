@@ -11,18 +11,23 @@ import AuthContext from "../../context/authContext";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import EstadisticasContext from "../../context/estadisticasContext";
 import useInventarioPagInicio from "../../hooks/useInventarioPagInicio";
+import { ButtonModeDark } from "./botonModoDark";
 
 const MenuLateral = ({ menuActive, setMenuActive }) => {
-  const { logout, user, isAuth } = useContext(AuthContext);
+  const { logout, user, isAuth, darkMode } = useContext(AuthContext);
   const { fondoAyer, bdCuadre } = useContext(EstadisticasContext);
   const { testInyectores } = useInventarioPagInicio();
   return (
     <div
-      onClick={() => setMenuActive(false)}
+      onClick={() => {
+        setMenuActive(false);
+      }}
       className={
         menuActive
-          ? "flex flex-col fixed w-2/3 h-screen z-50 bg-white translate-x-0 shadow transition-transform ease-out delay-75"
-          : "flex flex-col absolute md:relative -translate-x-full md:transform-none sm:w-1/3 md:w-2/5 lg:w-1/5 xl:w-1/6 max-w-xs shadow-lg bg-violet-50"
+          ? darkMode
+            ? "flex flex-col fixed w-2/3 h-screen z-50 bg-darkMode  translate-x-0 shadow transition-all delay-75"
+            : "flex flex-col fixed w-2/3 h-screen z-50 bg-lightMode  translate-x-0 shadow transition-all delay-75"
+          : "flex flex-col absolute md:relative bg-white/5 -translate-x-full md:transform-none sm:w-1/3 md:w-2/5 lg:w-1/5 xl:w-1/6 max-w-xs shadow-lg "
       }
     >
       <h1
@@ -31,12 +36,13 @@ const MenuLateral = ({ menuActive, setMenuActive }) => {
       >
         <FontAwesomeIcon className="p-1 text-md pt-2" icon={faBars} />
         Menu
+        <ButtonModeDark />
       </h1>
       <SectionPaginas />
       <SectionEntradas />
 
       {/* Test Ayer y Fondo */}
-      <div className="flex flex-col w-10/12 m-auto shadow shadow-violet-500/20 p-3 rounded-md text-slate-500 text-sm">
+      <div className="flex flex-col w-10/12 m-auto shadow shadow-violet-500/20 p-3 bg-white/5 rounded-md text-sm">
         <h3 className="self-center text-lg font-serif">Cuadre anterior:</h3>
         <div className="flex justify-between">
           <p className="">Fondo:</p>
@@ -63,11 +69,11 @@ const MenuLateral = ({ menuActive, setMenuActive }) => {
               icon={faUser}
               className="bg-violet-500/90 p-2 rounded-full text-white"
             />{" "}
-            <p className="p-2 font-serif text-slate-800">{user.name}</p>{" "}
+            <p className="p-2 font-serif">{user.name}</p>{" "}
           </div>
           <p
             onClick={() => logout()}
-            className="p-2 text-slate-700 bg-black/10 shadow-md hover:bg-black/10 rounded-md hover:shadow-md"
+            className="p-2 bg-black/10 shadow-md hover:bg-black/10 rounded-md hover:shadow-md"
           >
             {" "}
             <FontAwesomeIcon icon={faRightFromBracket} /> Salir

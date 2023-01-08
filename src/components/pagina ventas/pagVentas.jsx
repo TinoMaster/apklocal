@@ -201,7 +201,7 @@ const PagVentas = () => {
           <select
             name=""
             id=""
-            className="p-1 border-2 rounded-md ml-2 bg-violet-200 text-slate-700 focus:outline-none"
+            className="p-1 border-2 rounded-md ml-2  text-slate-700 focus:outline-none"
             onChange={handlerChangeSelectYear}
           >
             {years.length > 0 ?
@@ -216,15 +216,15 @@ const PagVentas = () => {
         <div className="w-full p-2 relative">
           <table className="table-fixed w-full border-collapse relative mb-16">
             <thead>
-              <tr className="bg-violet-500 text-white sticky top-0 w-full z-20">
-                <th className="py-2 border-2 rounded-lg text-xs">Fecha</th>
-                <th className="py-2 border-2 rounded-lg text-xs">Venta</th>
-                <th className="py-2 border-2 hidden md:block rounded-lg text-xs">
+              <tr className="bg-violet-500 text-slate-200 sticky top-0 w-full z-20">
+                <th className="py-2 rounded-lg text-xs">Fecha</th>
+                <th className="py-2 rounded-lg text-xs">Venta</th>
+                <th className="py-2 rounded-lg hidden md:block  text-xs">
                   Fondo
                 </th>
-                <th className="py-2 border-2 rounded-lg text-xs">Salario</th>
-                <th className="py-2 border-2 rounded-lg text-xs">Turno</th>
-                <th className="py-2 border-2 rounded-lg text-xs">Dueño</th>
+                <th className="py-2  rounded-lg text-xs">Salario</th>
+                <th className="py-2  rounded-lg text-xs">Turno</th>
+                <th className="py-2  rounded-lg text-xs">Dueño</th>
               </tr>
             </thead>
             <tbody>
@@ -234,31 +234,31 @@ const PagVentas = () => {
                   totalDueño += dia.dueño;
                   return (
                     <tr
-                      className="hover:bg-violet-200 hover:cursor-pointer rounded-lg bg-violet-50"
+                      className="hover:bg-black/20 hover:cursor-pointer rounded-lg"
                       key={dia.id}
                     >
                       <td className="text-center">
-                        <h4 className="py-2 flex justify-center items-baseline md:m-2 shadow-lg  text-violet-600 rounded-lg bg-white text-xs">
+                        <h4 className="py-2 flex justify-center items-baseline md:m-2 shadow-lg  rounded-lg bg-white/5 text-xs">
                           <FontAwesomeIcon
-                            className="text-violet-600 hidden md:block mr-2"
+                            className="t hidden md:block mr-2"
                             icon={faCalendarDays}
                           />{" "}
                           {dia.fecha}
                         </h4>
                       </td>
                       <td className="text-center">
-                        <h4 className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                        <h4 className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
                           <FontAwesomeIcon
-                            className=" text-slate-600"
+                            className=" "
                             icon={faDollarSign}
                           />
                           {dia.miron}
                         </h4>
                       </td>
                       <td className="text-center hidden md:block">
-                        <h4 className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                        <h4 className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
                           <FontAwesomeIcon
-                            className=" text-slate-600"
+                            className=" "
                             icon={faDollarSign}
                           />
                           {dia.fondo}
@@ -266,17 +266,17 @@ const PagVentas = () => {
                       </td>
                       <td className="text-center">
                         {!dia.turno.trabajador2 ? (
-                          <p className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                          <p className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
                             <FontAwesomeIcon
-                              className="text-slate-600"
+                              className=""
                               icon={faDollarSign}
                             />
                             {dia.salario1}
                           </p>
                         ) : (
-                          <p className=" text-slate-600 py-2 md:m-2 shadow-lg rounded-lg bg-white text-xs">
+                          <p className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
                             <FontAwesomeIcon
-                              className="text-slate-600"
+                              className=""
                               icon={faDollarSign}
                             />
                             {dia.salario1 + dia.salario2}
@@ -285,20 +285,20 @@ const PagVentas = () => {
                       </td>
                       <td className="text-center">
                         {dia.turno.trabajador2 ? (
-                          <p className="text-slate-600 py-2 md:m-2 font-semibold shadow-lg rounded-lg bg-white text-xs">{`${dia.turno.trabajador1.substring(
+                          <p className=" py-2 md:m-2 font-semibold shadow-lg rounded-lg bg-white/5 text-xs">{`${dia.turno.trabajador1.substring(
                             0,
                             1
                           )} y ${dia.turno.trabajador2.substring(0, 1)}`}</p>
                         ) : (
-                          <p className="text-slate-600 py-2 md:m-2 shadow-lg font-semibold rounded-lg bg-white text-xs">
+                          <p className=" py-2 md:m-2 shadow-lg font-semibold rounded-lg bg-white/5 text-xs">
                             {dia.turno.trabajador1}
                           </p>
                         )}
                       </td>
                       <td className="text-center flex relative py-2">
-                        <h4 className="w-full text-slate-600 shadow-lg py-2 rounded-lg bg-white text-xs">
+                        <h4 className="w-full  shadow-lg py-2 rounded-lg bg-white/5 text-xs">
                           <FontAwesomeIcon
-                            className=" text-slate-600"
+                            className=" "
                             icon={faDollarSign}
                           />
                           {dia.dueño}

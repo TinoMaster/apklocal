@@ -13,20 +13,20 @@ export const MenuTienda = ({ openLeftMenu }) => {
     <div
       className={
         openLeftMenu
-          ? "absolute md:relative md:w-1/5 h-full bg-violet-50 overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
-          : "absolute md:relative md:w-1/5 h-full bg-violet-50 overflow-auto shadow-md shadow-black/20 -translate-x-full transition-transform md:translate-x-0 z-20"
+          ? "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
+          : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 -translate-x-full transition-transform md:translate-x-0 z-20"
       }
     >
       <div className="flex p-2">
-        <h3 className="bg-cyan-500 shadow-lg flex items-center text-white font-serif p-1 rounded">
+        <h3 className="bg-violet-500 shadow-lg flex items-center text-white font-serif p-1 rounded">
           Paginas
         </h3>
         <div className="flex flex-col w-full">
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700 bg-violet-100 rounded-md"
-                : "p-4 w-full font-serif text-slate-700 flex items-baseline hover:bg-black/5"
+                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
+                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
             }
             to={"/tienda/addProduct"}
           >
@@ -36,8 +36,8 @@ export const MenuTienda = ({ openLeftMenu }) => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700 bg-violet-100 rounded-md"
-                : "p-4 w-full font-serif text-slate-700 flex items-baseline hover:bg-black/5"
+                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
+                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
             }
             to={"/tienda/inventario"}
           >
@@ -47,8 +47,8 @@ export const MenuTienda = ({ openLeftMenu }) => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700 bg-violet-100 rounded-md"
-                : "p-4 w-full font-serif text-slate-700 flex items-baseline hover:bg-black/5"
+                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
+                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
             }
             to={"/tienda/historial"}
           >
@@ -58,8 +58,8 @@ export const MenuTienda = ({ openLeftMenu }) => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700 bg-violet-100 rounded-md"
-                : "p-4 w-full font-serif text-slate-700 flex items-baseline hover:bg-black/5"
+                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
+                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
             }
             to={"/tienda/estadisticas"}
           >

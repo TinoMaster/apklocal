@@ -33,7 +33,7 @@ const PagPersonal = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="flex max-w-1080p relative max-h-1080p justify-around flex-wrap w-full h-full overflow-auto">
+    <div className="flex max-w-1080p relative max-h-1080p justify-around flex-wrap w-full h-full overflow-auto py-5">
       {/* Mensaje si es success */}
       <div
         className={
@@ -65,7 +65,7 @@ const PagPersonal = () => {
       {user?.role === "admin" && (
         <button
           onClick={() => !modalInsertWorker && setModalInsertWorker(true)}
-          className="w-10 h-10 bg-green-500 absolute rounded-full text-xl text-white bottom-5 md:bottom-10 right-5 shadow-lg shadow-green-600/40"
+          className="w-10 h-10 bg-green-500 fixed rounded-full text-xl text-white bottom-5 md:bottom-10 right-5 shadow-lg shadow-green-600/40"
         >
           <FontAwesomeIcon icon={faCirclePlus} />
         </button>

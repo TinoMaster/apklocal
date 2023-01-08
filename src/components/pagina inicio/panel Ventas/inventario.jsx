@@ -14,15 +14,15 @@ const Inventario = () => {
         Inventario
       </h4>
       {/* inventario */}
-      <div className="w-full h-full bg-white shadow-lg rounded-lg">
+      <div className="w-full h-full bg-white/5 shadow-lg rounded-lg">
         {/* Hojas blancas */}
-        <div className="flex flex-wrap justify-center w-full lg:w-2/4 rounded-lg md:h-1/2 bg-slate-50">
+        <div className="flex flex-wrap justify-center w-full lg:w-2/4 rounded-lg md:h-1/2">
           {/* hojas disponibles */}
           {user?.role === "admin" && (
             <div className="w-full md:w-1/2 h-full flex justify-center items-center">
               <div className="flex flex-wrap my-4">
                 <FontAwesomeIcon
-                  className="text-base md:text-2xl text-white bg-teal-500 p-3 rounded-full"
+                  className="text-base md:text-2xl bg-teal-500 p-3 rounded-full"
                   icon={faBoxesPacking}
                 />
                 <div className="flex flex-col ml-2">
@@ -49,16 +49,16 @@ const Inventario = () => {
             </h4>
             <div className="flex justify-around my-4 w-full items-start h-2/3">
               <div className="flex flex-col ">
-                <h4 className="font-semibold text-slate-700">Hojas</h4>
-                <p className="font-light text-xs text-slate-400">
+                <h4 className="font-semibold">Hojas</h4>
+                <p className="font-light text-xs">
                   blanco y negro
                 </p>
-                <p className="font-bold text-slate-600">{testInyectores.bn}</p>
+                <p className="font-bold">{testInyectores.bn}</p>
               </div>
               <div className="flex flex-col ">
-                <h4 className="font-semibold text-slate-700">Hojas</h4>
-                <p className="font-light text-xs text-slate-400">color</p>
-                <p className="font-bold text-slate-600">
+                <h4 className="font-semibold">Hojas</h4>
+                <p className="font-light text-xs">color</p>
+                <p className="font-bold">
                   {testInyectores.color}
                 </p>
               </div>

@@ -22,7 +22,7 @@ export const AddProduct = () => {
   } = UseAddProduct();
   return (
     <div className="flex flex-wrap justify-center items-start">
-      <h2 className="p-2 text-xl text-slate-600 font-serif font-semibold">Agregar Producto Nuevo</h2>
+      <h2 className="p-2 text-xl font-serif font-semibold">Agregar Producto Nuevo</h2>
       {/* Error */}
       <div className="w-full flex justify-center mt-14 absolute">
         <p

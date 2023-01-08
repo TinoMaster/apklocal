@@ -217,7 +217,7 @@ const EstadisticasProvider = ({ children }) => {
     return fondoAyer;
   };
 
-  const mejorYpeorMes = (bd) => {
+  /* const mejorYpeorMes = (bd) => {
     let allMonths = {};
     let sumaMeses = {};
     let mes = 0;
@@ -237,6 +237,7 @@ const EstadisticasProvider = ({ children }) => {
         allMonths = { ...allMonths, [fechaString]: {} };
       });
     }
+    console.log(bd);
 
     if (!bd.length) {
       return 0;
@@ -336,6 +337,9 @@ const EstadisticasProvider = ({ children }) => {
     }
 
     return [mejorMes, valorMejor, peorMes, valorPeor];
+  }; */
+  const mejorYpeorMes = (bd) => {
+    /* return [mejorMes, valorMejor, peorMes, valorPeor]; */
   };
 
   const existsYears = (bd) => {

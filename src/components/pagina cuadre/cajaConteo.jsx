@@ -33,7 +33,7 @@ const CajaConteo = () => {
           <FontAwesomeIcon icon={faCoins} /> Desglose
         </h3>
 
-        <div className=" h-full w-full flex flex-wrap bg-white items-center">
+        <div className=" h-full w-full pb-4 flex flex-wrap bg-white/5 items-center">
           <div className="divImputsDesglose">
             <label className="labelBilletes" htmlFor="1000">
               $1000
@@ -165,7 +165,7 @@ const CajaConteo = () => {
           </div>
         </div>
 
-        <div className="flex w-full border-t-2 mt-6 md:mt-0 bg-slate-100 border-slate-300 justify-between p-2 md:p-4 rounded-xl">
+        <div className="flex w-full border-t-2  md:mt-0 bg-white/10 border-slate-300 justify-between p-4 rounded-b-xl">
           <input
             type="reset"
             onClick={() => {
@@ -173,19 +173,19 @@ const CajaConteo = () => {
               setResult(0);
             }}
             value="Resetear"
-            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-slate-500/60 font-semibold bg-slate-500 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600"
+            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-slate-500/60 font-semibold bg-slate-500 hover:bg-slate-600 hover:cursor-pointer hover:shadow-slate-600 transition-all"
           />
           <input
             type="button"
             onClick={handlerSubmit}
-            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-violet-500/60 font-semibold bg-violet-500 hover:bg-violet-600 hover:cursor-pointer hover:shadow-violet-600"
+            className="text-white text-xs md:text-sm font-sans w-1/4 shadow-lg md:px-3 py-1 rounded-lg shadow-violet-500/60 font-semibold bg-violet-500 hover:bg-violet-600 hover:cursor-pointer hover:shadow-violet-600 transition-all"
             value="Procesar"
           />
           <input
             type="number"
             value={result}
             name="respuesta"
-            className="border-b-2 text-sm w-1/4 border-slate-400 text-center rounded-2xl font-sans md:font-medium md:text-md text-violet-600"
+            className="text-sm w-1/4 text-center rounded-2xl font-sans md:font-medium bg-transparent shadow-inner shadow-black/30 md:text-md"
             placeholder="Resultado"
             readOnly
           />

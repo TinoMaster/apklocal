@@ -15,7 +15,7 @@ const MedioBasico = () => {
 
   return (
     <div className="w-full lg:w-1/2 py-5 ">
-      <h4 className="py-5 text-center text-xl text-slate-600 font-serif font-semibold">
+      <h4 className="py-5 text-center text-xl font-serif font-semibold">
         Medio Basico
       </h4>
 
@@ -23,27 +23,27 @@ const MedioBasico = () => {
       <div className="w-11/12 md:w-3/4 m-auto flex flex-col ">
         {/* Encabezado */}
         <div className="w-full rounded-md bg-yellow-500/90 shadow-md flex justify-between">
-          <div className=" w-2/12 text-center border-x-2">
+          <div className=" w-2/12 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Nombre
             </h4>
           </div>
-          <div className=" w-3/12 text-center border-x-2">
+          <div className=" w-3/12 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Modelo
             </h4>
           </div>
-          <div className=" w-3/12 text-center border-x-2">
+          <div className=" w-3/12 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               # Serie
             </h4>
           </div>
-          <div className=" w-2/12 text-center border-x-2">
+          <div className=" w-2/12 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Almacen
             </h4>
           </div>
-          <div className=" w-2/12 text-center border-x-2">
+          <div className=" w-2/12 text-center">
             <h4 className="p-2 text-xs md:text-sm text-white font-semibold font-serif">
               Local
             </h4>

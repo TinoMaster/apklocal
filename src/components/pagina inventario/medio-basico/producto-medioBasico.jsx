@@ -24,7 +24,7 @@ const ProductoMedioBasico = ({
     <div className="w-full my-2 rounded-md shadow-md flex justify-between">
       {!modalEditar ? (
         <div className=" w-2/12 text-center">
-          <h4 className=" p-2 text-xs md:text-sm text-slate-800 font-medium">
+          <h4 className=" p-2 text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.nombre === undefined ? "-" : MBasico.nombre}
           </h4>
         </div>
@@ -37,14 +37,14 @@ const ProductoMedioBasico = ({
             onChange={handlerChangeMBasicoToEdit}
             name="nombre"
             type="text"
-            className="w-full h-full text-center text-zinc-500 hover:outline-none text-sm focus:outline-none"
+            className="w-full h-full text-center text-zinc-500 bg-transparent hover:outline-none text-sm focus:outline-none"
           />
         </div>
       )}
 
       {!modalEditar ? (
         <div className=" w-3/12 text-center">
-          <h4 className="p-2 text-xs md:text-sm text-slate-800 font-medium">
+          <h4 className="p-2 text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.modelo === undefined ? "-" : MBasico.modelo}
           </h4>
         </div>
@@ -57,14 +57,14 @@ const ProductoMedioBasico = ({
             onChange={handlerChangeMBasicoToEdit}
             name="modelo"
             type="text"
-            className="w-full h-full text-center text-zinc-500 hover:outline-none text-sm focus:outline-none"
+            className="w-full h-full text-center text-zinc-500 bg-transparent hover:outline-none text-sm focus:outline-none"
           />
         </div>
       )}
 
       {!modalEditar ? (
         <div className=" w-3/12 text-center">
-          <h4 className="p-2 text-xs md:text-sm text-slate-800 font-medium">
+          <h4 className="p-2 text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.serie === undefined ? "-" : MBasico.serie}
           </h4>
         </div>
@@ -77,14 +77,14 @@ const ProductoMedioBasico = ({
             onChange={handlerChangeMBasicoToEdit}
             name="serie"
             type="text"
-            className="w-full h-full text-center text-zinc-500 hover:outline-none text-sm focus:outline-none"
+            className="w-full h-full text-center text-zinc-500 bg-transparent hover:outline-none text-sm focus:outline-none"
           />
         </div>
       )}
 
       {!modalEditar ? (
         <div className=" w-2/12 text-center">
-          <h4 className="p-2 text-xs md:text-sm text-slate-800 font-medium">
+          <h4 className="p-2 text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.almacen === 0 ? "-" : MBasico.almacen}
           </h4>
         </div>
@@ -97,14 +97,14 @@ const ProductoMedioBasico = ({
             onChange={handlerChangeMBasicoToEdit}
             name="almacen"
             type="number"
-            className="w-full h-full text-center text-zinc-500 hover:outline-none text-sm focus:outline-none"
+            className="w-full h-full text-center text-zinc-500 bg-transparent hover:outline-none text-sm focus:outline-none"
           />
         </div>
       )}
 
       {!modalEditar ? (
         <div className="relative w-2/12 text-center flex">
-          <h4 className="p-2 w-full text-xs md:text-sm text-slate-800 font-medium">
+          <h4 className="p-2 w-full text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.local === 0 ? "-" : MBasico.local}
           </h4>
           {!botonEditOff && user?.role === "admin" && (
@@ -113,7 +113,7 @@ const ProductoMedioBasico = ({
                 setModalEditar(true);
                 setBotonEditOff(true);
               }}
-              className="absolute -right-2  border-l-2 rounded-lg h-full bg-slate-50 hover:cursor-pointer hover:bg-yellow-400/40 w-10 flex flex-col justify-center items-center text-center"
+              className="absolute -right-2  border-l-2 rounded-lg h-full bg-white/5 hover:cursor-pointer hover:bg-yellow-400/40 w-10 flex flex-col justify-center items-center text-center"
             >
               <FontAwesomeIcon
                 className="text-lg text-slate-500"
@@ -131,7 +131,7 @@ const ProductoMedioBasico = ({
             onChange={handlerChangeMBasicoToEdit}
             name="local"
             type="number"
-            className="w-full h-full text-center text-zinc-500 hover:outline-none text-sm focus:outline-none"
+            className="w-full h-full text-center text-zinc-500 bg-transparent hover:outline-none text-sm focus:outline-none"
           />
           <div
             onClick={() => {
