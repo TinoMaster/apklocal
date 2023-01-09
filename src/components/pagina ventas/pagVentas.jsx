@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
+import AuthContext from "../../context/authContext";
 import CuadreContext from "../../context/cuadreContext";
 import EstadisticasContext from "../../context/estadisticasContext";
 
@@ -18,6 +19,7 @@ const PagVentas = () => {
     handlerChangeSelectYear,
   } = useContext(CuadreContext);
   const { years } = useContext(EstadisticasContext);
+  const { user } = useContext(AuthContext);
   let totalVenta = 0;
   let totalDueño = 0;
 
@@ -204,12 +206,15 @@ const PagVentas = () => {
             className="p-1 border-2 rounded-md ml-2  text-slate-700 focus:outline-none"
             onChange={handlerChangeSelectYear}
           >
-            {years.length > 0 ?
+            {years.length > 0 ? (
               years?.map((año) => (
                 <option key={año} value={año}>
                   {año}
                 </option>
-              )): <option>...</option>}
+              ))
+            ) : (
+              <option>...</option>
+            )}
           </select>
         </div>
 
@@ -248,37 +253,25 @@ const PagVentas = () => {
                       </td>
                       <td className="text-center">
                         <h4 className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
-                          <FontAwesomeIcon
-                            className=" "
-                            icon={faDollarSign}
-                          />
+                          <FontAwesomeIcon className=" " icon={faDollarSign} />
                           {dia.miron}
                         </h4>
                       </td>
                       <td className="text-center hidden md:block">
                         <h4 className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
-                          <FontAwesomeIcon
-                            className=" "
-                            icon={faDollarSign}
-                          />
+                          <FontAwesomeIcon className=" " icon={faDollarSign} />
                           {dia.fondo}
                         </h4>
                       </td>
                       <td className="text-center">
                         {!dia.turno.trabajador2 ? (
                           <p className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
-                            <FontAwesomeIcon
-                              className=""
-                              icon={faDollarSign}
-                            />
+                            <FontAwesomeIcon className="" icon={faDollarSign} />
                             {dia.salario1}
                           </p>
                         ) : (
                           <p className="  py-2 md:m-2 shadow-lg rounded-lg bg-white/5 text-xs">
-                            <FontAwesomeIcon
-                              className=""
-                              icon={faDollarSign}
-                            />
+                            <FontAwesomeIcon className="" icon={faDollarSign} />
                             {dia.salario1 + dia.salario2}
                           </p>
                         )}
@@ -297,29 +290,28 @@ const PagVentas = () => {
                       </td>
                       <td className="text-center flex relative py-2">
                         <h4 className="w-full  shadow-lg py-2 rounded-lg bg-white/5 text-xs">
-                          <FontAwesomeIcon
-                            className=" "
-                            icon={faDollarSign}
-                          />
+                          <FontAwesomeIcon className=" " icon={faDollarSign} />
                           {dia.dueño}
                         </h4>
-                        <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
-                          <div className="outline outline-yellow-100 py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
-                            <FontAwesomeIcon
-                              className="text-xs"
-                              icon={faPenToSquare}
-                            />
+                        {user.role === "admin" && (
+                          <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
+                            <div className="outline outline-yellow-100 py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
+                              <FontAwesomeIcon
+                                className="text-xs"
+                                icon={faPenToSquare}
+                              />
+                            </div>
+                            <div
+                              onClick={() => EliminarDiaCuadre(dia.id)}
+                              className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
+                            >
+                              <FontAwesomeIcon
+                                className="text-xs"
+                                icon={faTrashCan}
+                              />
+                            </div>
                           </div>
-                          <div
-                            onClick={() => EliminarDiaCuadre(dia.id)}
-                            className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
-                          >
-                            <FontAwesomeIcon
-                              className="text-xs"
-                              icon={faTrashCan}
-                            />
-                          </div>
-                        </div>
+                        )}
                       </td>
                     </tr>
                   );

@@ -1,10 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 import apiConfig from "../config/api.config.json";
 
 /* URLs */
-const UrlRegisterImageWorker = `${apiConfig.api.url}/trabajadores/registro/image`;
+
 const UrlRegisterWorker = `${apiConfig.api.url}/trabajadores/registro/worker`;
 const UrlGetWorkers = `${apiConfig.api.url}/trabajadores`;
 const UrlGetRoles = `${apiConfig.api.url}/roles`;
@@ -82,10 +81,11 @@ export const usePagTrabajador = () => {
       return false;
     } else if (inputWorkerData.id.length !== 11) {
       console.log(inputWorkerData.id.length);
-      return setErrorUploadWorker({
+      setErrorUploadWorker({
         error: true,
         message: "El campo id debe tener 11 caracteres",
       });
+      return false;
     }
 
     return true;
