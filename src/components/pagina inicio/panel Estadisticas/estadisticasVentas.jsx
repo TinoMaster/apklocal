@@ -53,14 +53,14 @@ export const EstadisticasVentas = ({
           Mejor Mes
         </h4>
         <p className="text-sm md:text-base font-serif text-green-700">
-          {/* {mejorYpeorMes(bdCuadre)[0] ? mejorYpeorMes(bdCuadre)[0] : 0} */}
+          {mejorYpeorMes(bdCuadre)[0] ? mejorYpeorMes(bdCuadre)[0] : 0}
         </p>
         <div className="w-full flex">
           <div className="w-full flex p-3 justify-center">
             <p className="text-xs font-serif">Venta:</p>
-            <p className="text-xs ml-1 text-violet-600">{/* {`$${
+            <p className="text-xs ml-1 text-violet-600">{`$${
               mejorYpeorMes(bdCuadre)[1]
-            }`} */}</p>
+            }`}</p>
           </div>
         </div>
       </div>
@@ -74,14 +74,14 @@ export const EstadisticasVentas = ({
           Peor Mes
         </h4>
         <p className="text-sm md:text-base text-red-600/80 font-serif">
-          {/* {mejorYpeorMes(bdCuadre)[2]} */}
+          {mejorYpeorMes(bdCuadre)[2]}
         </p>
         <div className="w-full flex">
           <div className="w-full flex p-3 justify-center">
             <p className="text-xs font-serif">Venta:</p>
-            <p className="text-xs ml-1 text-violet-600">{/* {`$${
+            <p className="text-xs ml-1 text-violet-600">{`$${
               mejorYpeorMes(bdCuadre)[3]
-            }`} */}</p>
+            }`}</p>
           </div>
         </div>
       </div>

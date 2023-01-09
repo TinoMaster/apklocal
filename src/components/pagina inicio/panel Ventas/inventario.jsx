@@ -10,7 +10,7 @@ const Inventario = () => {
 
   return (
     <div className="flex flex-col w-11/12 m-auto h-full">
-      <h4 className="text-md font-medium text-gray-500 mx-auto p-2">
+      <h4 className="text-md font-medium mx-auto p-2">
         Inventario
       </h4>
       {/* inventario */}

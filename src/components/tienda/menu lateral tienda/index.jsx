@@ -8,13 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export const MenuTienda = ({ openLeftMenu }) => {
+export const MenuTienda = ({ openLeftMenu, darkMode }) => {
   return (
     <div
       className={
         openLeftMenu
-          ? "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
-          : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 -translate-x-full transition-transform md:translate-x-0 z-20"
+          ? darkMode
+            ? "absolute md:relative md:w-1/5 h-full bg-darkMode overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
+            : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
+          : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 -translate-x-full md:translate-x-0 z-20"
       }
     >
       <div className="flex p-2">

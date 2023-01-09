@@ -18,7 +18,7 @@ const PanelEstadisticas = () => {
   return (
     <div className="w-full md:w-4/5 m-auto lg:w-1/4 h-full p-2 flex flex-col rounded-md">
       {!!error?.name && <p>{error.statusText}</p>}
-      <h4 className="m-1 text-md font-medium text-gray-500">
+      <h4 className="m-1 text-md font-medium">
         Estadisticas generales
       </h4>
 

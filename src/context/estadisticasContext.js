@@ -217,6 +217,40 @@ const EstadisticasProvider = ({ children }) => {
     return fondoAyer;
   };
 
+  const whatMonthIs = (fecha) => {
+    const mes = fecha?.split("-")[1];
+    const año = fecha?.split("-")[2];
+
+    switch (mes) {
+      case "1":
+        return `enero-${año}`;
+      case "2":
+        return `febrero-${año}`;
+      case "3":
+        return `marzo-${año}`;
+      case "4":
+        return `abril-${año}`;
+      case "5":
+        return `mayo-${año}`;
+      case "6":
+        return `junio-${año}`;
+      case "7":
+        return `julio-${año}`;
+      case "8":
+        return `agosto-${año}`;
+      case "9":
+        return `septiembre-${año}`;
+      case "10":
+        return `octubre-${año}`;
+      case "11":
+        return `noviembre-${año}`;
+      case "12":
+        return `diciembre-${año}`;
+
+      default:
+        return "0";
+    }
+  };
   /* const mejorYpeorMes = (bd) => {
     let allMonths = {};
     let sumaMeses = {};
@@ -339,6 +373,43 @@ const EstadisticasProvider = ({ children }) => {
     return [mejorMes, valorMejor, peorMes, valorPeor];
   }; */
   const mejorYpeorMes = (bd) => {
+    let result = [];
+    let comp = 0;
+
+    const meses = bd?.reduce((objectResult, element, index, array) => {
+      if (
+        `${element.fecha.split("-")[1]}-${element.fecha.split("-")[2]}` !==
+        mesActual()
+      ) {
+        if (Object.keys(objectResult).length === 0) {
+          objectResult[whatMonthIs(element.fecha)] = element.miron;
+        } else if (objectResult[whatMonthIs(element.fecha)]) {
+          objectResult[whatMonthIs(element.fecha)] += element.miron;
+        } else {
+          objectResult[whatMonthIs(element.fecha)] = element.miron;
+        }
+      }
+
+      return objectResult;
+    }, {});
+
+    for (const key in meses) {
+      const element = meses[key];
+      if (element > comp) {
+        comp = element;
+        result[0] = key;
+        result[1] = meses[key];
+      }
+    }
+    for (const key in meses) {
+      const element = meses[key];
+      if (element < comp) {
+        comp = element;
+        result[2] = key;
+        result[3] = meses[key];
+      }
+    }
+    return result;
     /* return [mejorMes, valorMejor, peorMes, valorPeor]; */
   };
 
