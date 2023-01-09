@@ -4,13 +4,14 @@ import React, { useContext } from "react";
 import AuthContext from "../../context/authContext";
 
 export const ButtonModeDark = () => {
-  const { darkMode, setDarkMode } = useContext(AuthContext);
+  const { darkMode, setDarkMode, DARK_MODE } = useContext(AuthContext);
   return (
     <div className="flex mx-4 absolute right-0">
       <div className="Icono"></div>
       <div
         onClick={(e) => {
           setDarkMode(!darkMode);
+          window.localStorage.setItem(DARK_MODE, !darkMode);
           e.stopPropagation();
         }}
         className="flex justify-center items-center hover:cursor-pointer"

@@ -251,127 +251,7 @@ const EstadisticasProvider = ({ children }) => {
         return "0";
     }
   };
-  /* const mejorYpeorMes = (bd) => {
-    let allMonths = {};
-    let sumaMeses = {};
-    let mes = 0;
-    let año = 0;
-    let valorMejor = 0;
-    let valorPeor = 500000;
-    let mejorMes = "";
-    let peorMes = "";
 
-    if (!bd.length) {
-      return 0;
-    } else {
-      bd.forEach((dia) => {
-        let fecha = dia.id;
-        let fechaSub = fecha.toString();
-        let fechaString = fechaSub.substring(0, 5);
-        allMonths = { ...allMonths, [fechaString]: {} };
-      });
-    }
-    console.log(bd);
-
-    if (!bd.length) {
-      return 0;
-    } else {
-      bd.forEach((dia) => {
-        let fecha = dia.id;
-        let fechaSub = fecha.toString();
-        let fechaString = fechaSub.substring(0, 5);
-
-        if (allMonths[fechaString]) {
-          allMonths[fechaString] = {
-            ...allMonths[fechaString],
-            [fechaSub.substring(5, 7)]: dia,
-          };
-        }
-      });
-    }
-
-    if (!bd.length) {
-      return 0;
-    } else {
-      bd.forEach((dia) => {
-        let fecha = dia.id;
-        let fechaSub = fecha.toString();
-        let fechaString = fechaSub.substring(0, 5);
-
-        if (allMonths[fechaString]) {
-          if (fechaSub.length === 7) {
-            mes = fechaSub.substring(4, 5);
-            año = fechaSub.substring(0, 4);
-          } else {
-            mes = fechaSub.substring(4, 6);
-            año = fechaSub.substring(0, 4);
-          }
-          switch (mes) {
-            case "0":
-              mes = `enero-${año}`;
-              break;
-            case "1":
-              mes = `febrero-${año}`;
-              break;
-            case "2":
-              mes = `marzo-${año}`;
-              break;
-            case "3":
-              mes = `abril-${año}`;
-              break;
-            case "4":
-              mes = `mayo-${año}`;
-              break;
-            case "5":
-              mes = `junio-${año}`;
-              break;
-            case "6":
-              mes = `julio-${año}`;
-              break;
-            case "7":
-              mes = `agosto-${año}`;
-              break;
-            case "8":
-              mes = `septiembre-${año}`;
-              break;
-            case "9":
-              mes = `octubre-${año}`;
-              break;
-            case "10":
-              mes = `noviembre-${año}`;
-              break;
-            case "11":
-              mes = `diciembre-${año}`;
-              break;
-
-            default:
-              mes = "enero";
-              break;
-          }
-
-          if (sumaMeses[mes] >= 0) {
-            sumaMeses[mes] += dia.miron;
-          } else {
-            sumaMeses[mes] = 0;
-            sumaMeses[mes] += dia.miron;
-          }
-        }
-      });
-    }
-
-    for (const mes in sumaMeses) {
-      if (sumaMeses[mes] >= 0 && sumaMeses[mes] >= valorMejor) {
-        mejorMes = mes;
-        valorMejor = sumaMeses[mes];
-      }
-      if (sumaMeses[mes] >= 0 && sumaMeses[mes] <= valorPeor) {
-        peorMes = mes;
-        valorPeor = sumaMeses[mes];
-      }
-    }
-
-    return [mejorMes, valorMejor, peorMes, valorPeor];
-  }; */
   const mejorYpeorMes = (bd) => {
     let result = [];
     let comp = 0;
@@ -410,7 +290,6 @@ const EstadisticasProvider = ({ children }) => {
       }
     }
     return result;
-    /* return [mejorMes, valorMejor, peorMes, valorPeor]; */
   };
 
   const existsYears = (bd) => {

@@ -12,6 +12,7 @@ const IS_AUTH = "APP_KEY_SV";
 const USER_IMAGE = "IM_USER";
 const USER_NAME = "NAME_USER";
 const USER_ROLE = "ROLE_USER";
+const DARK_MODE = "DARK_MODE";
 
 const USER = {
   name: window.localStorage.getItem(USER_NAME),
@@ -29,7 +30,11 @@ const AuthProvider = ({ children }) => {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState({});
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    window.localStorage.getItem(DARK_MODE) === "true"
+      ? true
+      : false
+  );
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -140,6 +145,7 @@ const AuthProvider = ({ children }) => {
     logout,
     darkMode,
     setDarkMode,
+    DARK_MODE,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
