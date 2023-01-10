@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import CuadreContext from "../context/cuadreContext";
 
 export const useDesglose = (
   objectInputs,
@@ -8,6 +9,11 @@ export const useDesglose = (
 ) => {
   /* Variables de estado */
   const [inputs, setInputs] = useState(objectInputs);
+  const { cards } = useContext(CuadreContext);
+
+  let thereAreCards = cards?.reduce((acumulador, element) => {
+    return (acumulador += parseInt(element.value));
+  }, 0);
 
   /* Funciones */
   const validarCaracter = (values) => {
@@ -23,7 +29,7 @@ export const useDesglose = (
     }
     return error;
   };
-  
+
   const validarInputs = (inputs) => {
     if (validarCaracter(inputs).name === undefined) {
       return true;
@@ -49,7 +55,9 @@ export const useDesglose = (
     inputs.forEach((input) => {
       res += input[1] * input[2];
     });
-    validarInputs(inputs) === true ? setResult(res) : setResult(0);
+    validarInputs(inputs) === true
+      ? setResult(thereAreCards === 0 ? res : res + thereAreCards)
+      : setResult(0);
     setErrors(validarCaracter(inputs));
     setBilletes(inputs);
   };

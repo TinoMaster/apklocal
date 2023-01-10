@@ -12,6 +12,7 @@ export const Layout = () => {
   const { darkMode } = useContext(AuthContext);
   const [menuActive, setMenuActive] = useState(false);
   const [notasActive, setNotasActive] = useState(false);
+  const [addTarget, setAddTarget] = useState(false);
   return (
     <InventarioProvider>
       <CuadreProvider>
@@ -26,6 +27,8 @@ export const Layout = () => {
             <MenuLateral
               menuActive={menuActive}
               setMenuActive={setMenuActive}
+              addTarget={addTarget}
+              setAddTarget={setAddTarget}
             />
             <section className="container m-auto flex flex-col h-screen w-full ">
               <Menu

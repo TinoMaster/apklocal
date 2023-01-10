@@ -1,3 +1,5 @@
+import { faDollar, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
 import CuadreContext from "../../context/cuadreContext";
@@ -11,7 +13,7 @@ import ModalResult from "./modalResult";
 
 const PagCuadre = () => {
   const [errorsForm, setErrorsForm] = useState({});
-  const { ModalCuadre } = useContext(CuadreContext);
+  const { ModalCuadre, cards, deleteCard } = useContext(CuadreContext);
   const {
     handleSubmitForm,
     handleChangeForm,
@@ -57,6 +59,26 @@ const PagCuadre = () => {
       )}
 
       <div className="flex flex-col h-full w-full lg:justify-center items-center  lg:h-3/4 lg:flex-row">
+        {/* Area Tarjetas */}
+        <div className="flex flex-col relative items-center lg:absolute z-10">
+          <h3 className="font-serif mb-2">Tarjetas:</h3>
+          {cards?.map((card) => (
+            <div
+              key={card.id}
+              className="flex justify-between w-full m-auto items-center relative bg-primary/30 px-2 py-1 rounded-md mb-2"
+            >
+              <p className="pr-2">{card.id}</p>
+              <p>
+                <FontAwesomeIcon icon={faDollar} /> {card.value}
+              </p>
+              <FontAwesomeIcon
+                onClick={() => deleteCard(card.id)}
+                className="absolute p-2 -right-8 rounded-full shadow-md shadow-black/20 bg-white/5 hover:bg-white/10 hover:cursor-pointer"
+                icon={faTrash}
+              />
+            </div>
+          ))}
+        </div>
         <CajaConteo errorsForm={errorsForm} setErrorsForm={setErrorsForm} />
         <CajaCuadre
           errorsForm={errorsForm}

@@ -127,11 +127,16 @@ const CuadreProvider = ({ children }) => {
 
   const [workers, setWorkers] = useState([]);
 
+  const [card, setCard] = useState({});
+  const [cards, setCards] = useState([]);
+
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const [loading, setLoading] = useState(false);
 
   const urlGet = `${apiConfig.api.url}/cuadre/getMonth/${mesDelAño}`,
     urlSave = `${apiConfig.api.url}/cuadre`;
+
+  const urlGetOrPostCards = `${apiConfig.api.url}/cards`;
 
   useEffect(() => {
     httpHelper()
@@ -141,6 +146,16 @@ const CuadreProvider = ({ children }) => {
           setWorkers(docs.data);
         } else {
           console.log(docs);
+        }
+      });
+    httpHelper()
+      .get(`${apiConfig.api.url}/cards`)
+      .then((res) => {
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          setError({});
+          setCards(res.data);
         }
       });
   }, []);
@@ -281,11 +296,70 @@ const CuadreProvider = ({ children }) => {
     }
   };
 
+  const handleTarget = (e) => {
+    const { name, value } = e.target;
+    setCard({ ...card, [name]: value });
+  };
+
+  const validarTarget = () => {
+    if (!card.id || card.id.length !== 13) {
+      return false;
+    }
+    if (!card.value) {
+      return false;
+    }
+    return true;
+  };
+
+  const addTargetToArray = (close) => {
+    if (!validarTarget()) {
+      setError({ error: true, message: "Introduce datos validos" });
+    } else {
+      const options = {
+        body: card,
+        headers: { "content-type": "application/json" },
+      };
+      httpHelper()
+        .post(urlGetOrPostCards, options)
+        .then((res) => {
+          if (res.error) {
+            setError(res);
+          } else if (res.success) {
+            setSuccess(res);
+            setError({});
+            setCards([...cards, card]);
+            setCard({});
+            close(false);
+            setTimeout(() => {
+              setSuccess({});
+            }, 2000);
+          }
+        });
+    }
+  };
+
   const EliminarDiaCuadre = (id) => {
     const urlDeleteDay = `${apiConfig.api.url}/cuadre/delete/${id}`;
     httpHelper()
       .del(urlDeleteDay)
       .then((res) => console.log(res));
+  };
+
+  const deleteCard = (id) => {
+    httpHelper()
+      .del(`${apiConfig.api.url}/cards/${id}`)
+      .then((res) => {
+        if (res.error) {
+          setError(res);
+        } else {
+          setSuccess(res);
+          setError({});
+          setCards(cards.filter((card) => card.id !== id));
+          setTimeout(() => {
+            setSuccess({});
+          }, 2000);
+        }
+      });
   };
 
   useEffect(() => {
@@ -328,6 +402,10 @@ const CuadreProvider = ({ children }) => {
     mesDelAño,
     handlerChangeSelectYear,
     mesSelectEtiqueta,
+    handleTarget,
+    addTargetToArray,
+    cards,
+    deleteCard,
   };
 
   return (
