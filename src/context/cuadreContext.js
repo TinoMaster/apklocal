@@ -54,6 +54,37 @@ const mesActual = () => {
   }
   return mes;
 };
+const mesSelectEtiqueta = (value, año) => {
+  let num = `${value}`;
+  switch (num) {
+    case "1":
+      return `Enero-${año}`;
+    case "2":
+      return `Febrero-${año}`;
+    case "3":
+      return `Marzo-${año}`;
+    case "4":
+      return `Abril-${año}`;
+    case "5":
+      return `Mayo-${año}`;
+    case "6":
+      return `Junio-${año}`;
+    case "7":
+      return `Julio-${año}`;
+    case "8":
+      return `Agosto-${año}`;
+    case "9":
+      return `Septiembre-${año}`;
+    case "10":
+      return `Octubre-${año}`;
+    case "11":
+      return `Noviembre-${año}`;
+    case "12":
+      return `Diciembre-${año}`;
+    default:
+      return `Enero-${año}`;
+  }
+};
 
 const addZero = (num) => {
   let result = 0;
@@ -116,6 +147,7 @@ const CuadreProvider = ({ children }) => {
 
   const handlerChangeSelectYear = (e) => {
     setYearChoice(e.target.value);
+    setMesDelAño(`1-${e.target.value}`);
   };
 
   const hojasGastadas = () => {
@@ -293,7 +325,9 @@ const CuadreProvider = ({ children }) => {
     loading,
     workers,
     yearChoice,
+    mesDelAño,
     handlerChangeSelectYear,
+    mesSelectEtiqueta,
   };
 
   return (

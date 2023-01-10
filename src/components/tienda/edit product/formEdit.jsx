@@ -1,8 +1,6 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { httpHelper } from "../../../helpers/httpHelper";
+import { useLocation, useNavigate } from "react-router-dom";
 import { PrimaryLoader } from "../../loaders/primaryLoader";
-import apiConfig from "../../../config/api.config.json";
 
 export const FormEdit = ({
   isNewCategory,
@@ -18,7 +16,7 @@ export const FormEdit = ({
 }) => {
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  /*  const { id } = useParams(); */
   const location = useLocation();
 
   let product;

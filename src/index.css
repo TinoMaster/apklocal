@@ -30,14 +30,11 @@ focus:border-slate-300 mt-1;
   @apply border-2 w-1/2 text-center p-1 text-sm rounded-md border-none bg-transparent  shadow-inner shadow-black/20  focus:outline-none;
 }
 
-input:checked + label {
-  @apply bg-violet-500 shadow-lg shadow-violet-400/50 font-bold text-white;
-}
-
 /* Pag ventas: */
 .input-hide {
   @apply hidden;
 }
+
 .label-meses {
   @apply m-1 p-1 hover:cursor-pointer rounded-lg text-xs font-serif text-slate-500;
 }
