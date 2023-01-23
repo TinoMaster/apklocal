@@ -16,8 +16,6 @@ const ModalResult = () => {
     resultForm,
     setModalCuadre,
     error,
-    finalizar,
-    setFinalizar,
     validarData,
     hojasGastadas,
     success,
@@ -34,6 +32,11 @@ const ModalResult = () => {
     <ModalPortal>
       <div className="flex z-50 flex-col justify-center rounded-lg w-full h-full fixed md:absolute bg-black/50">
         <div className="flex flex-col justify-center w-11/12 h-10/12 md:w-1/3 relative m-auto md:h-3/5 bg-white rounded-lg shadow-2xl shadow-white/30 items-center">
+          {error.error && (
+            <div className="bg-red-500/70 font-serif -top-10 absolute p-2 rounded-md text-white">
+              {error.message}
+            </div>
+          )}
           {/* Loading y success */}
           <div className="absolute bg-violet-500/30 rounded-md">
             {loading && <PrimaryLoader />}
@@ -226,9 +229,9 @@ const ModalResult = () => {
           </div>
         </div>
 
-        {!finalizar && (
+        {/*  {!finalizar && (
           <div className="caja_modal_2">
-            {Object.keys(error).length !== 0 && <h3>{error.statusText}</h3>}
+            {error.error && <h3>{error.message}</h3>}
             <input
               type="button"
               onClick={() => setFinalizar(true)}
@@ -236,7 +239,7 @@ const ModalResult = () => {
               value="Aceptar"
             />
           </div>
-        )}
+        )} */}
       </div>
     </ModalPortal>
   );

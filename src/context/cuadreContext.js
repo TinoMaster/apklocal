@@ -117,11 +117,11 @@ const CuadreProvider = ({ children }) => {
   const [dbMensual, setDbMensual] = useState([]);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState({});
-  const [finalizar, setFinalizar] = useState(true);
   const [result, setResult] = useState(0);
   const [billetes, setBilletes] = useState([]);
   const [ModalCuadre, setModalCuadre] = useState(false);
   const [resultForm, setResultForm] = useState({});
+  const [dataToSend, setDataToSend] = useState({});
   const [mesDelAño, setMesDelAño] = useState(mesActual);
   const [yearChoice, setYearChoice] = useState(añoActual);
 
@@ -139,6 +139,17 @@ const CuadreProvider = ({ children }) => {
   const urlGetOrPostCards = `${apiConfig.api.url}/cards`;
 
   useEffect(() => {
+    httpHelper()
+      .get(urlGet)
+      .then((el) => {
+        if (!el.length) {
+          setDbMensual([]);
+          setError(el);
+        } else {
+          setDbMensual(el);
+          setError({});
+        }
+      });
     httpHelper()
       .get(`${apiConfig.api.url}/trabajadores`)
       .then((docs) => {
@@ -196,9 +207,38 @@ const CuadreProvider = ({ children }) => {
     api.put(urlEdit, options);
   };
 
-  const createData = async () => {
+  const existCuadre = async () => {
+    let existCuadre = false;
+    let data = {};
+
+    if (resultForm.fecha) {
+      let mes = resultForm.fecha.substring(5, 7);
+      let dia = resultForm.fecha.substring(8, 10);
+      const nuevoDia = restZeroDay(dia);
+      const nuevoMes = parseInt(constMes(mes));
+      let año = resultForm.fecha.substring(0, 4);
+
+      data.id = parseInt(`${año}${nuevoMes}${dia}`);
+      data.fecha = `${nuevoDia}-${parseInt(nuevoMes) + 1}-${año}`;
+    } else {
+      data.id = parseInt(
+        `${fecha.getFullYear()}${fecha.getMonth()}${addZero(fecha.getDate())}`
+      );
+      data.fecha = `${fecha.getDate()}-${
+        fecha.getMonth() + 1
+      }-${fecha.getFullYear()}`;
+    }
+
+    await dbMensual.forEach((el) => {
+      if (el.id === data.id) {
+        existCuadre = true;
+      }
+    });
+    return existCuadre;
+  };
+
+  const createDataToSend = async () => {
     const data = {};
-    let testIny = {};
 
     if (resultForm.fecha) {
       let mes = resultForm.fecha.substring(5, 7);
@@ -226,10 +266,12 @@ const CuadreProvider = ({ children }) => {
     data.turno = resultForm.turno;
     data.dueño = resultForm.dueño;
 
-    testIny = resultForm.testInyectores;
+    return data;
+  };
 
-    let api = httpHelper();
-
+  const sendData = async () => {
+    let data = await createDataToSend();
+    let testIny = resultForm.testInyectores;
     let options = {
       body: data,
       headers: { "content-type": "application/json" },
@@ -240,42 +282,29 @@ const CuadreProvider = ({ children }) => {
       headers: { "content-type": "application/json" },
     };
 
-    if (dbMensual.length > 0) {
-      for (const i of dbMensual) {
-        if (i.id === data.id) {
-          setError({
-            error: "true",
-            status: "500",
-            statusText: "Ya existe el cuadre de hoy",
-          });
-          setFinalizar(false);
-          break;
-        } else {
-          setError({});
-          setFinalizar(true);
-        }
-      }
-    }
-
-    if (finalizar === true) {
-      await api.post(urlSave, options);
-      await api.post(`${apiConfig.api.url}/testInyectores`, optionsTest);
-    }
-
-    api
-      .get(urlGet)
-      .then((el) => setDbMensual(el))
-      .catch((err) => console.log(err));
+    await httpHelper().post(urlSave, options);
+    await httpHelper().post(`${apiConfig.api.url}/testInyectores`, optionsTest);
   };
 
   const validarData = async () => {
-    setLoading(true);
-    if (resultForm.diferencia === 0) {
-      setFinalizar(true);
-      await createData();
-      await restarHojasPagInicio();
-      if (finalizar === true) {
+    if (resultForm.diferencia !== 0) {
+      setError({
+        error: true,
+        message: "El dia no esta cuadrado",
+      });
+    } else {
+      setLoading(true);
+      setError({});
+      const exist = await existCuadre();
+      if (exist) {
         setLoading(false);
+        setError({ error: true, message: "El cuadre de hoy ya existe" });
+      } else {
+        setError({});
+        await sendData();
+        await restarHojasPagInicio();
+        setLoading(false);
+        httpHelper().del(urlGetOrPostCards);
         setSuccess({
           success: true,
           message: "Registro satisfactorio",
@@ -286,13 +315,6 @@ const CuadreProvider = ({ children }) => {
         }, 2000);
         window.location.reload();
       }
-    } else {
-      setFinalizar(false);
-      setError({
-        error: "true",
-        status: "500",
-        statusText: "El dia no esta cuadrado",
-      });
     }
   };
 
@@ -362,27 +384,11 @@ const CuadreProvider = ({ children }) => {
       });
   };
 
-  useEffect(() => {
-    httpHelper()
-      .get(urlGet)
-      .then((el) => {
-        if (!el.length) {
-          setDbMensual([]);
-          setError(el);
-        } else {
-          setDbMensual(el);
-          setError({});
-        }
-      });
-  }, [urlGet]);
-
   const data = {
     dbMensual,
     setDbMensual,
     error,
     setError,
-    setFinalizar,
-    finalizar,
     resultForm,
     setResultForm,
     result,

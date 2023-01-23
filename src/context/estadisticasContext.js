@@ -295,15 +295,18 @@ const EstadisticasProvider = ({ children }) => {
   const existsYears = (bd) => {
     let result = [];
 
-    result = bd?.reduce((array, element) => {
-      const año = element.fecha.split("-")[2];
+    if (bd.length > 0) {
+      result = bd?.reduce((array, element) => {
+        const año = element?.fecha?.split("-")[2];
 
-      if (!array?.includes(año)) {
-        array?.push(año);
-      }
-      return result;
-    }, result);
-    return result.sort((a, b) => b - a);
+        if (!array?.includes(año)) {
+          array?.push(año);
+        }
+        return result;
+      }, result);
+    }
+
+    return result?.sort((a, b) => b - a);
   };
   const years = existsYears(bdCuadre);
 
