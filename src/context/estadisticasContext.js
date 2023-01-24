@@ -142,7 +142,7 @@ const EstadisticasProvider = ({ children }) => {
   const ventaPorTurno = (bd) => {
     let result = {};
 
-    if (bd.length) {
+    if (bd?.length) {
       result = bd.reduce((object, element) => {
         const turno =
           element.turno.trabajador1 +
@@ -152,8 +152,10 @@ const EstadisticasProvider = ({ children }) => {
 
         if (!object[turno]) {
           object[turno] = element.miron;
+          object[`#${turno}`] = 1;
         } else {
           object[turno] += element.miron;
+          object[`#${turno}`] += 1;
         }
         return result;
       }, result);
@@ -324,6 +326,7 @@ const EstadisticasProvider = ({ children }) => {
     mejorYpeorMes,
     bdPorAño,
     years,
+    ventaPorTurno,
   };
   return (
     <EstadisticasContext.Provider value={data}>

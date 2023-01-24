@@ -121,7 +121,6 @@ const CuadreProvider = ({ children }) => {
   const [billetes, setBilletes] = useState([]);
   const [ModalCuadre, setModalCuadre] = useState(false);
   const [resultForm, setResultForm] = useState({});
-  const [dataToSend, setDataToSend] = useState({});
   const [mesDelAño, setMesDelAño] = useState(mesActual);
   const [yearChoice, setYearChoice] = useState(añoActual);
 

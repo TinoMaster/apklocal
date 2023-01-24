@@ -13,14 +13,15 @@ const PanelEstadisticas = () => {
     mejorYpeorMes,
     mejorTurno,
     error,
+    ventaPorTurno,
+    esteMes,
+    bdPorAño,
   } = useContext(EstadisticasContext);
 
   return (
     <div className="w-full md:w-4/5 m-auto lg:w-1/4 h-full p-2 flex flex-col rounded-md">
       {!!error?.name && <p>{error.statusText}</p>}
-      <h4 className="m-1 text-md font-medium">
-        Estadisticas generales
-      </h4>
+      <h4 className="m-1 text-md font-medium">Estadisticas generales</h4>
 
       <div className="p-1">
         {/*Balance Total  */}
@@ -56,6 +57,9 @@ const PanelEstadisticas = () => {
           bdCuadre={bdCuadre}
           mejorYpeorMes={mejorYpeorMes}
           mejorTurno={mejorTurno}
+          ventaPorTurno={ventaPorTurno}
+          bdPorAño={bdPorAño}
+          esteMes={esteMes}
         />
       </div>
     </div>
