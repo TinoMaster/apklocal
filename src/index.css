@@ -16,7 +16,7 @@
 }
 
 .labelBilletes {
-  @apply  text-xs font-bold  rounded-md px-1 mt-4 md:mt-0;
+  @apply text-xs font-bold  rounded-md px-1 mt-4 md:mt-0;
 }
 
 .billetes {
@@ -24,7 +24,7 @@
 focus:border-slate-300 mt-1;
 }
 .labelCajaCuadre {
-  @apply  p-1 mb-1 text-xs font-serif font-bold rounded-lg;
+  @apply p-1 mb-1 text-xs font-serif font-bold rounded-lg;
 }
 .imputsCajaCuadre {
   @apply border-2 w-1/2 text-center p-1 text-sm rounded-md border-none bg-transparent  shadow-inner shadow-black/20  focus:outline-none;
@@ -40,6 +40,14 @@ focus:border-slate-300 mt-1;
 }
 
 /* Modal pagina trabajadores */
-.input-worker{
-  @apply shadow-inner p-1 shadow-black/20 text-center text-xs lg:text-xl focus:outline-none overflow-auto w-full bg-white/5 font-sans rounded-md
+.input-worker {
+  @apply shadow-inner p-1 shadow-black/20 text-center text-xs lg:text-xl focus:outline-none overflow-auto w-full bg-white/5 font-sans rounded-md;
+}
+
+.imputCheckedNotas {
+  @apply hidden;
+}
+
+.imputCheckedNotas:checked +label{
+  @apply shadow-md shadow-violet-400/50 text-violet-500;
 }

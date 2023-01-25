@@ -27,6 +27,7 @@ export const CajaNotas = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [panelBotones, setPanelBotones] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
+  const [optionNotas, setOptionNotas] = useState("unchecked");
   const urlNotas = `${apiConfig.api.url}/notas`;
 
   const { nota, handleChangeNota, handlerSubmit } = useNota(
@@ -182,27 +183,59 @@ export const CajaNotas = () => {
         </ModalPortal>
       )}
 
-      <div className="w-full h-full overflow-auto p-2">
+      <div className="w-full h-full p-2">
         <div className="flex flex-wrap relative justify-end w-full">
           <h2 className="w-full text-center text-slate-600 font-semibold text-base font-serif">
             Notas
           </h2>
 
-          <div className="flex w-2/4 p-2 mt-1 justify-between bg-transparent shadow-black/20 shadow-sm rounded-md">
+          {/* Opciones de tipos de notas */}
+          <div className="w-1/2 flex justify-center mt-5 bg-white/5 rounded-md">
+            <input
+              type="radio"
+              id="unchecked"
+              name="option"
+              className="imputCheckedNotas"
+              defaultChecked
+              onChange={(e) => setOptionNotas(e.target.id)}
+            />
+            <label
+              htmlFor="unchecked"
+              className="p-3 rounded-l-lg hover:cursor-pointer shadow-lg text-xs font-serif"
+            >
+              Pendientes
+            </label>
+            <input
+              type="radio"
+              id="checked"
+              name="option"
+              className="imputCheckedNotas"
+              onChange={(e) => setOptionNotas(e.target.id)}
+            />
+            <label
+              htmlFor="checked"
+              className="p-3 rounded-r-lg hover:cursor-pointer shadow-lg text-xs font-serif"
+            >
+              Completadas
+            </label>
+          </div>
+
+          {/* Botones , agregar,editar y borrar */}
+          <div className="flex w-1/2  mt-1 justify-around items-start rounded-md">
             <FontAwesomeIcon
               icon={faCirclePlus}
-              className="p-2 bg-green-400/80 rounded-full text-white shadow-lg shadow-green-300/20 hover:cursor-pointer hover:bg-green-500"
+              className="p-2 bg-green-400/70 rounded-full text-white hover:cursor-pointer shadow-md hover:bg-green-500"
               title="Agregar"
               onClick={crearNota}
             />
             <FontAwesomeIcon
-              className="p-2 bg-yellow-400/80 rounded-full text-white shadow-lg shadow-yellow-300/20 hover:cursor-pointer hover:bg-yellow-500"
+              className="p-2 bg-yellow-400/70 rounded-full text-white hover:cursor-pointer shadow-md hover:bg-yellow-500"
               title="Editar"
               icon={faPenToSquare}
               onClick={abrirPanel}
             />
             <FontAwesomeIcon
-              className="p-2 bg-red-400/80 rounded-full text-white shadow-lg shadow-red-300/20 hover:cursor-pointer hover:bg-red-500"
+              className="p-2 bg-red-400/70 rounded-full text-white hover:cursor-pointer shadow-md hover:bg-red-500"
               title="Eliminar"
               icon={faTrashCan}
               onClick={abrirPanel}
@@ -220,7 +253,68 @@ export const CajaNotas = () => {
           )}
         </div>
 
-        <div className="cuadranteNotas">
+        {notas.length === 0 ? (
+          <p className="w-2/3 m-auto mt-5 p-2 bg-violet-300 text-center rounded-md font-serif shadow-md text-xs">Agregue su primera nota</p>
+        ) : optionNotas === "unchecked" ? (
+          <div className="h-full overflow-auto pb-20">
+            {notas.filter((el) => el.checked === 1).length === 0 ? (
+              <p className="w-2/3 m-auto mt-5 p-2 bg-violet-300 text-center rounded-md font-serif shadow-md text-xs">
+                No hay Notas sin completar
+              </p>
+            ) : (
+              notas
+                ?.filter((el) => el.checked === 1)
+                .map((nota) => (
+                  <Notas
+                    key={nota.id}
+                    nombre={nota.nombre}
+                    fecha={nota.fecha}
+                    creador={nota.creador}
+                    telefono={nota.telefono}
+                    id={nota.id}
+                    setNotas={setNotas}
+                    setPanelBotones={setPanelBotones}
+                    panelBotones={panelBotones}
+                    setModalIsOpen={setModalIsOpen}
+                    setDataToEdit={setDataToEdit}
+                    nota={nota}
+                  >
+                    {`- ${nota.description}`}
+                  </Notas>
+                ))
+            )}
+          </div>
+        ) : (
+          <div className="h-full overflow-auto pb-20">
+            {notas.filter((el) => el.checked === 0).length === 0 ? (
+              <p className="w-2/3 m-auto mt-5 py-2 bg-violet-400 text-white text-center rounded-md font-serif shadow-md text-xs">
+                No hay Notas completadas
+              </p>
+            ) : (
+              notas
+                ?.filter((el) => el.checked === 0)
+                .map((nota) => (
+                  <Notas
+                    key={nota.id}
+                    nombre={nota.nombre}
+                    fecha={nota.fecha}
+                    creador={nota.creador}
+                    telefono={nota.telefono}
+                    id={nota.id}
+                    setNotas={setNotas}
+                    setPanelBotones={setPanelBotones}
+                    panelBotones={panelBotones}
+                    setModalIsOpen={setModalIsOpen}
+                    setDataToEdit={setDataToEdit}
+                    nota={nota}
+                  >
+                    {`- ${nota.description}`}
+                  </Notas>
+                ))
+            )}
+          </div>
+        )}
+        {/* <div className="h-full overflow-auto pb-20">
           {notas.length === 0 ? (
             <p>No hay Notas</p>
           ) : (
@@ -243,7 +337,7 @@ export const CajaNotas = () => {
               </Notas>
             ))
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

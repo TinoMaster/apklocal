@@ -147,35 +147,41 @@ export const EstadisticasVentas = ({
             )}
           </select>
         </div>
-        {option === "mes" &&
-          Object.entries(ventaPorTurno(esteMes))?.map((el) => (
-            <div key={el[1][0]} className="w-1/2 flex">
-              <div className="w-full flex p-3 justify-start">
-                <p className="text-xs font-serif ">
-                  {el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:
-                </p>
-                <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+        <div className="w-full max-h-48 overflow-auto flex flex-wrap mt-2">
+          {option === "mes" &&
+            Object.entries(ventaPorTurno(esteMes))?.map((el) => (
+              <div key={el[1][0]} className="w-1/2 flex">
+                <div className="w-full flex py-2 justify-center">
+                  <p className="text-xs font-serif ">
+                    {el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:
+                  </p>
+                  <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        {option === "año" &&
-          Object.entries(ventaPorTurno(bdPorAño))?.map((el) => (
-            <div key={el[1][0]} className="w-1/2 flex">
-              <div className="w-full flex p-3 justify-start">
-                <p className="text-xs font-serif">{el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:</p>
-                <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+            ))}
+          {option === "año" &&
+            Object.entries(ventaPorTurno(bdPorAño))?.map((el) => (
+              <div key={el[1][0]} className="w-1/2 flex">
+                <div className="w-full flex py-2 justify-center">
+                  <p className="text-xs font-serif">
+                    {el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:
+                  </p>
+                  <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        {option === "general" &&
-          Object.entries(ventaPorTurno(bdCuadre))?.map((el) => (
-            <div key={el[1][0]} className="w-1/2 flex">
-              <div className="w-full flex p-3 justify-start">
-                <p className="text-xs font-serif">{el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:</p>
-                <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+            ))}
+          {option === "general" &&
+            Object.entries(ventaPorTurno(bdCuadre))?.map((el) => (
+              <div key={el[1][0]} className="w-1/2 flex">
+                <div className="w-full flex py-2 justify-center">
+                  <p className="text-xs font-serif">
+                    {el[1][0].slice(0, 1) === "#" ? "cant turnos" : el[1][0]}:
+                  </p>
+                  <p className="text-xs ml-1 text-violet-600">{el[1][1]}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
     </>
   );
