@@ -21,6 +21,8 @@ export const Notas = ({
   setModalIsOpen,
   setDataToEdit,
   nota,
+  updateChecked,
+  optionNotas,
 }) => {
   const urlNota = `${apiConfig.api.url}/notas/${id}`;
 
@@ -36,7 +38,11 @@ export const Notas = ({
   };
 
   return (
-    <div className="w-10/12 mx-auto my-4 flex shadow-lg rounded-lg p-2 relative bg-white/5">
+    <div
+      className={`w-10/12 mx-auto my-4 flex shadow-lg rounded-lg p-2 relative bg-white/5 ${
+        optionNotas === "checked" && "bg-red-400/20"
+      }`}
+    >
       {panelBotones && (
         <div className="flex absolute w-1/4 justify-around z-20">
           <FontAwesomeIcon
@@ -57,7 +63,19 @@ export const Notas = ({
         </div>
       )}
 
-      <button className="absolute hover:bg-green-400 px-1 rounded-full right-2 z-20 transition-colors text-green-300 hover:text-white"><FontAwesomeIcon className="shadow-md rounded-full" icon={faCheckCircle}/></button>
+      <button
+        onClick={() => updateChecked(id, optionNotas === "checked" ? 1 : 0)}
+        className={`absolute ${optionNotas === "unchecked"?"hover:bg-green-400":"hover:bg-yellow-400"} px-1 rounded-full right-2 z-20 transition-colors text-green-300 hover:text-white`}
+      >
+        {optionNotas === "unchecked" ? (
+          <FontAwesomeIcon
+            className="shadow-md rounded-full"
+            icon={faCheckCircle}
+          />
+        ) : (
+          <p className="text-slate-500">Restaurar</p>
+        )}
+      </button>
 
       <div className="flex flex-col relative items-center w-full">
         <h3 className="w-full text-center font-serif">{nombre}</h3>

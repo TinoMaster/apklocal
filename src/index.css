@@ -49,5 +49,5 @@ focus:border-slate-300 mt-1;
 }
 
 .imputCheckedNotas:checked +label{
-  @apply shadow-md shadow-violet-400/50 text-violet-500;
+  @apply shadow-md shadow-green-400/30 text-green-500;
 }

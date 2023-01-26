@@ -23,7 +23,5 @@ export const useNota = (modeloNota, dataToEdit) => {
     }
   };
 
-
-
   return { nota, handleChangeNota, handlerSubmit };
 };

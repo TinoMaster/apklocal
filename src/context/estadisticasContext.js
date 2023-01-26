@@ -257,23 +257,26 @@ const EstadisticasProvider = ({ children }) => {
   const mejorYpeorMes = (bd) => {
     let result = [];
     let comp = 0;
+    let meses;
 
-    const meses = bd?.reduce((objectResult, element, index, array) => {
-      if (
-        `${element.fecha.split("-")[1]}-${element.fecha.split("-")[2]}` !==
-        mesActual()
-      ) {
-        if (Object.keys(objectResult).length === 0) {
-          objectResult[whatMonthIs(element.fecha)] = element.miron;
-        } else if (objectResult[whatMonthIs(element.fecha)]) {
-          objectResult[whatMonthIs(element.fecha)] += element.miron;
-        } else {
-          objectResult[whatMonthIs(element.fecha)] = element.miron;
+    if (bd.length) {
+      meses = bd?.reduce((objectResult, element, index, array) => {
+        if (
+          `${element.fecha.split("-")[1]}-${element.fecha.split("-")[2]}` !==
+          mesActual()
+        ) {
+          if (Object.keys(objectResult).length === 0) {
+            objectResult[whatMonthIs(element.fecha)] = element.miron;
+          } else if (objectResult[whatMonthIs(element.fecha)]) {
+            objectResult[whatMonthIs(element.fecha)] += element.miron;
+          } else {
+            objectResult[whatMonthIs(element.fecha)] = element.miron;
+          }
         }
-      }
 
-      return objectResult;
-    }, {});
+        return objectResult;
+      }, {});
+    }
 
     for (const key in meses) {
       const element = meses[key];
