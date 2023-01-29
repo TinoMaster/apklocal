@@ -5,11 +5,12 @@ import { CuadreProvider } from "../../context/cuadreContext";
 import { EstadisticasProvider } from "../../context/estadisticasContext";
 import { InventarioProvider } from "../../context/inventarioContext";
 import Contenedor from "../contenedor paginas/contenedor";
+import { WaitingPage } from "../loaders/WaitingPage";
 import MenuLateral from "../menu lateral/menuLateral";
 import Menu from "../menu/menuPrincipal";
 
 export const Layout = () => {
-  const { darkMode } = useContext(AuthContext);
+  const { darkMode, isConnected } = useContext(AuthContext);
   const [menuActive, setMenuActive] = useState(false);
   const [notasActive, setNotasActive] = useState(false);
   const [addTarget, setAddTarget] = useState(false);
@@ -20,10 +21,11 @@ export const Layout = () => {
           <main
             className={
               darkMode
-                ? "flex w-screen h-auto md:h-screen overflow-hidden bg-darkMode transition-all delay-75 text-slate-200"
-                : "flex w-screen h-auto md:h-screen overflow-hidden bg-lightMode transition-all delay-75 text-slate-700"
+                ? "flex w-screen h-auto md:h-screen overflow-hidden bg-darkMode transition-all delay-75 text-slate-200 relative"
+                : "flex w-screen h-auto md:h-screen overflow-hidden bg-lightMode transition-all delay-75 text-slate-700 relative"
             }
           >
+            {!isConnected && <WaitingPage />}
             <MenuLateral
               menuActive={menuActive}
               setMenuActive={setMenuActive}

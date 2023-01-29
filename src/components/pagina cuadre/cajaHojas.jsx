@@ -7,7 +7,7 @@ const CajaHojas = ({ handlerChangeHojas, restHojas }) => {
   return (
     <div className="flex w-full mb-5 lg:m-0 lg:bg-transparent justify-center lg:w-1/4">
       <div className="flex flex-col items-start">
-        <h5 className="w-full text-center font-semibold text-sm font-serif p-3">
+        <h5 className="w-full text-center font-semibold text-sm md:text-lg font-serif pt-3">
           Hojas
         </h5>
         <div className="flex flex-col w-full h-full py-4">

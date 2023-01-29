@@ -24,15 +24,18 @@ const PagCuadre = () => {
     turno,
     workers,
     restHojas,
+    handlerChangeMirones,
+    mirones,
+    loaderMirones,
   } = UseCuadreMiron(setErrorsForm);
 
   const { user, darkMode } = useContext(AuthContext);
 
   return (
-    <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative">
+    <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative ">
       {ModalCuadre && <ModalResult />}
 
-      <div className="flex flex-col lg:flex-row w-full lg:w-11/12 m-auto shadow-md shadow-violet-500/20 lg:h-1/4 bg-white/10 rounded-lg">
+      <div className="flex flex-col lg:flex-row w-full lg:w-full m-auto  lg:h-1/4 bg-white/10 rounded-lg">
         <CajaTurno
           handlerChoiceWorker={handlerChoiceWorker}
           turno={turno}
@@ -43,7 +46,11 @@ const PagCuadre = () => {
           handlerChangeHojas={handlerChangeHojas}
           restHojas={restHojas}
         />
-        <CajaProductos />
+        <CajaProductos
+          mirones={mirones}
+          loaderMirones={loaderMirones}
+          handlerChangeMirones={handlerChangeMirones}
+        />
       </div>
 
       {user?.role === "admin" && (
@@ -58,7 +65,7 @@ const PagCuadre = () => {
         </div>
       )}
 
-      <div className="flex flex-col h-full w-full lg:justify-center items-center  lg:h-3/4 lg:flex-row">
+      <div className="flex flex-col h-full w-full lg:justify-center items-center  lg:h-3/4 lg:flex-row bg-white/5 rounded-md ">
         {/* Area Tarjetas */}
         <div className="flex flex-col relative items-center lg:absolute z-10">
           <h3 className="font-serif mb-2">Tarjetas:</h3>

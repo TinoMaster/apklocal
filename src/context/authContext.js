@@ -23,6 +23,7 @@ const USER = {
 const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(window.localStorage.getItem(IS_AUTH));
   const [user, setUser] = useState(USER);
+  const [isConnected, setIsConnected] = useState(false);
 
   const [form, setForm] = useState({});
   const [registro, setRegistro] = useState({});
@@ -31,9 +32,7 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState({});
 
   const [darkMode, setDarkMode] = useState(
-    window.localStorage.getItem(DARK_MODE) === "true"
-      ? true
-      : false
+    window.localStorage.getItem(DARK_MODE) === "true" ? true : false
   );
   const [loader, setLoader] = useState(false);
 
@@ -41,6 +40,9 @@ const AuthProvider = ({ children }) => {
     httpHelper()
       .get(urlExistUser)
       .then((res) => {
+        if (res) {
+          setIsConnected(true);
+        }
         if (res.error) {
           setError(res);
           setOpcion("inicio");
@@ -146,6 +148,7 @@ const AuthProvider = ({ children }) => {
     darkMode,
     setDarkMode,
     DARK_MODE,
+    isConnected,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

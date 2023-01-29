@@ -132,14 +132,13 @@ const CuadreProvider = ({ children }) => {
   const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const [loading, setLoading] = useState(false);
 
-  const urlGet = `${apiConfig.api.url}/cuadre/getMonth/${mesDelAño}`,
-    urlSave = `${apiConfig.api.url}/cuadre`;
+  const urlSave = `${apiConfig.api.url}/cuadre`;
 
   const urlGetOrPostCards = `${apiConfig.api.url}/cards`;
 
   useEffect(() => {
     httpHelper()
-      .get(urlGet)
+      .get(`${apiConfig.api.url}/cuadre/getMonth/${mesDelAño}`)
       .then((el) => {
         if (!el.length) {
           setDbMensual([]);
@@ -168,7 +167,7 @@ const CuadreProvider = ({ children }) => {
           setCards(res.data);
         }
       });
-  }, []);
+  }, [mesDelAño]);
 
   const handlerChangeSelectYear = (e) => {
     setYearChoice(e.target.value);
