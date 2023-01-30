@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CuadreContext from "../context/cuadreContext";
 import apiConfig from "../config/api.config.json";
 import { httpHelper } from "../helpers/httpHelper";
+import axios from "axios";
 
 let idHojas = {
   bn: null,
@@ -25,6 +26,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [restHojas, setRestHojas] = useState({ color: 0, bn: 0 });
   const [mirones, setMirones] = useState({});
   const [loaderMirones, setLoaderMirones] = useState(false);
+  const [errorMirones, setErrorMirones] = useState(false);
 
   const { setModalCuadre, setResultForm } = useContext(CuadreContext);
 
@@ -114,12 +116,26 @@ export const UseCuadreMiron = (setErrorsForm) => {
     setResultForm(form);
   };
 
-  const handlerChangeMirones = (e) => {
+  const handlerChangeMirones = async (e) => {
     setLoaderMirones(true);
-    const { name, value } = e.target;
-    setMirones({ ...mirones, [name]: value });
-    setLoaderMirones(false);
+    const formData = new FormData();
+    await formData.append("file", e.target.files[0]);
+
+    await axios
+      .post(`${apiConfig.api.url}/mirones/handlerExcel`, formData)
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          setErrorMirones(res);
+          setLoaderMirones(false);
+        } else if (res.data.success) {
+          setMirones({ ...mirones, [res.data.data.name]: res.data.data });
+          setErrorMirones(false);
+          setLoaderMirones(false);
+        }
+      });
   };
+  console.log(mirones);
 
   /* Handlers: */
   const handleChangeForm = (e) => {
@@ -166,5 +182,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
     handlerChangeMirones,
     mirones,
     loaderMirones,
+    errorMirones,
   };
 };

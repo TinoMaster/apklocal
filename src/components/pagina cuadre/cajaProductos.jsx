@@ -25,7 +25,7 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
             className="hidden"
             onChange={handlerChangeMirones}
           />
-          {mirones?.pc1 && (
+          {mirones?.pc1Reporte && (
             <div className="w-full text-center">
               <FontAwesomeIcon className="text-green-400" icon={faCheck} />
             </div>
@@ -51,7 +51,7 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
             className="hidden"
             onChange={handlerChangeMirones}
           />
-          {mirones?.pc2 && (
+          {mirones?.pc2Reporte && (
             <div className="w-full text-center">
               <FontAwesomeIcon className="text-green-400" icon={faCheck} />
             </div>
