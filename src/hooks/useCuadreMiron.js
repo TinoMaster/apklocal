@@ -116,6 +116,20 @@ export const UseCuadreMiron = (setErrorsForm) => {
     setResultForm(form);
   };
 
+  const reduceCopia = (array) => {
+    let result = {};
+    result = array?.reduce((objectResult, element) => {
+      if (!objectResult[element]) {
+        objectResult[element] = 1;
+      } else {
+        objectResult[element] += 1;
+      }
+      return result;
+    }, result);
+    console.log(result);
+    return result;
+  };
+
   const handlerChangeMirones = async (e) => {
     setLoaderMirones(true);
     const formData = new FormData();
@@ -135,7 +149,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
         }
       });
   };
-  console.log(mirones);
 
   /* Handlers: */
   const handleChangeForm = (e) => {
