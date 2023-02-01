@@ -23,21 +23,21 @@ const EsteAño = () => {
 
   return (
     <div className="flex flex-col w-11/12 m-auto mt-10 md:mt-0 md:w-3/4 md:my-2 lg:w-5/12 md:h-full min-h-[450px] shadow-lg shadow-black-400/50 bg-white/5 rounded-lg">
-      <h3 className="font-serif font-normal text-lg md:text-2xl p-3">
+      <h3 className="font-serif font-normal text-lg md:text-2xl p-3 rounded-t-md border-b-2 border-teal-100">
         <FontAwesomeIcon icon={faCalendarDays} /> Este Año
       </h3>
-      <div className="h-full rounded-t-3xl rounded-b-lg flex flex-col">
+      <div className="h-full rounded-t-3xl rounded-b-lg flex flex-col p-2">
         <div className="flex flex-col w-full h-full">
-          <div className="flex justify-between bg-teal-100 p-3 rounded-t-3xl">
-            <h6 className="font-serif md:text-lg text-green-700">
+          <div className="flex justify-between py-2 ">
+            <h6 className="font-serif md:text-lg text-teal-600">
               Venta Total
             </h6>
-            <p className="text-sm md:text-base font-semibold text-green-700">
+            <p className="text-sm md:text-base font-semibold text-teal-700">
               {totalRecaudado(bdPorAño)} <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
-          <div className="flex justify-between p-2 ">
+          <div className="flex justify-between py-2 ">
             <h6 className="font-serif text-sm md:text-base">Dueño</h6>
             <p className="text-sm">
               {totalRecaudadoDueño(bdPorAño)}{" "}
@@ -45,14 +45,14 @@ const EsteAño = () => {
             </p>
           </div>
 
-          <div className="flex justify-between p-2 ">
+          <div className="flex justify-between py-2 ">
             <h6 className="font-serif text-sm md:text-base">Salario</h6>
             <p className="text-sm">
               {totalSalario(bdPorAño)} <FontAwesomeIcon icon={faDollarSign} />
             </p>
           </div>
 
-          <div className="flex justify-between p-2 ">
+          <div className="flex justify-between py-2 ">
             <h6 className="font-serif text-sm md:text-base">Mejor Venta</h6>
             <p className="text-sm">
               {mejorVenta(bdPorAño).miron}{" "}
@@ -60,7 +60,7 @@ const EsteAño = () => {
             </p>
           </div>
 
-          <div className="flex justify-between p-2 ">
+          <div className="flex justify-between py-2 ">
             <h6 className="font-serif text-sm md:text-base">Mejor Turno</h6>
             <p className="text-sm">
               <span className="font-serif mr-2">
@@ -71,7 +71,7 @@ const EsteAño = () => {
             </p>
           </div>
 
-          <div className="bg-teal-200 ">
+          <div className="bg-teal-100 rounded">
             <h5 className="font-serif md:text-lg text-indigo-900 text-center">
               Salarios
             </h5>

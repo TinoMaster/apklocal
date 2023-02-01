@@ -30,7 +30,7 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
               totalDueño += dia.dueño;
               return (
                 <tr
-                  className="hover:bg-black/20 hover:cursor-pointer rounded-lg"
+                  className="hover:bg-black/10  hover:cursor-pointer transition-all rounded"
                   key={dia.id}
                 >
                   <td className="text-center">
@@ -86,7 +86,7 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
                     </h4>
                     {user.role === "admin" && (
                       <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
-                        <div className="outline outline-yellow-100 py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
+                        <div className="py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
                           <FontAwesomeIcon
                             className="text-xs"
                             icon={faPenToSquare}
@@ -94,7 +94,7 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
                         </div>
                         <div
                           onClick={() => EliminarDiaCuadre(dia.id)}
-                          className="outline outline-red-200 py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
+                          className="py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
                         >
                           <FontAwesomeIcon
                             className="text-xs"

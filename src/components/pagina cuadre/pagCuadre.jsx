@@ -10,9 +10,11 @@ import CajaHojas from "./cajaHojas";
 import CajaProductos from "./cajaProductos";
 import CajaTurno from "./cajaTurno";
 import ModalResult from "./modalResult";
+import { ModalViewMiron } from "./modalViewMiron";
 
 const PagCuadre = () => {
   const [errorsForm, setErrorsForm] = useState({});
+  const [viewMiron, setViewMiron] = useState(false);
   const { ModalCuadre, cards, deleteCard } = useContext(CuadreContext);
   const {
     handleSubmitForm,
@@ -34,6 +36,7 @@ const PagCuadre = () => {
   return (
     <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative ">
       {ModalCuadre && <ModalResult />}
+      {!viewMiron && <ModalViewMiron setViewMiron={setViewMiron} mirones={mirones}/>}
 
       <div className="flex flex-col lg:flex-row w-full lg:w-full m-auto  lg:h-1/4 bg-white/10 rounded-lg">
         <CajaTurno
