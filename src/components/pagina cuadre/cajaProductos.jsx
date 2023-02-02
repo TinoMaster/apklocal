@@ -3,7 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { PrimaryLoader } from "../loaders/primaryLoader";
 
-const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
+const CajaProductos = ({
+  mirones,
+  loaderMirones,
+  handlerChangeMirones,
+  setViewMiron,
+}) => {
   return (
     <div className="flex flex-col w-full mb-10 lg:m-0 justify-center lg:w-1/2">
       <h5 className="w-full text-center font-semibold text-sm md:text-lg font-serif p-3">
@@ -19,7 +24,7 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
           </label>
           <input
             type="file"
-            name="pc1"
+            name="pc1Reporte"
             id="file1"
             accept=".xls,.xlsx"
             className="hidden"
@@ -30,7 +35,10 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
               <div className="w-full text-center">
                 <FontAwesomeIcon className="text-green-400" icon={faCheck} />
               </div>
-              <button className="absolute top-14 text-xs px-2 py-1 rounded-md bg-green-400/40 hover:bg-green-400/60 transition-colors shadow">
+              <button
+                onClick={() => setViewMiron("pc1")}
+                className="absolute top-14 text-xs px-2 py-1 rounded-md bg-green-400/40 hover:bg-green-400/60 transition-colors shadow"
+              >
                 resumen
               </button>
             </div>
@@ -50,7 +58,7 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
           </label>
           <input
             type="file"
-            name="pc2"
+            name="pc2Reporte"
             id="file2"
             accept=".xls,.xlsx"
             className="hidden"
@@ -61,17 +69,23 @@ const CajaProductos = ({ mirones, loaderMirones, handlerChangeMirones }) => {
               <div className="w-full text-center">
                 <FontAwesomeIcon className="text-green-400" icon={faCheck} />
               </div>
-              <button className="absolute top-14 text-xs px-2 py-1 rounded-md bg-green-400/40 hover:bg-green-400/60 transition-colors shadow">
+              <button
+                onClick={() => setViewMiron("pc2")}
+                className="absolute top-14 text-xs px-2 py-1 rounded-md bg-green-400/40 hover:bg-green-400/60 transition-colors shadow"
+              >
                 resumen
               </button>
             </div>
           )}
+          {mirones?.pc1Reporte && mirones?.pc2Reporte && (
+            <button
+              onClick={() => setViewMiron("pc1pc2")}
+              className="absolute top-14 -right-20 text-xs px-3 py-1 rounded-md bg-violet-400/40 hover:bg-violet-400/60 transition-colors shadow-md"
+            >
+              General
+            </button>
+          )}
         </div>
-        {mirones?.pc1Reporte && mirones?.pc2Reporte && (
-          <div className="absolute top-40 text-xs px-3 py-1 rounded-md bg-violet-400/40 hover:bg-violet-400/60 transition-colors shadow-md">
-            General
-          </div>
-        )}
       </div>
     </div>
   );

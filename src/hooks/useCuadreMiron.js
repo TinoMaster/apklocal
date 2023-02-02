@@ -25,6 +25,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [workers, setWorkers] = useState([]);
   const [restHojas, setRestHojas] = useState({ color: 0, bn: 0 });
   const [mirones, setMirones] = useState({});
+  const [totalMirones, setTotalMirones] = useState({});
   const [loaderMirones, setLoaderMirones] = useState(false);
   const [errorMirones, setErrorMirones] = useState(false);
 
@@ -42,6 +43,32 @@ export const UseCuadreMiron = (setErrorsForm) => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    if (mirones.pc1Reporte && mirones.pc2Reporte) {
+      const pc1pc2 = {};
+      pc1pc2.name = `${mirones.pc1Reporte.name} y ${mirones.pc2Reporte.name}`;
+      pc1pc2.fecha = mirones.pc1Reporte.fecha;
+      pc1pc2.cant_dispositivos =
+        mirones.pc1Reporte.cant_dispositivos +
+        mirones.pc2Reporte.cant_dispositivos;
+      pc1pc2.volumen_copia =
+        mirones.pc1Reporte.volumen_copia + mirones.pc2Reporte.volumen_copia;
+      pc1pc2.cant_ficheros =
+        mirones.pc1Reporte.cant_ficheros + mirones.pc2Reporte.cant_ficheros;
+      pc1pc2.venta_total =
+        mirones.pc1Reporte.venta_total + mirones.pc2Reporte.venta_total;
+      pc1pc2.dispositivos = [
+        ...mirones.pc1Reporte.dispositivos,
+        ...mirones.pc2Reporte.dispositivos,
+      ];
+      pc1pc2.copias = {
+        ...mirones.pc1Reporte.copias,
+        ...mirones.pc2Reporte.copias,
+      };
+      setTotalMirones(pc1pc2);
+    } else setTotalMirones({});
+  }, [mirones]);
 
   const validarForm = (form) => {
     let err = {};
@@ -116,29 +143,15 @@ export const UseCuadreMiron = (setErrorsForm) => {
     setResultForm(form);
   };
 
-  const reduceCopia = (array) => {
-    let result = {};
-    result = array?.reduce((objectResult, element) => {
-      if (!objectResult[element]) {
-        objectResult[element] = 1;
-      } else {
-        objectResult[element] += 1;
-      }
-      return result;
-    }, result);
-    console.log(result);
-    return result;
-  };
-
   const handlerChangeMirones = async (e) => {
     setLoaderMirones(true);
     const formData = new FormData();
     await formData.append("file", e.target.files[0]);
+    await formData.append("name", e.target.name);
 
     await axios
       .post(`${apiConfig.api.url}/mirones/handlerExcel`, formData)
       .then((res) => {
-        console.log(res);
         if (res.data.error) {
           setErrorMirones(res);
           setLoaderMirones(false);
@@ -196,5 +209,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
     mirones,
     loaderMirones,
     errorMirones,
+    totalMirones,
   };
 };

@@ -14,7 +14,7 @@ import { ModalViewMiron } from "./modalViewMiron";
 
 const PagCuadre = () => {
   const [errorsForm, setErrorsForm] = useState({});
-  const [viewMiron, setViewMiron] = useState(false);
+  const [viewMiron, setViewMiron] = useState("close");
   const { ModalCuadre, cards, deleteCard } = useContext(CuadreContext);
   const {
     handleSubmitForm,
@@ -29,6 +29,7 @@ const PagCuadre = () => {
     handlerChangeMirones,
     mirones,
     loaderMirones,
+    totalMirones,
   } = UseCuadreMiron(setErrorsForm);
 
   const { user, darkMode } = useContext(AuthContext);
@@ -36,7 +37,14 @@ const PagCuadre = () => {
   return (
     <div className="flex flex-col w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative ">
       {ModalCuadre && <ModalResult />}
-      {!viewMiron && <ModalViewMiron setViewMiron={setViewMiron} mirones={mirones}/>}
+      {viewMiron !== "close" && (
+        <ModalViewMiron
+          setViewMiron={setViewMiron}
+          mirones={mirones}
+          viewMiron={viewMiron}
+          totalMirones={totalMirones}
+        />
+      )}
 
       <div className="flex flex-col lg:flex-row w-full lg:w-full m-auto  lg:h-1/4 bg-white/10 rounded-lg">
         <CajaTurno
@@ -53,6 +61,7 @@ const PagCuadre = () => {
           mirones={mirones}
           loaderMirones={loaderMirones}
           handlerChangeMirones={handlerChangeMirones}
+          setViewMiron={setViewMiron}
         />
       </div>
 
