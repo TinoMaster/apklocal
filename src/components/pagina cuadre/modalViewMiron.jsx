@@ -1,6 +1,8 @@
 import { faCalendarDays, faFile } from "@fortawesome/free-regular-svg-icons";
 import {
   faCashRegister,
+  faCheck,
+  faClose,
   faDatabase,
   faDisplay,
   faMemory,
@@ -10,36 +12,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import { ModalPortal } from "../modalPortal/modalPortal";
-import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
+import { PrimaryLoader } from "../loaders/primaryLoader";
 
 export const ModalViewMiron = ({
   setViewMiron,
   mirones,
   viewMiron,
   totalMirones,
+  saveMiron,
+  errorMirones,
+  successSendMiron,
+  loaderMirones,
 }) => {
   const { darkMode } = useContext(AuthContext);
-
-  const exportTxt = (jsonData) => {
-    let text = "User Information\n";
-    text += "Name: " + jsonData.name + "\n";
-    text += "Age: " + jsonData.age + "\n";
-
-    const element = document.createElement("a");
-    element.setAttribute(
-      "href",
-      "data:text/plain;charset=utf-8," + encodeURIComponent(text)
-    );
-    element.setAttribute("download", "json-to-txt.txt");
-
-    element.style.display = "none";
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
-  };
 
   const exportPdf = (jsonData) => {
     const doc = new jsPDF();
@@ -60,12 +46,18 @@ export const ModalViewMiron = ({
   return (
     <ModalPortal>
       <div
-        className={`w-full h-full md:w-1/3 md:h-5/6 md:rounded p-2 font-serif text-sm ${
+        className={`w-full h-full md:w-1/3 md:h-5/6 relative md:rounded p-2 font-serif text-sm ${
           !darkMode
             ? "bg-lightMode text-darkMode"
             : "bg-darkMode text-lightMode"
         }  overflow-auto shadow-xl shadow-black/80`}
       >
+        {/* Loader */}
+        {loaderMirones && (
+          <div className="absolute w-full h-full bg-black/10 z-30 flex justify-center items-center">
+            <PrimaryLoader />
+          </div>
+        )}
         {/* Caja de resultados */}
         <div className="w-full flex flex-wrap">
           {/* Atras */}
@@ -162,8 +154,8 @@ export const ModalViewMiron = ({
             </p>
           </div>
           {/* Botones */}
-          <div className="w-1/2 flex flex-col py-3 px-1 text-darkMode items-end">
-            <button className="p-2 mt-2 bg-green-200 rounded-md shadow hover:bg-green-300 w-full max-w-[400px] transition-colors">
+          <div className="w-1/2 flex flex-col py-3 px-1 text-darkMode items-end relative">
+            <button className="p-2 mt-2 bg-slate-200 rounded-md shadow hover:bg-slate-300 w-full max-w-[400px] transition-colors">
               Imprimir
             </button>
             <button
@@ -172,12 +164,32 @@ export const ModalViewMiron = ({
             >
               Exportar a PDF
             </button>
-            <button
-              onClick={() => exportTxt(mirones.pc1Reporte)}
-              className="p-2 mt-2 bg-slate-200 rounded-md shadow hover:bg-slate-300 w-full max-w-[400px] transition-colors"
-            >
-              Exportar a TXT
-            </button>
+            {viewMiron !== "pc1pc2" && (
+              <button
+                onClick={() =>
+                  saveMiron(
+                    viewMiron === "pc1"
+                      ? mirones.pc1Reporte
+                      : mirones.pc2Reporte
+                  )
+                }
+                className="p-2 mt-2 bg-green-200 rounded-md shadow hover:bg-green-300 w-full max-w-[400px] transition-colors"
+              >
+                Guardar en BD
+              </button>
+            )}
+            <div className="w-full max-w-[400px] absolute flex justify-center items-center bottom-8">
+              {successSendMiron?.success && (
+                <span className="absolute text-green-500 text-lg">
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+              )}
+              {errorMirones?.error && (
+                <span className="absolute text-red-500 text-lg">
+                  <FontAwesomeIcon icon={faClose} />
+                </span>
+              )}
+            </div>
           </div>
           {/* Caja de dispositivos */}
           <div className="w-full">
@@ -188,15 +200,13 @@ export const ModalViewMiron = ({
                 mirones?.pc1Reporte?.dispositivos?.map((disp) => (
                   <div
                     key={`${disp.dispositivo + disp.insercion}`}
-                    className="w-full flex flex-wrap relative m-1 bg-white/5 shadow-md rounded-md"
+                    className="w-full flex flex-wrap relative m-1 bg-white/5  shadow-md rounded-md"
                   >
                     <p className="w-full text-center py-1 text-green-500">
                       {disp.dispositivo}
                     </p>
                     <p className="w-1/3 py-1 text-center">{`Tipo: ${disp.tipo}`}</p>
-                    <p className="py-1 absolute right-2 text-slate-700">
-                      {disp.insercion}
-                    </p>
+                    <p className="py-1 absolute right-2">{disp.insercion}</p>
                     <p className="w-1/3 py-1 text-center">{`Volumen: ${disp.tamano_copiados}`}</p>
                     <p className="w-1/3 py-1 text-center">
                       {`Copiados: ${disp.ficheros_copiados}`}
@@ -204,8 +214,12 @@ export const ModalViewMiron = ({
                     <p className="w-1/3 py-1 text-center">
                       {`Borrados: ${disp.ficheros_borrados}`}
                     </p>
-                    <p className="w-1/3 py-1 text-center">{`Pago: ${disp.pago}$`}</p>
-                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.pago}$`}</p>
+                    <p
+                      className={`w-1/3 py-1 text-center ${
+                        disp.pago === "0" && "text-red-400"
+                      }`}
+                    >{`Pago: ${disp.pago}$`}</p>
+                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>
                     <p className="w-full text-center py-1">
                       {`"${disp.comentario}"`}
                     </p>
@@ -216,15 +230,13 @@ export const ModalViewMiron = ({
                 mirones?.pc2Reporte?.dispositivos?.map((disp) => (
                   <div
                     key={`${disp.dispositivo + disp.insercion}`}
-                    className="w-full flex flex-wrap relative m-1 bg-white/5 shadow-md rounded-md"
+                    className="w-full flex flex-wrap relative m-1 bg-white/5  shadow-md rounded-md"
                   >
                     <p className="w-full text-center py-1 text-green-500">
                       {disp.dispositivo}
                     </p>
                     <p className="w-1/3 py-1 text-center">{`Tipo: ${disp.tipo}`}</p>
-                    <p className="py-1 absolute right-2 text-slate-700">
-                      {disp.insercion}
-                    </p>
+                    <p className="py-1 absolute right-2">{disp.insercion}</p>
                     <p className="w-1/3 py-1 text-center">{`Volumen: ${disp.tamano_copiados}`}</p>
                     <p className="w-1/3 py-1 text-center">
                       {`Copiados: ${disp.ficheros_copiados}`}
@@ -232,8 +244,12 @@ export const ModalViewMiron = ({
                     <p className="w-1/3 py-1 text-center">
                       {`Borrados: ${disp.ficheros_borrados}`}
                     </p>
-                    <p className="w-1/3 py-1 text-center">{`Pago: ${disp.pago}$`}</p>
-                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.pago}$`}</p>
+                    <p
+                      className={`w-1/3 py-1 text-center ${
+                        disp.pago === "0" && "text-red-400"
+                      }`}
+                    >{`Pago: ${disp.pago}$`}</p>
+                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>
                     <p className="w-full text-center py-1">
                       {`"${disp.comentario}"`}
                     </p>
@@ -244,15 +260,13 @@ export const ModalViewMiron = ({
                 totalMirones.dispositivos?.map((disp) => (
                   <div
                     key={`${disp.dispositivo + disp.insercion}`}
-                    className="w-full flex flex-wrap relative m-1 bg-white/5 shadow-md rounded-md"
+                    className="w-full flex flex-wrap relative m-1 bg-white/5  shadow-md rounded-md"
                   >
                     <p className="w-full text-center py-1 text-green-500">
                       {disp.dispositivo}
                     </p>
                     <p className="w-1/3 py-1 text-center">{`Tipo: ${disp.tipo}`}</p>
-                    <p className="py-1 absolute right-2 text-slate-700">
-                      {disp.insercion}
-                    </p>
+                    <p className="py-1 absolute right-2">{disp.insercion}</p>
                     <p className="w-1/3 py-1 text-center">{`Volumen: ${disp.tamano_copiados}`}</p>
                     <p className="w-1/3 py-1 text-center">
                       {`Copiados: ${disp.ficheros_copiados}`}
@@ -260,8 +274,12 @@ export const ModalViewMiron = ({
                     <p className="w-1/3 py-1 text-center">
                       {`Borrados: ${disp.ficheros_borrados}`}
                     </p>
-                    <p className="w-1/3 py-1 text-center">{`Pago: ${disp.pago}$`}</p>
-                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.pago}$`}</p>
+                    <p
+                      className={`w-1/3 py-1 text-center ${
+                        disp.pago === "0" && "text-red-400"
+                      }`}
+                    >{`Pago: ${disp.pago}$`}</p>
+                    <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>
                     <p className="w-full text-center py-1">
                       {`"${disp.comentario}"`}
                     </p>

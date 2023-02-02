@@ -6,8 +6,10 @@ import {
   faBoxesStacked,
   faPerson,
   faShop,
+  faDatabase,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { faFileExcel } from "@fortawesome/free-regular-svg-icons";
 
 const SectionPaginas = () => {
   return (
@@ -57,6 +59,19 @@ const SectionPaginas = () => {
           >
             <FontAwesomeIcon className="mx-1" icon={faPerson} /> Personal
           </NavLink>
+        </li>
+        <li className="link w-full flex font-light rounded hover:translate-x-2 relative transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "font-semibold text-teal-500" : ""
+            }
+            to="/mirones"
+          >
+            <FontAwesomeIcon className="mx-1" icon={faDatabase} /> Miron
+          </NavLink>
+          <p className="absolute -right-10 bg-primary/70 font-serif text-lightMode px-1 rounded-md shadow-md shadow-black/40">
+            Nuevo
+          </p>
         </li>
         <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
           <NavLink

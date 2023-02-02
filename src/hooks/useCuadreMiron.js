@@ -27,7 +27,8 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [mirones, setMirones] = useState({});
   const [totalMirones, setTotalMirones] = useState({});
   const [loaderMirones, setLoaderMirones] = useState(false);
-  const [errorMirones, setErrorMirones] = useState(false);
+  const [errorMirones, setErrorMirones] = useState({});
+  const [successSendMiron, setSuccessSendMiron] = useState({});
 
   const { setModalCuadre, setResultForm } = useContext(CuadreContext);
 
@@ -143,6 +144,32 @@ export const UseCuadreMiron = (setErrorsForm) => {
     setResultForm(form);
   };
 
+  const saveMiron = (miron) => {
+    setLoaderMirones(true);
+    miron.id = miron.name + miron.fecha;
+    const obj = miron;
+    delete obj.copias;
+    console.log(obj);
+    const options = {
+      body: obj,
+      headers: { "content-type": "application/json" },
+    };
+    httpHelper()
+      .post(`${apiConfig.api.url}/mirones`, options)
+      .then((res) => {
+        if (res.error) {
+          setErrorMirones(res);
+          setLoaderMirones(false);
+          setTimeout(() => setErrorMirones({}), 3000);
+        } else {
+          setLoaderMirones(false);
+          setErrorMirones({});
+          setSuccessSendMiron(res);
+          setTimeout(() => setSuccessSendMiron({}), 3000);
+        }
+      });
+  };
+
   const handlerChangeMirones = async (e) => {
     setLoaderMirones(true);
     const formData = new FormData();
@@ -209,6 +236,8 @@ export const UseCuadreMiron = (setErrorsForm) => {
     mirones,
     loaderMirones,
     errorMirones,
+    successSendMiron,
     totalMirones,
+    saveMiron,
   };
 };

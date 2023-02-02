@@ -14,6 +14,7 @@ import { Historial } from "../tienda/historial";
 import { EstadisticasTienda } from "../tienda/estadisticas tienda";
 import { EditProduct } from "../tienda/edit product";
 import { SeeProduct } from "../tienda/see product";
+import { PagMirones } from "../pag mirones";
 
 const Contenedor = ({ setMenuActive, notasActive }) => {
   return (
@@ -47,6 +48,7 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
             <Route path="historial" element={<Historial />} />
             <Route path="estadisticas" element={<EstadisticasTienda />} />
           </Route>
+            <Route path="/mirones" element={<PagMirones />} />
           <Route path="/*" element={<PagInicio />} />
         </Routes>
       </div>

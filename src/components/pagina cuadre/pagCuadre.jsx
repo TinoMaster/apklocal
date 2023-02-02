@@ -30,6 +30,9 @@ const PagCuadre = () => {
     mirones,
     loaderMirones,
     totalMirones,
+    saveMiron,
+    successSendMiron,
+    errorMirones,
   } = UseCuadreMiron(setErrorsForm);
 
   const { user, darkMode } = useContext(AuthContext);
@@ -43,6 +46,10 @@ const PagCuadre = () => {
           mirones={mirones}
           viewMiron={viewMiron}
           totalMirones={totalMirones}
+          saveMiron={saveMiron}
+          errorMirones={errorMirones}
+          successSendMiron={successSendMiron}
+          loaderMirones={loaderMirones}
         />
       )}
 
