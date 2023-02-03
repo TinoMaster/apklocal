@@ -9,7 +9,6 @@ import {
   faDatabase,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { faFileExcel } from "@fortawesome/free-regular-svg-icons";
 
 const SectionPaginas = () => {
   return (
@@ -18,10 +17,12 @@ const SectionPaginas = () => {
         Paginas
       </h6>
       <ul className="flex flex-col my-2 justify-center  items-center">
-        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? "font-semibold text-teal-500 w-full h-full inline-block p-2 pl-5 lg:pl-14"
+                : "w-full h-full inline-block p-2 pl-5 lg:pl-14"
             }
             to="/"
           >
@@ -29,20 +30,24 @@ const SectionPaginas = () => {
           </NavLink>
         </li>
 
-        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? "font-semibold text-teal-500 w-full h-full inline-block p-2 pl-5 lg:pl-14"
+                : "w-full h-full inline-block p-2 pl-5 lg:pl-14"
             }
             to="/ventas"
           >
             <FontAwesomeIcon className="mx-1" icon={faClipboard} /> Ventas
           </NavLink>
         </li>
-        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? "font-semibold text-teal-500 w-full h-full inline-block p-2 pl-5 lg:pl-14"
+                : "w-full h-full inline-block p-2 pl-5 lg:pl-14"
             }
             to="/inventario"
           >
@@ -50,33 +55,41 @@ const SectionPaginas = () => {
             Inventario
           </NavLink>
         </li>
-        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? "font-semibold text-teal-500 w-full h-full inline-block p-2 pl-5 lg:pl-14"
+                : "w-full h-full inline-block p-2 pl-5 lg:pl-14"
             }
             to="/personal"
           >
             <FontAwesomeIcon className="mx-1" icon={faPerson} /> Personal
           </NavLink>
         </li>
-        <li className="link w-full flex font-light rounded hover:translate-x-2 relative transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full flex font-light rounded hover:translate-x-2 relative transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? " text-teal-500 w-full h-full items-center p-2 pl-5 lg:pl-14 flex"
+                : "w-full h-full items-center p-2 pl-5 lg:pl-14 flex"
             }
             to="/mirones"
           >
             <FontAwesomeIcon className="mx-1" icon={faDatabase} /> Miron
+            <div className="absolute flex items-center justify-end h-full w-full -right-4">
+              <p className=" bg-primary/70 font-serif text-lightMode px-1 rounded-md shadow-md shadow-black/40">
+                Nuevo
+              </p>
+            </div>
           </NavLink>
-          <p className="absolute -right-10 bg-primary/70 font-serif text-lightMode px-1 rounded-md shadow-md shadow-black/40">
-            Nuevo
-          </p>
         </li>
-        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base p-2 pl-5 lg:pl-14 hover:bg-black/5">
+        <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">
           <NavLink
             className={({ isActive }) =>
-              isActive ? "font-semibold text-teal-500" : ""
+              isActive
+                ? "font-semibold text-teal-500 w-full h-full inline-block p-2 pl-5 lg:pl-14"
+                : "w-full h-full inline-block p-2 pl-5 lg:pl-14"
             }
             to="/tienda/addProduct"
           >
