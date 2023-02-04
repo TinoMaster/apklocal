@@ -1,8 +1,6 @@
 import { faCalendarDays, faFile } from "@fortawesome/free-regular-svg-icons";
 import {
   faCashRegister,
-  faCheck,
-  faClose,
   faDatabase,
   faDisplay,
   faMemory,
@@ -10,21 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import AuthContext from "../../context/authContext";
-import { ModalPortal } from "../modalPortal/modalPortal";
+import AuthContext from "./../context/authContext";
+import { ModalPortal } from "./modalPortal/modalPortal";
 import jsPDF from "jspdf";
-import { PrimaryLoader } from "../loaders/primaryLoader";
-import { logDOM } from "@testing-library/react";
 
-export const ModalViewMiron = ({
+export const ViewMiron = ({
   setViewMiron,
   mirones,
   viewMiron,
   totalMirones,
-  saveMiron,
-  errorMirones,
-  successSendMiron,
-  loaderMirones,
 }) => {
   const { darkMode } = useContext(AuthContext);
 
@@ -53,12 +45,6 @@ export const ModalViewMiron = ({
             : "bg-darkMode text-lightMode"
         }  overflow-auto shadow-xl shadow-black/80`}
       >
-        {/* Loader */}
-        {loaderMirones && (
-          <div className="absolute w-full h-full bg-black/10 z-30 flex justify-center items-center">
-            <PrimaryLoader />
-          </div>
-        )}
         {/* Caja de resultados */}
         <div className="w-full flex flex-wrap">
           {/* Atras */}
@@ -165,32 +151,6 @@ export const ModalViewMiron = ({
             >
               Exportar a PDF
             </button>
-            {viewMiron !== "pc1pc2" && (
-              <button
-                onClick={() =>
-                  saveMiron(
-                    viewMiron === "pc1"
-                      ? mirones.pc1Reporte
-                      : mirones.pc2Reporte
-                  )
-                }
-                className="p-2 mt-2 bg-green-200 rounded-md shadow hover:bg-green-300 w-full max-w-[400px] transition-colors"
-              >
-                Guardar en BD
-              </button>
-            )}
-            <div className="w-full max-w-[400px] absolute flex justify-center items-center bottom-8">
-              {successSendMiron?.success && (
-                <span className="absolute text-green-500 text-lg">
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-              )}
-              {errorMirones?.error && (
-                <span className="absolute text-red-500 text-lg">
-                  <FontAwesomeIcon icon={faClose} />
-                </span>
-              )}
-            </div>
           </div>
           {/* Caja de dispositivos */}
           <div className="w-full">
@@ -257,8 +217,8 @@ export const ModalViewMiron = ({
                   </div>
                 ))}
               {viewMiron === "pc1pc2" &&
-                totalMirones?.dispositivos?.length > 0 &&
-                totalMirones.dispositivos?.map((disp) => (
+                totalMirones()?.length > 0 &&
+                totalMirones()?.map((disp) => (
                   <div
                     key={`${disp.dispositivo + disp.insercion}`}
                     className="w-full flex flex-wrap relative m-1 bg-white/5  shadow-md rounded-md"

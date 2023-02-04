@@ -1,16 +1,39 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { ViewMiron } from "../ViewMiron";
 
 export const TablaMirones = ({ mirones }) => {
-  const [deployDay, setDeployDay] = useState([]);
+  const [deployDay, setDeployDay] = useState({});
+  const [dataToView, setDataToView] = useState({});
+  const [vieMiron, setVieMiron] = useState("close");
 
   const functionDeployDay = (fecha, array) => {
     const result = array.filter((day) => day.fecha === fecha);
     setDeployDay(result);
+    if (result.length === 2) {
+      setDataToView({ pc1Reporte: result[0], pc2Reporte: result[1] });
+    } else setDataToView({ pc1Reporte: result[0] });
+  };
+
+  const totalMirones = () => {
+    const pc1pc2 = [
+      ...dataToView?.pc1Reporte?.dispositivos,
+      ...dataToView?.pc2Reporte?.dispositivos,
+    ];
+
+    return pc1pc2;
   };
   return (
     <div className="w-full p-2 font-serif">
+      {vieMiron !== "close" && (
+        <ViewMiron
+          viewMiron={vieMiron}
+          setViewMiron={setVieMiron}
+          totalMirones={totalMirones}
+          mirones={dataToView}
+        />
+      )}
       {mirones?.map((dia, index, array) =>
         index !== 0 && dia.fecha === array[index - 1]?.fecha ? (
           <div
@@ -49,6 +72,9 @@ export const TablaMirones = ({ mirones }) => {
                     className="flex flex-wrap justify-between items-center py-1 px-2 m-2 bg-white/5 rounded-md shadow lg:text-base text-sm hover:shadow-black/50"
                     onClick={(e) => {
                       e.stopPropagation();
+                      setVieMiron(
+                        daySelect.name === "pc1Reporte" ? "pc1" : "pc2"
+                      );
                     }}
                   >
                     <p className="">{daySelect.name}</p>
@@ -57,6 +83,20 @@ export const TablaMirones = ({ mirones }) => {
                     <p className="">{`venta: $${daySelect.venta_total}`}</p>
                   </div>
                 ))}
+              {deployDay.length > 0 && deployDay[0].fecha === dia.fecha && (
+                <p className="w-full text-right">
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setVieMiron("pc1pc2");
+                    }}
+                    className="mr-2 p-1 bg-green-400 rounded-md shadow-md hover:cursor-pointer hover:bg-green-500 transition-all hover:shadow-black/20 text-slate-100"
+                  >
+                    {" "}
+                    Resumen
+                  </span>{" "}
+                </p>
+              )}
             </div>
           </div>
         ) : (
@@ -97,6 +137,9 @@ export const TablaMirones = ({ mirones }) => {
                       className="flex flex-wrap justify-between items-center py-1 px-2 m-2 bg-white/5 rounded-md shadow lg:text-base text-sm hover:shadow-black/50"
                       onClick={(e) => {
                         e.stopPropagation();
+                        setVieMiron(
+                          daySelect.name === "pc1Reporte" ? "pc1" : "pc2"
+                        );
                       }}
                     >
                       <p className="">{daySelect.name}</p>
