@@ -14,7 +14,6 @@ import AuthContext from "../../context/authContext";
 import { ModalPortal } from "../modalPortal/modalPortal";
 import jsPDF from "jspdf";
 import { PrimaryLoader } from "../loaders/primaryLoader";
-import { logDOM } from "@testing-library/react";
 
 export const ModalViewMiron = ({
   setViewMiron,

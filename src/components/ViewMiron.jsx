@@ -177,7 +177,7 @@ export const ViewMiron = ({
                     </p>
                     <p
                       className={`w-1/3 py-1 text-center ${
-                        disp.pago === "0" && "text-red-400"
+                        disp.pago === 0 && "text-red-400"
                       }`}
                     >{`Pago: ${disp.pago}$`}</p>
                     <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>
@@ -207,7 +207,7 @@ export const ViewMiron = ({
                     </p>
                     <p
                       className={`w-1/3 py-1 text-center ${
-                        disp.pago === "0" && "text-red-400"
+                        disp.pago === 0 && "text-red-400"
                       }`}
                     >{`Pago: ${disp.pago}$`}</p>
                     <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>
@@ -237,7 +237,7 @@ export const ViewMiron = ({
                     </p>
                     <p
                       className={`w-1/3 py-1 text-center ${
-                        disp.pago === "0" && "text-red-400"
+                        disp.pago === 0 && "text-red-400"
                       }`}
                     >{`Pago: ${disp.pago}$`}</p>
                     <p className="w-1/3 py-1 text-center">{`Cobro: ${disp.cobrado}$`}</p>

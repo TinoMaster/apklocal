@@ -149,7 +149,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
     miron.id = miron.name + miron.fecha;
     const obj = miron;
     delete obj.copias;
-    console.log(obj);
     const options = {
       body: obj,
       headers: { "content-type": "application/json" },

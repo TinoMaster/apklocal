@@ -2,6 +2,8 @@ import React from "react";
 import { usePagMirones } from "../../hooks/usePagMirones";
 import { SecondaryLoader } from "../loaders/secondaryLoader";
 import { ChoiceMonth } from "./choiceMonth";
+import { AreaCopias } from "./estadisticas miron/area copias";
+import { AreaMiron } from "./estadisticas miron/area miron";
 import { TablaMirones } from "./tablaMirones";
 
 export const PagMirones = () => {
@@ -9,7 +11,7 @@ export const PagMirones = () => {
   return (
     <div className="flex flex-wrap w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative ">
       {/* Caja mirones */}
-      <div className="w-full h-full lg:w-1/3 bg-white/5 relative">
+      <div className="w-full h-full lg:w-1/3 bg-white/5 relative shadow-inner shadow-black/20">
         {/* Loader */}
         {states?.loaderPageMiron && (
           <div className="w-full h-full absolute flex justify-center items-center">
@@ -37,6 +39,13 @@ export const PagMirones = () => {
             loader={states.loaderPageMiron}
           />
         </div>
+      </div>
+      {/* Area estadisticas miron */}
+      <div className="w-full h-full lg:w-1/3 bg-white/5 relative shadow-inner shadow-black/20">
+        <AreaMiron />
+      </div>
+      <div className="w-full h-full lg:w-1/3 bg-white/5 relative shadow-inner shadow-black/20">
+        <AreaCopias />
       </div>
     </div>
   );

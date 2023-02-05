@@ -2,7 +2,7 @@ import React from "react";
 
 export const ChoiceMonth = () => {
   return (
-    <div className="flex flex-wrap m-2 justify-around bg-white/10 outline-1 outline-dotted outline-slate-400 rounded-lg mt-2">
+    <div className="flex flex-wrap m-2 justify-around bg-white/10 outline-1 outline-dotted outline-slate-400 rounded-lg mt-2 shadow-md">
       <input
         className="input-hide"
         type="radio"
