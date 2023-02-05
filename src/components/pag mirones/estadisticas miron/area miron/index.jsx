@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { RenderDispositivos } from "./renderDispositivos";
 import { RenderGeneral } from "./renderGeneral";
 
-export const AreaMiron = () => {
+export const AreaMiron = ({ functions, states }) => {
   const [optionRender, setOptionRender] = useState("general");
+  const {
+    mejoresDiasSemana,
+    dispositivosMasCopian,
+    ArrayDispositivos,
+    handlerSearchDispositivos,
+  } = functions;
+  const { mirones } = states;
 
   return (
-    <div className="w-full h-full flex flex-col items-start font-serif p-1 overflow-auto">
+    <div className="w-full lg:h-full flex flex-col items-start bg-black/5 font-serif p-1 overflow-auto">
       <h2 className="w-full text-center p-3 mt-1 bg-white/5 shadow-md rounded-md">
         Estadisticas y Dispositivos
       </h2>
@@ -43,8 +50,20 @@ export const AreaMiron = () => {
         </label>
       </div>
       {/* renders options */}
-      {optionRender === "general" && <RenderGeneral />}
-      {optionRender === "dispositivos" && <RenderDispositivos />}
+      {optionRender === "general" && (
+        <RenderGeneral
+          mejoresDiasSemana={mejoresDiasSemana}
+          dispositivosMasCopian={dispositivosMasCopian}
+          mirones={mirones}
+        />
+      )}
+      {optionRender === "dispositivos" && (
+        <RenderDispositivos
+          ArrayDispositivos={ArrayDispositivos}
+          mirones={mirones}
+          handlerSearchDispositivos={handlerSearchDispositivos}
+        />
+      )}
     </div>
   );
 };

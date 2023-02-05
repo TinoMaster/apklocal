@@ -7,7 +7,7 @@ import { AreaMiron } from "./estadisticas miron/area miron";
 import { TablaMirones } from "./tablaMirones";
 
 export const PagMirones = () => {
-  const { states } = usePagMirones();
+  const { states, functions } = usePagMirones();
   return (
     <div className="flex flex-wrap w-full max-w-1080p max-h-1080p m-auto overflow-auto h-full lg:py-6 rounded-lg relative ">
       {/* Caja mirones */}
@@ -42,7 +42,7 @@ export const PagMirones = () => {
       </div>
       {/* Area estadisticas miron */}
       <div className="w-full h-full lg:w-1/3 bg-white/5 relative shadow-inner shadow-black/20">
-        <AreaMiron />
+        <AreaMiron functions={functions} states={states} />
       </div>
       <div className="w-full h-full lg:w-1/3 bg-white/5 relative shadow-inner shadow-black/20">
         <AreaCopias />
