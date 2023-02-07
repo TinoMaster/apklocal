@@ -12,6 +12,7 @@ const Login = () => {
     success,
     error,
     loader,
+    register,
   } = useContext(AuthContext);
 
   return (
@@ -40,7 +41,7 @@ const Login = () => {
           <img src={img} alt="Logo" className="w-full h-full" />
         </div>
 
-        <form className="w-full flex flex-col">
+        <div className="w-full flex flex-col">
           {opcion === "registro" && (
             <label htmlFor="nombre" className="flex flex-col w-4/5 m-auto">
               <span className="font-serif text-slate-500 ml-1">Nombre:</span>
@@ -67,7 +68,9 @@ const Login = () => {
               placeholder="Correo"
               className="w-full mx-auto border-2 placeholder:text-slate-400 text-violet-600 my-2 p-1 rounded-md focus:outline-violet-300"
               autoComplete="off"
-              onChange={handleChange}
+              onChange={
+                opcion === "inicio" ? handleChange : handleChangeRegistro
+              }
             />
           </label>
 
@@ -104,9 +107,9 @@ const Login = () => {
             type="submit"
             value={opcion === "inicio" ? "Entrar" : "Registrar"}
             className="my-5 p-2 text-sm  bg-violet-600 text-white rounded-md shadow-md shadow-violet-500/75 hover:cursor-pointer hover:bg-violet-700 w-11/12 m-auto"
-            onClick={(e) => (opcion === "inicio" ? login(e) : "Registrar")}
+            onClick={(e) => (opcion === "inicio" ? login() : register())}
           />
-        </form>
+        </div>
       </div>
     </div>
   );

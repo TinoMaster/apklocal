@@ -7,6 +7,7 @@ const AuthContext = createContext();
 
 const urlExistUser = `${apiConfig.api.url}/trabajadores`;
 const urlLogin = `${apiConfig.api.url}/trabajadores/login`;
+const urlRegister = `${apiConfig.api.url}/trabajadores/registro/worker`;
 
 const IS_AUTH = "APP_KEY_SV";
 const USER_IMAGE = "IM_USER";
@@ -67,8 +68,44 @@ const AuthProvider = ({ children }) => {
     setRegistro({ ...registro, [e.target.name]: e.target.value });
   };
 
-  /* const validarRegistroInicio = () => {};
-  const validarRegistroPagPersonal = () => {}; */
+  const validarRegistroInicio = (data) => {
+    return true;
+  };
+
+  const register = async () => {
+    setLoader(true);
+    const validation = await validarRegistroInicio(registro);
+    if (!validation) {
+      setLoader(false);
+      setError({ error: true, message: "Debe llenar los campos" });
+    } else {
+      setError({});
+      const options = {
+        body: {
+          ...registro,
+          role: "admin",
+          correo: registro.usuario,
+          usuario: "Admin",
+        },
+        headers: { "content-type": "application/json" },
+      };
+      httpHelper()
+        .post(urlRegister, options)
+        .then((res) => {
+          console.log(res);
+          if (res.success) {
+            setLoader(false);
+            window.location.href = "/login";
+          } else if (res.error) {
+            setLoader(false);
+            setError(res);
+          } else {
+            setLoader(false);
+            console.log(res);
+          }
+        });
+    }
+  };
 
   const validarLogin = () => {
     let validator = false;
@@ -103,9 +140,9 @@ const AuthProvider = ({ children }) => {
     window.location.href = "/";
   };
 
-  const login = async (e) => {
+  const login = async () => {
     setLoader(true);
-    e.preventDefault();
+
     const validacion = await validarLogin();
 
     if (!validacion) {
@@ -149,6 +186,7 @@ const AuthProvider = ({ children }) => {
     setDarkMode,
     DARK_MODE,
     isConnected,
+    register,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
