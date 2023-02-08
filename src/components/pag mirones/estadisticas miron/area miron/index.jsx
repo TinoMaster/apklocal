@@ -13,12 +13,12 @@ export const AreaMiron = ({ functions, states }) => {
   const { mirones } = states;
 
   return (
-    <div className="w-full lg:h-full flex flex-col items-start bg-black/5 font-serif p-1 overflow-auto">
+    <div className="w-full lg:h-full flex flex-col items-start font-serif p-1 overflow-auto">
       <h2 className="w-full text-center p-3 mt-1 bg-white/5 shadow-md rounded-md">
         Estadisticas y Dispositivos
       </h2>
       {/* Botones choice options */}
-      <div className="w-full flex p-1 justify-end items-center text-sm my-2">
+      <div className="w-full flex p-1 justify-end items-center text-sm my-2 ">
         <input type="radio" name="general" id="general" className="hidden" />
         <label
           htmlFor="general"

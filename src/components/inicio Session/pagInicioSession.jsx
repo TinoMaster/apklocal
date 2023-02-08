@@ -35,7 +35,7 @@ const Login = () => {
           </div>
         )}
         <h3 className=" text-2xl text-center text-violet-600 font-semibold py-2">
-          {opcion === "inicio" ? "Iniciar Session" : "Registrarse"}
+          {opcion === "inicio" ? "Iniciar Session" : "Registrar Administrador"}
         </h3>
         <div className="w-2/3 md:w-full m-auto flex items-center justify-center">
           <img src={img} alt="Logo" className="w-full h-full" />

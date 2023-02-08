@@ -6,15 +6,14 @@ export const RenderGeneral = ({
   mirones,
 }) => {
   return (
-    <div className="w-full h-full flex flex-col justify-between px-2 text-sm">
+    <div className="w-full h-screen flex flex-col justify-between px-2 text-sm">
       {/* Dias de la semana de mayor venta */}
-      <div className="w-full bg-white/5 shadow-md p-2 h-1/3 rounded-md">
-        <div className="w-full">
-          <h3 className="text-base ml-1 pb-1 text-green-400">
-            Mejores dias de la semana
-          </h3>
-        </div>
-        {/* Tabla de dias de la semana */}
+      <div className="w-full bg-white/5 shadow-md p-2 h-1/3 rounded-md overflow-hidden">
+        <h3 className="text-base ml-1 pb-1 text-green-400">
+          Mejores dias de la semana
+        </h3>
+
+        {/* Encabezado Tabla de dias de la semana */}
         <div className="w-full flex justify-around">
           <p className="w-1/2 text-center py-1 bg-white/5 shadow-md shadow-green-400/30 rounded-tl-md">
             Dia
@@ -23,19 +22,22 @@ export const RenderGeneral = ({
             Volumen Venta
           </p>
         </div>
-        {/* Render dias */}
-        {mejoresDiasSemana(mirones)?.length > 0 &&
-          mejoresDiasSemana(mirones)?.map((el, index) => (
-            <div key={el[0]} className="w-full flex justify-around relative">
-              <p className="absolute left-2">{`${index + 1}:`}</p>
-              <p className="w-1/2 text-center py-1 outline-1 outline-black">
-                {el[0]}
-              </p>
-              <p className="w-1/2 text-center py-1 outline-1 outline-black">
-                {`$${el[1]}`}
-              </p>
-            </div>
-          ))}
+        {/* Cuadro de dias */}
+        <div className="w-full overflow-auto max-h-[210px] pb-10">
+          {/* Render dias */}
+          {mejoresDiasSemana(mirones)?.length > 0 &&
+            mejoresDiasSemana(mirones)?.map((el, index) => (
+              <div key={el[0]} className="w-full flex justify-around relative">
+                <p className="absolute left-2">{`${index + 1}:`}</p>
+                <p className="w-1/2 text-center py-1 outline-1 outline-black">
+                  {el[0]}
+                </p>
+                <p className="w-1/2 text-center py-1 outline-1 outline-black">
+                  {`$${el[1]}`}
+                </p>
+              </div>
+            ))}
+        </div>
       </div>
       {/* Dispositivos que mas copian */}
       <div className="w-full h-1/3 bg-white/5 shadow-md p-2 my-1 rounded-md overflow-hidden">
@@ -56,7 +58,7 @@ export const RenderGeneral = ({
             dispositivosMasCopian(mirones)?.map((el, index) => (
               <div key={el[0]} className="w-full flex justify-around relative">
                 <p className="absolute left-2">{`${index + 1}:`}</p>
-                <p className="w-1/2 text-center py-1 rounded-tl-md">{el[0]}</p>
+                <p className="w-1/2 text-center py-1 rounded-tl-md ml-5">{el[0]}</p>
                 <p className="w-1/2 text-center py-1 rounded-tl-md">{`$${el[1]}`}</p>
               </div>
             ))}
