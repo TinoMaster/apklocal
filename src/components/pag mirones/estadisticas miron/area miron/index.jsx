@@ -4,13 +4,8 @@ import { RenderGeneral } from "./renderGeneral";
 
 export const AreaMiron = ({ functions, states }) => {
   const [optionRender, setOptionRender] = useState("general");
-  const {
-    mejoresDiasSemana,
-    dispositivosMasCopian,
-    ArrayDispositivos,
-    handlerSearchDispositivos,
-  } = functions;
-  const { mirones } = states;
+  const { mejoresDiasSemana, dispositivosMasCopian } = functions;
+  const { mirones, dispositivos } = states;
 
   return (
     <div className="w-full lg:h-full flex flex-col items-start font-serif p-1 overflow-auto">
@@ -58,11 +53,7 @@ export const AreaMiron = ({ functions, states }) => {
         />
       )}
       {optionRender === "dispositivos" && (
-        <RenderDispositivos
-          ArrayDispositivos={ArrayDispositivos}
-          mirones={mirones}
-          handlerSearchDispositivos={handlerSearchDispositivos}
-        />
+        <RenderDispositivos dispositivos={dispositivos} />
       )}
     </div>
   );

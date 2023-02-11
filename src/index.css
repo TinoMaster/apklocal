@@ -36,7 +36,7 @@ focus:border-slate-300 mt-1;
 }
 
 .label-meses {
-  @apply m-1 p-1 hover:cursor-pointer rounded-lg text-xs font-serif hover:bg-violet-100 hover:text-slate-600 transition-all;
+  @apply m-1 p-1 hover:cursor-pointer rounded-lg text-xs font-serif hover:bg-violet-100 text-slate-600 transition-all;
 }
 
 .label-meses_pagMiron {
