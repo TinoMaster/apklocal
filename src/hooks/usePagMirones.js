@@ -6,10 +6,7 @@ const usePagMirones = () => {
   const [mirones, setMirones] = useState([]);
   const [loaderPageMiron, setLoaderPageMiron] = useState(false);
   const [errorPageMiron, setErrorPageMiron] = useState({});
-  const [successPageMiron, setSuccessPageMiron] = useState({});
   const [dispositivos, setDispositivos] = useState([]);
-
-  const [searchDisp, setSearchDisp] = useState("");
 
   useEffect(() => {
     setLoaderPageMiron(true);
@@ -26,8 +23,6 @@ const usePagMirones = () => {
         }
       });
   }, []);
-
- 
 
   const mejoresDiasSemana = (bd) => {
     let result = {};
@@ -63,21 +58,28 @@ const usePagMirones = () => {
       elementoutside?.dispositivos?.forEach(async (element) => {
         if (!objectResult[element.dispositivo]) {
           objectResult[element.dispositivo] = {
-            fechas: [elementoutside.fecha],
+            fechas: [`${elementoutside.fecha}`],
+            horas: [`${elementoutside.fecha} (${element.insercion})`],
             cont: 1,
             pago: element.pago,
           };
         } else {
-          const existDate = await objectResult[
-            element.dispositivo
-          ]?.fechas?.includes(elementoutside.fecha);
-          if (!existDate) {
-            objectResult[element.dispositivo].cont += 1;
-            objectResult[element.dispositivo].fechas = [
-              ...objectResult[element.dispositivo].fechas,
-              elementoutside.fecha,
-            ];
-          }
+          let arrayProv = [];
+
+          objectResult[element.dispositivo].cont += 1;
+          objectResult[element.dispositivo].horas = [
+            ...objectResult[element.dispositivo].horas,
+            `${elementoutside.fecha} (${element.insercion})`,
+          ];
+          arrayProv = [
+            ...objectResult[element.dispositivo].fechas,
+            `${elementoutside.fecha}`,
+          ];
+          objectResult[element.dispositivo].fechas = arrayProv.filter(
+            (val, index, array) => {
+              return array.indexOf(val) === index;
+            }
+          );
           objectResult[element.dispositivo].pago += element.pago;
         }
       });
@@ -94,7 +96,6 @@ const usePagMirones = () => {
     setMirones,
     loaderPageMiron,
     errorPageMiron,
-    successPageMiron,
     dispositivos,
   };
   const functions = {
