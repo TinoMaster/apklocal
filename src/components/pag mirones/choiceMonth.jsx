@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ChoiceMonth = () => {
+export const ChoiceMonth = ({ setFechaMirones }) => {
   return (
     <div className="flex flex-wrap m-2 justify-around bg-white/10 outline-1 outline-dotted outline-slate-400 rounded-lg mt-2 shadow-md">
       <input
@@ -9,6 +9,7 @@ export const ChoiceMonth = () => {
         id="enero"
         value="enero"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label
         className="label-meses_pagMiron"
@@ -23,6 +24,7 @@ export const ChoiceMonth = () => {
         id="febrero"
         value="febrero"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="febrero">
         Febrero
@@ -33,6 +35,7 @@ export const ChoiceMonth = () => {
         id="marzo"
         value="marzo"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="marzo">
         Marzo
@@ -43,6 +46,7 @@ export const ChoiceMonth = () => {
         id="abril"
         value="abril"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="abril">
         Abril
@@ -53,6 +57,7 @@ export const ChoiceMonth = () => {
         id="mayo"
         value="mayo"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="mayo">
         Mayo
@@ -63,6 +68,7 @@ export const ChoiceMonth = () => {
         id="junio"
         value="junio"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="junio">
         Junio
@@ -73,6 +79,7 @@ export const ChoiceMonth = () => {
         id="julio"
         value="julio"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="julio">
         Julio
@@ -83,6 +90,7 @@ export const ChoiceMonth = () => {
         id="agosto"
         value="agosto"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="agosto">
         Agosto
@@ -93,6 +101,7 @@ export const ChoiceMonth = () => {
         id="septiembre"
         value="septiembre"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="septiembre">
         Septiembre
@@ -103,6 +112,7 @@ export const ChoiceMonth = () => {
         id="octubre"
         value="octubre"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="octubre">
         Octubre
@@ -113,6 +123,7 @@ export const ChoiceMonth = () => {
         id="noviembre"
         value="noviembre"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="noviembre">
         Noviembre
@@ -123,6 +134,7 @@ export const ChoiceMonth = () => {
         id="diciembre"
         value="diciembre"
         name="meses"
+        onClick={(e) => setFechaMirones(e.target.value[0].toUpperCase()+e.target.value.substring(1))}
       />
       <label className="label-meses_pagMiron" htmlFor="diciembre">
         Diciembre

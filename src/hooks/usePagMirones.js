@@ -2,11 +2,64 @@ import { useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
 import apiConfig from "../config/api.config.json";
 
+const fecha = new Date();
+const añoActual = fecha.getFullYear();
+
+const mesActual = () => {
+  let mes = fecha.getMonth();
+
+  switch (mes) {
+    case 0:
+      mes = `Enero`;
+      break;
+    case 1:
+      mes = `Febrero`;
+      break;
+    case 2:
+      mes = `Marzo`;
+      break;
+    case 3:
+      mes = `Abril`;
+      break;
+    case 4:
+      mes = `Mayo`;
+      break;
+    case 5:
+      mes = `Junio`;
+      break;
+    case 6:
+      mes = `Julio`;
+      break;
+    case 7:
+      mes = `Agosto`;
+      break;
+    case 8:
+      mes = `Septiembre`;
+      break;
+    case 9:
+      mes = `Octubre`;
+      break;
+    case 10:
+      mes = `Noviembre`;
+      break;
+    case 11:
+      mes = `Diciembre`;
+      break;
+
+    default:
+      mes = `Enero`;
+      break;
+  }
+  return mes;
+};
+
 const usePagMirones = () => {
   const [mirones, setMirones] = useState([]);
   const [loaderPageMiron, setLoaderPageMiron] = useState(false);
   const [errorPageMiron, setErrorPageMiron] = useState({});
   const [dispositivos, setDispositivos] = useState([]);
+  const [fechaMirones, setFechaMirones] = useState(`${mesActual()}`);
+  const [añosDisponiblesMiron, setAñosDisponiblesMiron] = useState([]);
 
   useEffect(() => {
     setLoaderPageMiron(true);
@@ -18,11 +71,22 @@ const usePagMirones = () => {
           setErrorPageMiron(res);
         } else {
           await setMirones(res.data);
+          añosDisponibles(res.data);
           ArrayDispositivos(res.data);
           setLoaderPageMiron(false);
         }
       });
   }, []);
+
+  const añosDisponibles = (array) => {
+    let result = [];
+    result = array.reduce((arrayResult, element) => {
+      !arrayResult.includes(`${añoActual}`) && arrayResult.push(`${añoActual}`);
+      !arrayResult.includes(element.fecha.match(/\d{4}/)[0]) && arrayResult.push(element.fecha.match(/\d{4}/)[0])
+      return arrayResult;
+    }, []);
+    setAñosDisponiblesMiron(result);
+  };
 
   const mejoresDiasSemana = (bd) => {
     let result = {};
@@ -85,7 +149,6 @@ const usePagMirones = () => {
       });
       return objectResult;
     }, {});
-    console.log(Object.entries(result).sort((a, b) => b[1].pago - a[1].pago));
     setDispositivos(
       Object.entries(result).sort((a, b) => b[1].pago - a[1].pago)
     );
@@ -97,6 +160,9 @@ const usePagMirones = () => {
     loaderPageMiron,
     errorPageMiron,
     dispositivos,
+    fechaMirones,
+    setFechaMirones,
+    añosDisponiblesMiron,
   };
   const functions = {
     mejoresDiasSemana,

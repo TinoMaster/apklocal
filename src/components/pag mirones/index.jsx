@@ -44,7 +44,9 @@ export const PagMirones = () => {
       {/* Caja mirones */}
       <div
         className={`w-full h-full lg:w-1/3 bg-white/5 absolute lg:relative shadow-inner shadow-black/20 mt-12 lg:m-0 overflow-auto ${
-          optionsShow === "mirones" ? "translate-x-0 transition-all" : "-translate-x-full lg:translate-x-0"
+          optionsShow === "mirones"
+            ? "translate-x-0 transition-all"
+            : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Loader */}
@@ -58,19 +60,27 @@ export const PagMirones = () => {
         {/* Mirones */}
         <div className="w-full flex flex-col">
           {/* Select Month */}
-          <ChoiceMonth />
+          <ChoiceMonth setFechaMirones={states.setFechaMirones} />
           {/* Select Year */}
-          <div className="flex">
+          <div className="flex justify-between items-center">
             <select
               name=""
               id=""
               className="p-1 border-2 rounded-md ml-2  text-slate-700 focus:outline-none"
-            ></select>
-            <p className="self-center right-5 absolute block text-sm text-violet-400/80 font-serif"></p>
+            >
+              {states.añosDisponiblesMiron.map((el) => (
+                <option key={el} value="">{el}</option>
+              ))}
+            </select>
+            <p className="self-center right-5 absolute block text-sm text-violet-400/80 font-serif">
+              {states.fechaMirones}
+            </p>
           </div>
           {/* Tabla de mirones */}
           <TablaMirones
-            mirones={states.mirones}
+            mirones={states.mirones.filter((el) =>
+              el.fecha.match(states.fechaMirones)
+            )}
             loader={states.loaderPageMiron}
           />
         </div>
@@ -78,14 +88,18 @@ export const PagMirones = () => {
       {/* Area estadisticas miron */}
       <div
         className={`w-full h-full lg:w-1/3 bg-white/5 absolute lg:relative shadow-inner shadow-black/20 mt-12 lg:m-0 overflow-auto ${
-          optionsShow === "dispositivos" ? "translate-x-0 transition-all" : "-translate-x-full lg:translate-x-0"
+          optionsShow === "dispositivos"
+            ? "translate-x-0 transition-all"
+            : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <AreaMiron functions={functions} states={states} />
       </div>
       <div
         className={`w-full h-full lg:w-1/3 bg-white/5 absolute lg:relative shadow-inner shadow-black/20 mt-12 lg:m-0 overflow-auto ${
-          optionsShow === "copias" ? "translate-x-0 transition-all" : "-translate-x-full lg:translate-x-0"
+          optionsShow === "copias"
+            ? "translate-x-0 transition-all"
+            : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <AreaCopias />

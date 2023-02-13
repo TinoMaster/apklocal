@@ -153,6 +153,7 @@ export const TablaMirones = ({ mirones }) => {
           )
         )
       )}
+      {mirones.length === 0 && <p className="w-full p-2 text-center text-violet-500">No hay datos de este mes</p>}
     </div>
   );
 };
