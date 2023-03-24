@@ -25,7 +25,7 @@ export const TablaMirones = ({ mirones }) => {
     return pc1pc2;
   };
   return (
-    <div className="w-full p-2 font-serif">
+    <div className="w-full p-2 font-serif pb-20 lg:pb-10">
       {vieMiron !== "close" && (
         <ViewMiron
           viewMiron={vieMiron}
@@ -38,7 +38,7 @@ export const TablaMirones = ({ mirones }) => {
         index !== 0 && dia.fecha === array[index - 1]?.fecha ? (
           <div
             key={dia.id}
-            className="w-full flex flex-wrap justify-between bg-white/5 p-2 rounded-md shadow-md my-2 hover:cursor-pointer"
+            className="w-full flex flex-wrap justify-between bg-white/5 p-2 rounded-md shadow-md my-2 hover:cursor-pointer overflow-auto"
             onClick={() => functionDeployDay(dia.fecha, array)}
           >
             <p
