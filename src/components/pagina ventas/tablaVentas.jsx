@@ -1,15 +1,17 @@
+import React, { useState } from "react";
 import {
   faCalendarDays,
   faDollarSign,
-  faPenToSquare,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { ModalViewVentas } from "./modalViewVentas";
 
 export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
+  const [viewDay, setViewDay] = useState("close");
   let totalVenta = 0;
   let totalDueño = 0;
+
   return (
     <div className="w-full p-2 relative">
       <table className="table-fixed w-full border-collapse relative mb-16">
@@ -30,9 +32,13 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
               totalDueño += dia.dueño;
               return (
                 <tr
+                  onClick={() => setViewDay("open")}
                   className="hover:bg-black/10  hover:cursor-pointer transition-all rounded"
                   key={dia.id}
                 >
+                  {viewDay === "open" && (
+                    <ModalViewVentas dia={dia} setViewDay={setViewDay} />
+                  )}
                   <td className="text-center">
                     <h4 className="py-2 flex justify-center items-baseline md:m-2 shadow-lg  rounded-lg bg-white/5 text-xs">
                       <FontAwesomeIcon
@@ -85,16 +91,10 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
                       {dia.dueño}
                     </h4>
                     {user.role === "admin" && (
-                      <div className="hidden md:flex w-1/4 justify-around items-center absolute right-0">
-                        <div className="py-1 px-2 rounded-lg mr-1 hover:bg-yellow-200 hover:shadow-md">
-                          <FontAwesomeIcon
-                            className="text-xs"
-                            icon={faPenToSquare}
-                          />
-                        </div>
+                      <div className="hidden md:flex w-1/4 justify-end items-center absolute right-0">
                         <div
-                          onClick={() => EliminarDiaCuadre(dia.id)}
-                          className="py-1 px-2 rounded-lg mr-1 hover:bg-red-200 hover:shadow-md"
+                          onClick={(e) => EliminarDiaCuadre(e, dia.id)}
+                          className="py-1 px-2 mr-2 rounded-lg hover:bg-slate-100 hover:text-darkMode transition-all hover:shadow-md"
                         >
                           <FontAwesomeIcon
                             className="text-xs"

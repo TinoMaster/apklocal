@@ -1,8 +1,12 @@
-import React from "react";
-import useInventarioPagInicio from "../../hooks/useInventarioPagInicio";
+import React, { useContext } from "react";
+import EstadisticasContext from "../../context/estadisticasContext";
 
 const CajaHojas = ({ handlerChangeHojas, restHojas }) => {
-  const { testInyectores } = useInventarioPagInicio();
+  const { hojas, bdCuadre } = useContext(EstadisticasContext);
+  const testInyectores = {
+    bn: hojas(bdCuadre).bn,
+    color: hojas(bdCuadre).color,
+  };
 
   return (
     <div className="flex w-full mb-5 lg:m-0 lg:bg-transparent justify-center lg:w-1/4">

@@ -3,12 +3,7 @@ import CuadreContext from "../context/cuadreContext";
 import apiConfig from "../config/api.config.json";
 import { httpHelper } from "../helpers/httpHelper";
 import axios from "axios";
-
-let idHojas = {
-  bn: null,
-  color: null,
-  id: 111111,
-};
+import AuthContext from "../context/authContext";
 
 let defaultTurno = {
   trabajador1: "",
@@ -21,7 +16,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   /* Este es lo mismo que useForm lo estoy convirtiendo para hacer nuevas pruebas para hacer dinamico el uso  de trabajadores */
   const [form, setForm] = useState({});
   const [turno, setTurno] = useState(defaultTurno);
-  const [cantHojas, setCantHojas] = useState(idHojas);
+  const [cantHojas, setCantHojas] = useState({ bn: 0, color: 0 });
   const [workers, setWorkers] = useState([]);
   const [restHojas, setRestHojas] = useState({ color: 0, bn: 0 });
   const [mirones, setMirones] = useState({});
@@ -31,6 +26,7 @@ export const UseCuadreMiron = (setErrorsForm) => {
   const [successSendMiron, setSuccessSendMiron] = useState({});
 
   const { setModalCuadre, setResultForm } = useContext(CuadreContext);
+  const { user } = useContext(AuthContext);
 
   /* Funciones: */
   useEffect(() => {
@@ -122,6 +118,15 @@ export const UseCuadreMiron = (setErrorsForm) => {
     let diferenciaFondo = form.fondoHoy - form.fondoAyer;
     form.dueño = form.miron - form.salario1 - form.salario2 - diferenciaFondo;
 
+    form.hojas = {
+      bn: cantHojas.bn,
+      color: cantHojas.color,
+      rest_bn: restHojas.bn,
+      rest_color: restHojas.color,
+    };
+
+    form.made_by = user.name;
+
     if (!form.deuda) {
       form.deuda = 0;
       form.diferencia =
@@ -205,7 +210,6 @@ export const UseCuadreMiron = (setErrorsForm) => {
     if (Object.keys(validarForm(form)).length === 0) {
       await resultFinal(form);
       setModalCuadre(true);
-      console.log(form);
       setErrorsForm({});
     } else {
       setErrorsForm(validarForm(form));

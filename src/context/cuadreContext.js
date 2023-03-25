@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { httpHelper } from "../helpers/httpHelper";
-import useInventarioPagInicio from "../hooks/useInventarioPagInicio";
+import useInventarioPagInicio from "../hooks/useHojasBlancas";
 import apiConfig from "../config/api.config.json";
 
 const CuadreContext = createContext();
@@ -115,6 +115,7 @@ const constMes = (num) => {
 
 const CuadreProvider = ({ children }) => {
   const [dbMensual, setDbMensual] = useState([]);
+  const [ultimaVenta, setUltimaVenta] = useState({});
   const [error, setError] = useState({});
   const [success, setSuccess] = useState({});
   const [result, setResult] = useState(0);
@@ -123,17 +124,16 @@ const CuadreProvider = ({ children }) => {
   const [resultForm, setResultForm] = useState({});
   const [mesDelAño, setMesDelAño] = useState(mesActual);
   const [yearChoice, setYearChoice] = useState(añoActual);
+  const [loading, setLoading] = useState(false);
 
   const [workers, setWorkers] = useState([]);
 
   const [card, setCard] = useState({});
   const [cards, setCards] = useState([]);
 
-  const { hojasBlancas, testInyectores } = useInventarioPagInicio();
-  const [loading, setLoading] = useState(false);
+  const { hojasBlancas } = useInventarioPagInicio();
 
   const urlSave = `${apiConfig.api.url}/cuadre`;
-
   const urlGetOrPostCards = `${apiConfig.api.url}/cards`;
 
   useEffect(() => {
@@ -146,6 +146,18 @@ const CuadreProvider = ({ children }) => {
         } else {
           setDbMensual(el);
           setError({});
+        }
+      });
+    httpHelper()
+      .get(`${apiConfig.api.url}/cuadre/latest`)
+      .then((res) => {
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          setError({});
+          res.data.length > 0
+            ? setUltimaVenta(res.data[0])
+            : setUltimaVenta({});
         }
       });
     httpHelper()
@@ -175,23 +187,37 @@ const CuadreProvider = ({ children }) => {
   };
 
   const hojasGastadas = () => {
-    let bn = resultForm?.testInyectores?.bn - testInyectores?.bn;
-    let color = resultForm.testInyectores.color - testInyectores.color;
-    let total = bn + color;
+    let bn;
+    let color;
+    if (Object.keys(ultimaVenta).length === 0) {
+      bn = resultForm?.testInyectores?.bn;
+      color = resultForm.testInyectores.color;
+    } else {
+      bn = resultForm?.testInyectores?.bn - ultimaVenta?.hojas.bn;
+      color = resultForm.testInyectores.color - ultimaVenta?.hojas.color;
+    }
+    let total = parseInt(bn) + parseInt(color);
 
     return { bn, color, total };
   };
 
   const restarHojasPagInicio = () => {
-    let bn = resultForm.testInyectores.bn - testInyectores.bn;
-    let color = resultForm.testInyectores.color - testInyectores.color;
-    let total = bn + color;
+    let bn;
+    let color;
+    if (Object.keys(ultimaVenta).length === 0) {
+      bn = resultForm?.testInyectores?.bn;
+      color = resultForm.testInyectores.color;
+    } else {
+      bn = resultForm?.testInyectores?.bn - ultimaVenta?.hojas.bn;
+      color = resultForm.testInyectores.color - ultimaVenta?.hojas.color;
+    }
+    let total = parseInt(bn) + parseInt(color);
 
     let result = hojasBlancas.local - total;
     let id = hojasBlancas._id;
 
     let data = {
-      local: result > 0 ? result : 0,
+      local: result >= 0 ? result : 0,
     };
 
     let options = {
@@ -263,6 +289,8 @@ const CuadreProvider = ({ children }) => {
     data.salario2 = resultForm.salario2;
     data.turno = resultForm.turno;
     data.dueño = resultForm.dueño;
+    data.hojas = resultForm.hojas;
+    data.made_by = resultForm.made_by;
 
     return data;
   };
@@ -358,11 +386,39 @@ const CuadreProvider = ({ children }) => {
     }
   };
 
-  const EliminarDiaCuadre = (id) => {
-    const urlDeleteDay = `${apiConfig.api.url}/cuadre/delete/${id}`;
-    httpHelper()
-      .del(urlDeleteDay)
-      .then((res) => console.log(res));
+  const sumarHojasDiaAnterior = () => {
+    const total = ultimaVenta.hojas.rest_bn + ultimaVenta.hojas.rest_color;
+    let result = hojasBlancas.local + total;
+    let id = hojasBlancas._id;
+
+    let data = {
+      local: result,
+    };
+    let options = {
+      body: data,
+      headers: { "content-type": "application/json" },
+    };
+
+    let api = httpHelper();
+    let urlEdit = `${apiConfig.api.url}/inventario/${id}`;
+
+    api.put(urlEdit, options);
+  };
+
+  const EliminarDiaCuadre = (e, id) => {
+    e.stopPropagation();
+    const resp = window.confirm("Estas seguro que quieres eliminar el dia?");
+    if (resp === true) {
+      const urlDeleteDay = `${apiConfig.api.url}/cuadre/delete/${id}`;
+      httpHelper()
+        .del(urlDeleteDay)
+        .then(async (res) => {
+          if (res.success) {
+            await sumarHojasDiaAnterior();
+            window.location.reload();
+          }
+        });
+    }
   };
 
   const deleteCard = (id) => {

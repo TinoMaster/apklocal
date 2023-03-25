@@ -12,7 +12,6 @@ import {
 import AuthContext from "../../context/authContext";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import EstadisticasContext from "../../context/estadisticasContext";
-import useInventarioPagInicio from "../../hooks/useInventarioPagInicio";
 import { ButtonModeDark } from "./botonModoDark";
 import CuadreContext from "../../context/cuadreContext";
 
@@ -23,7 +22,7 @@ const MenuLateral = ({
   setAddTarget,
 }) => {
   const { logout, user, isAuth, darkMode } = useContext(AuthContext);
-  const { fondoAyer, bdCuadre } = useContext(EstadisticasContext);
+  const { fondoAyer, bdCuadre, hojas } = useContext(EstadisticasContext);
   const {
     handleTarget,
     addTargetToArray,
@@ -33,7 +32,6 @@ const MenuLateral = ({
     cards,
     deleteCard,
   } = useContext(CuadreContext);
-  const { testInyectores } = useInventarioPagInicio();
   return (
     <div
       onClick={() => {
@@ -86,13 +84,20 @@ const MenuLateral = ({
             {fondoAyer(bdCuadre)}
           </p>
         </div>
-        <div className="flex justify-between">
-          <p className="">Color:</p>
-          <p className="">{testInyectores.color}</p>
+        <div className="flex justify-between items-center">
+          <p className="">Hojas ayer:</p>
+          <p className="text-xs">{`(${hojas(bdCuadre).venta_bn} bn) (${
+            hojas(bdCuadre).venta_color
+          } color)`}</p>
+          <p className="">{hojas(bdCuadre).venta_total}</p>
         </div>
         <div className="flex justify-between">
-          <p className="">B/N:</p>
-          <p className="">{testInyectores.bn}</p>
+          <p className="">Test color:</p>
+          <p className="">{hojas(bdCuadre).color}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="">Test b/n:</p>
+          <p className="">{hojas(bdCuadre).bn}</p>
         </div>
         {/* Section add Card */}
         <div

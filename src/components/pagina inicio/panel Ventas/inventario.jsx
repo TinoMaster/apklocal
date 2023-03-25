@@ -1,18 +1,16 @@
-import { faBoxesPacking, faPrint } from "@fortawesome/free-solid-svg-icons";
+import { faBoxesPacking } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import AuthContext from "../../../context/authContext";
-import useInventarioPagInicio from "../../../hooks/useInventarioPagInicio";
+import useHojasBlancas from "../../../hooks/useHojasBlancas";
 
 const Inventario = () => {
-  const { hojasBlancas, testInyectores } = useInventarioPagInicio();
   const { user } = useContext(AuthContext);
+  const { hojasBlancas } = useHojasBlancas();
 
   return (
     <div className="flex flex-col w-11/12 m-auto h-full">
-      <h4 className="text-md font-medium mx-auto p-2">
-        Inventario
-      </h4>
+      <h4 className="text-md font-medium mx-auto p-2">Inventario</h4>
       {/* inventario */}
       <div className="w-full h-full bg-white/5 shadow-lg rounded-lg">
         {/* Hojas blancas */}
@@ -39,31 +37,7 @@ const Inventario = () => {
           )}
 
           {/* De ayer */}
-          <div className="flex w-full md:w-1/2 h-full flex-col justify-between items-center">
-            <h4 className="font-semibold mt-4 text-center md:text-xl text-violet-500/80 ml-2 ">
-              <FontAwesomeIcon
-                className=" text-violet-500 rounded-full"
-                icon={faPrint}
-              />{" "}
-              Test Ayer
-            </h4>
-            <div className="flex justify-around my-4 w-full items-start h-2/3">
-              <div className="flex flex-col ">
-                <h4 className="font-semibold">Hojas</h4>
-                <p className="font-light text-xs">
-                  blanco y negro
-                </p>
-                <p className="font-bold">{testInyectores.bn}</p>
-              </div>
-              <div className="flex flex-col ">
-                <h4 className="font-semibold">Hojas</h4>
-                <p className="font-light text-xs">color</p>
-                <p className="font-bold">
-                  {testInyectores.color}
-                </p>
-              </div>
-            </div>
-          </div>
+          <div className="flex w-full md:w-1/2 h-full flex-col justify-between items-center"></div>
         </div>
       </div>
     </div>

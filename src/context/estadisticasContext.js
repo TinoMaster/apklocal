@@ -219,6 +219,26 @@ const EstadisticasProvider = ({ children }) => {
     return fondoAyer;
   };
 
+  const hojas = (bd) => {
+    let hojas = {
+      bn: 0,
+      color: 0,
+      venta_bn: 0,
+      venta_color: 0,
+      venta_total: 0,
+    };
+    if (!bd.length) return hojas;
+    else {
+      const last = bd[bd.length - 1];
+      hojas.bn = last.hojas.bn;
+      hojas.color = last.hojas.color;
+      hojas.venta_bn = last.hojas.rest_bn;
+      hojas.venta_color = last.hojas.rest_color;
+      hojas.venta_total = last.hojas.rest_bn + last.hojas.rest_color;
+    }
+    return hojas;
+  };
+
   const whatMonthIs = (fecha) => {
     const mes = fecha?.split("-")[1];
     const año = fecha?.split("-")[2];
@@ -330,6 +350,7 @@ const EstadisticasProvider = ({ children }) => {
     bdPorAño,
     years,
     ventaPorTurno,
+    hojas,
   };
   return (
     <EstadisticasContext.Provider value={data}>

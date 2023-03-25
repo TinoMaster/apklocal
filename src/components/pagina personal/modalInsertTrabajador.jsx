@@ -1,6 +1,6 @@
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 
 export const ModalInsertTrabajador = ({
   setModalInsertWorker,
@@ -13,6 +13,7 @@ export const ModalInsertTrabajador = ({
   roles,
   darkMode,
 }) => {
+  const [newRole, setNewRole] = useState(false);
   return (
     <div
       className={
@@ -138,24 +139,46 @@ export const ModalInsertTrabajador = ({
             </label>
           </div>
           <div className=" md:w-1/2 m-auto h-1/5 flex flex-col">
-            <label className="flex flex-col text-center font-serif text-xs lg:text-lg font-semibold">
-              Role
-              <select
-                className="text-center focus:outline-none bg-white/5 p-2 rounded-lg"
-                name="role"
-                id="role"
-                onChange={handlerChangeWorker}
+            <label className="flex flex-col relative text-center font-serif text-xs lg:text-lg font-semibold">
+              <label
+                className="w-full flex justify-end pr-4 absolute text-sm"
+                htmlFor="new_role"
               >
-                {roles?.map((role) => (
-                  <option value={role.name} key={role._id}>
-                    {role.name}
-                  </option>
-                ))}
-                <option className="font-serif bg-slate-100" value="">
-                  {" "}
-                  {/* Pendiente */}+ Añadir nuevo role
-                </option>
-              </select>
+                Nuevo Role{" "}
+                <input
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setNewRole(true);
+                    } else setNewRole(false);
+                  }}
+                  className="ml-1"
+                  type="checkbox"
+                  name="new_role"
+                  id="new_role"
+                />
+              </label>
+              Role
+              {roles?.length > 0 && newRole === false ? (
+                <select
+                  className="text-center focus:outline-none bg-white/5 p-2 rounded-lg"
+                  name="role"
+                  id="role"
+                  onChange={handlerChangeWorker}
+                >
+                  {roles?.map((role) => (
+                    <option value={role.name} key={role._id}>
+                      {role.name}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  onChange={handlerChangeWorker}
+                  className="input-worker"
+                  type="text"
+                  name="role"
+                />
+              )}
             </label>
           </div>
         </div>

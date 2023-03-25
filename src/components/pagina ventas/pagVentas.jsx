@@ -6,6 +6,7 @@ import { Meses } from "./meses";
 import { TablaVentas } from "./tablaVentas";
 
 const PagVentas = () => {
+  
   const {
     yearChoice,
     dbMensual,

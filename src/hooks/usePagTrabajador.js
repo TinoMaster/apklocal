@@ -7,6 +7,7 @@ import apiConfig from "../config/api.config.json";
 const UrlRegisterWorker = `${apiConfig.api.url}/trabajadores/registro/worker`;
 const UrlGetWorkers = `${apiConfig.api.url}/trabajadores`;
 const UrlGetRoles = `${apiConfig.api.url}/roles`;
+const UrlPostRoles = `${apiConfig.api.url}/roles/save`;
 const UrlUpdateWorker = `${apiConfig.api.url}/trabajadores/update`;
 
 export const usePagTrabajador = () => {
@@ -153,6 +154,10 @@ export const usePagTrabajador = () => {
         body: inputWorkerData,
         headers: { "Content-Type": "application/json" },
       };
+      const optionsRole = {
+        body: { name: inputWorkerData.role },
+        headers: { "Content-Type": "application/json" },
+      };
       httpHelper()
         .post(UrlRegisterWorker, options)
         .then((res) => {
@@ -167,6 +172,7 @@ export const usePagTrabajador = () => {
             }, 3000);
           }
         });
+      httpHelper().post(UrlPostRoles, optionsRole);
     }
   };
 

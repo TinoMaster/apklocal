@@ -5,7 +5,6 @@ import AuthContext from "../../context/authContext";
 
 const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <div className="w-full relative h-96 md:w-10/12 lg:w-4/12 m-5 md:h-4/12 mt-9 md:mt-0 bg-white/5  rounded-2xl shadow-xl flex flex-col">
@@ -44,34 +43,42 @@ const Trabajador = ({ worker, setModalUpdateWorker, setDataToEdit }) => {
             <p className=" text-center font-serif text-xs  font-semibold">
               Direccion
             </p>
-            <p className="text-center text-xs ">{user.name === worker.usuario || user.role === "admin"
+            <p className="text-center text-xs ">
+              {user.name === worker.usuario || user.role === "admin"
                 ? worker.direccion
-                : "*************"}</p>
+                : "*************"}
+            </p>
           </div>
           {/* Municipio */}
           <div className="w-1/2 h-1/3 flex flex-col">
             <p className="text-center font-serif text-xs  font-semibold">
               Municipio
             </p>
-            <p className="text-center text-xs ">{user.name === worker.usuario || user.role === "admin"
+            <p className="text-center text-xs ">
+              {user.name === worker.usuario || user.role === "admin"
                 ? worker.municipio
-                : "*************"}</p>
+                : "*************"}
+            </p>
           </div>
           {/* Telefono */}
           <div className="w-1/2 h-1/3 flex flex-col">
             <p className="text-center font-serif text-xs  font-semibold">
               Telefono
             </p>
-            <p className="text-center text-xs ">{user.name === worker.usuario || user.role === "admin"
+            <p className="text-center text-xs ">
+              {user.name === worker.usuario || user.role === "admin"
                 ? worker.telefono
-                : "*************"}</p>
+                : "*************"}
+            </p>
           </div>
           {/* #Carnet */}
           <div className="w-1/2 h-1/3 flex flex-col">
             <p className="text-center font-serif text-xs  font-semibold">ID</p>
-            <p className="text-center text-xs ">{user.name === worker.usuario || user.role === "admin"
+            <p className="text-center text-xs ">
+              {user.name === worker.usuario || user.role === "admin"
                 ? worker.id
-                : "*************"}</p>
+                : "*************"}
+            </p>
           </div>
         </div>
       </div>
