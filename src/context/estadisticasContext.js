@@ -230,11 +230,13 @@ const EstadisticasProvider = ({ children }) => {
     if (!bd.length) return hojas;
     else {
       const last = bd[bd.length - 1];
-      hojas.bn = last.hojas.bn;
-      hojas.color = last.hojas.color;
-      hojas.venta_bn = last.hojas.rest_bn;
-      hojas.venta_color = last.hojas.rest_color;
-      hojas.venta_total = last.hojas.rest_bn + last.hojas.rest_color;
+      if (last.hasOwnProperty("hojas")) {
+        hojas.bn = last?.hojas.bn;
+        hojas.color = last?.hojas.color;
+        hojas.venta_bn = last?.hojas.rest_bn;
+        hojas.venta_color = last?.hojas.rest_color;
+        hojas.venta_total = last?.hojas.rest_bn + last?.hojas.rest_color;
+      }
     }
     return hojas;
   };

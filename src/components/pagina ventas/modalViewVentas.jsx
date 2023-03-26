@@ -15,12 +15,34 @@ export const ModalViewVentas = ({ dia, setViewDay }) => {
             <h5 className="inline my-3 py-1 px-3 text-xs bg-green-600 font-serif font-semibold text-white rounded-lg shadow-lg shadow-yellow-400/20">
               Hojas
             </h5>
-            <p className="text-xs font-semibold text-slate-500">{`test b/n ${dia.hojas.bn}`}</p>
-            <p className="text-xs font-semibold text-slate-500">{`test color ${dia.hojas.color}`}</p>
-            <p className="text-xs font-semibold text-violet-500">{`vendidas b/n ${dia.hojas.rest_bn}`}</p>
-            <p className="text-xs font-semibold text-violet-500">{`vendidas color ${dia.hojas.rest_color}`}</p>
+            <p className="text-xs font-semibold text-slate-500">{`test b/n ${
+              dia.hasOwnProperty("hojas") ? dia.hojas.bn : 0
+            }`}</p>
+            <p className="text-xs font-semibold text-slate-500">{`test color ${
+              dia.hasOwnProperty("hojas") ? dia.hojas.color : 0
+            }`}</p>
+            <p className="text-xs font-semibold text-violet-500">{`vendidas b/n ${
+              dia.hasOwnProperty("hojas")
+                ? dia.hojas.rest_bn
+                  ? dia.hojas.rest_bn
+                  : 0
+                : 0
+            }`}</p>
+            <p className="text-xs font-semibold text-violet-500">{`vendidas color ${
+              dia.hasOwnProperty("hojas")
+                ? dia.hojas.rest_color
+                  ? dia.hojas.rest_color
+                  : 0
+                : 0
+            }`}</p>
             <p className="text-xs font-semibold text-green-500">{`total ${
-              dia.hojas.rest_bn + dia.hojas.rest_color
+              dia.hasOwnProperty("hojas")
+                ? dia.hojas.rest_bn
+                  ? dia.hojas.rest_bn
+                  : 0 + dia.hojas.rest_color
+                  ? dia.hojas.rest_color
+                  : 0
+                : 0
             }`}</p>
           </div>
 

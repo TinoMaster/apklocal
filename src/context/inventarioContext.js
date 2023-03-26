@@ -14,18 +14,53 @@ const InventarioProvider = ({ children }) => {
   const [mBasicoToEdit, setMBasicoToEdit] = useState({});
 
   const urlGetInsumos = `${apiConfig.api.url}/inventario/insumos`;
+  const urlPostInsumos = `${apiConfig.api.url}/inventario`;
   const urlGetMediosBasicos = `${apiConfig.api.url}/inventario/mediosBasicos`;
+
+  const addDataToArray = (object) => {
+    if (object.tipo === "insumos") {
+      setInsumos([...insumos, object]);
+    } else {
+      setMediosBasicos([...mediosBasicos, object]);
+    }
+  };
+
+  const createHojasBlancas = (array) => {
+    const exist = array.some((item) => item.nombre === "Hojas Blancas");
+    if (!exist) {
+      const options = {
+        body: {
+          nombre: "Hojas Blancas",
+          almacen: 0,
+          local: 0,
+          tipo: "insumos",
+        },
+        headers: { "content-type": "application/json" },
+      };
+      httpHelper()
+        .post(urlPostInsumos, options)
+        .then((res) => {
+          if (res.error) {
+            setError(res);
+          } else if (res.success) {
+            setError({});
+            addDataToArray(res.data);
+          }
+        });
+    }
+  };
 
   useEffect(() => {
     httpHelper()
       .get(`${apiConfig.api.url}/inventario/insumos`)
       .then((res) => {
-        if (!res.length) {
+        if (res.error) {
           setError(res);
           setInsumos([]);
         } else {
           setError({});
-          setInsumos(res);
+          setInsumos(res.data);
+          createHojasBlancas(res.data);
         }
       });
 
@@ -54,23 +89,39 @@ const InventarioProvider = ({ children }) => {
     setMBasicoToEdit({ ...mBasicoToEdit, [name]: value });
   };
 
+  const deleteFromArray = (object) => {
+    if (object.tipo === "insumos") {
+      setInsumos(insumos.filter((item) => item.id !== object.id));
+    } else
+      setMediosBasicos(mediosBasicos.filter((item) => item.id !== object.id));
+  };
+
   const EliminarData = async (id) => {
     const urlEliminar = `${apiConfig.api.url}/inventario/${id}`;
-    console.log(id);
 
-    await httpHelper().del(urlEliminar);
-    httpHelper()
-      .get(urlGetInsumos)
+    await httpHelper()
+      .del(urlEliminar)
       .then((res) => {
-        setInsumos(res);
-      });
-    httpHelper()
-      .get(urlGetMediosBasicos)
-      .then((res) => {
-        setMediosBasicos(res);
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          setError({});
+          deleteFromArray(res.data);
+        } else setError({ error: true, message: "revise su conexion" });
       });
   };
 
+  const editDataInArray = (object) => {
+    if (object.tipo === "insumos") {
+      setInsumos(
+        insumos.map((item) => (item.id === object.id ? object : item))
+      );
+    } else {
+      setMediosBasicos(
+        mediosBasicos.map((item) => (item.id === object.id ? object : item))
+      );
+    }
+  };
   /* enviar edit de insumos */
   const sendDataToEdit = async (id) => {
     const urlEdit = `${apiConfig.api.url}/inventario/${id}`;
@@ -97,8 +148,13 @@ const InventarioProvider = ({ children }) => {
     await httpHelper().put(urlEdit, options);
     httpHelper()
       .get(urlGetInsumos)
-      .then((response) => {
-        setInsumos(response);
+      .then((res) => {
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          setError({});
+          editDataInArray(res.data[0]);
+        }
       });
   };
   /* Enviar edit de Medios Basicos */
@@ -125,13 +181,13 @@ const InventarioProvider = ({ children }) => {
 
     await httpHelper()
       .put(urlEdit, options)
-      .then((response) => {
-        setMBasicoToEdit({});
-      });
-    httpHelper()
-      .get(urlGetMediosBasicos)
-      .then((response) => {
-        setMediosBasicos(response);
+      .then((res) => {
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          setError({});
+          editDataInArray(res.data[0]);
+        }
       });
   };
 

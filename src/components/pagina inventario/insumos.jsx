@@ -15,7 +15,7 @@ const Insumos = () => {
 
   return (
     <div className="w-full lg:w-1/2 py-5 ">
-      <h4 className="py-5 text-center text-xl text-slate-600 font-serif font-semibold">
+      <h4 className="py-5 text-center text-xl font-serif font-semibold">
         Insumos
       </h4>
 
@@ -41,8 +41,8 @@ const Insumos = () => {
         </div>
 
         {/* Productos */}
-        {insumos.length !== 0 ? (
-          insumos.map((insumo) => {
+        {insumos?.length !== 0 ? (
+          insumos?.map((insumo) => {
             return (
               <ProductoInsumos
                 key={insumo._id}
