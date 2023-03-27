@@ -8,65 +8,60 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export const MenuTienda = ({ openLeftMenu, darkMode }) => {
+export const MenuTienda = ({ darkMode }) => {
   return (
     <div
       className={
-        openLeftMenu
-          ? darkMode
-            ? "absolute md:relative md:w-1/5 h-full bg-darkMode overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
-            : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 translate-x-0 transition-transform z-20"
-          : "absolute md:relative md:w-1/5 h-full bg-white/5 overflow-auto shadow-md shadow-black/20 -translate-x-full md:translate-x-0 z-20"
+        darkMode
+          ? "absolute bottom-0 w-full bg-darkMode z-30 rounded-t-md"
+          : "absolute bottom-0 w-full bg-lightMode z-30 rounded-t-md"
       }
     >
       <div className="flex p-2">
-        <h3 className="bg-violet-500 shadow-lg flex items-center text-white font-serif p-1 rounded">
-          Paginas
-        </h3>
-        <div className="flex flex-col w-full">
+        <div className="flex w-full">
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
-                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
+                ? "p-2 w-full font-serif flex items-baseline text-violet-700 justify-center"
+                : "p-2 w-full font-serif flex items-baseline justify-center"
             }
             to={"/tienda/addProduct"}
+            title="Añadir producto"
           >
-            <FontAwesomeIcon className="px-2" icon={faPlus} />
-            Añadir producto
+            <FontAwesomeIcon className={`p-2 shadow-md ${darkMode? "shadow-primary/10":"shadow-black/20"} rounded-md`} icon={faPlus} />
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
-                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
+                ? "p-2 w-full font-serif flex items-baseline text-violet-700 justify-center"
+                : "p-2 w-full font-serif flex items-baseline justify-center"
             }
             to={"/tienda/inventario"}
+            title="Inventario"
           >
-            <FontAwesomeIcon className="px-2" icon={faCartFlatbed} />
-            Inventario
+            <FontAwesomeIcon className={`p-2 shadow-md ${darkMode? "shadow-primary/10":"shadow-black/20"} rounded-md`} icon={faCartFlatbed} />
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
-                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
+                ? "p-2 w-full font-serif flex items-baseline text-violet-700 justify-center"
+                : "p-2 w-full font-serif flex items-baseline justify-center"
             }
             to={"/tienda/historial"}
+            title="Historial Venta"
           >
-            <FontAwesomeIcon className="px-2" icon={faClockRotateLeft} />
-            Historial
+            <FontAwesomeIcon className={`p-2 shadow-md ${darkMode? "shadow-primary/10":"shadow-black/20"} rounded-md`} icon={faClockRotateLeft} />
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "p-4 w-full font-serif flex items-baseline hover:bg-black/5 text-violet-700  rounded-md"
-                : "p-4 w-full font-serif flex items-baseline hover:bg-black/5"
+                ? "p-2 w-full font-serif flex items-baseline text-violet-700 justify-center"
+                : "p-2 w-full font-serif flex items-baseline justify-center"
             }
             to={"/tienda/estadisticas"}
+            title="Estadisticas"
           >
-            <FontAwesomeIcon className="px-2" icon={faSitemap} />
-            Estadisticas
+            <FontAwesomeIcon className={`p-2 shadow-md ${darkMode? "shadow-primary/10":"shadow-black/20"} rounded-md`} icon={faSitemap} />
           </NavLink>
         </div>
       </div>

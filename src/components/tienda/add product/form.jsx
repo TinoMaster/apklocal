@@ -86,7 +86,7 @@ export const Form = ({
   return (
     <form
       ref={formRef}
-      className="w-full my-10 flex flex-wrap justify-center"
+      className="w-full my-5 flex flex-wrap justify-center"
       action=""
     >
       {/* Standard */}
@@ -98,7 +98,7 @@ export const Form = ({
             </div>
           </div>
         )}
-        <legend className="text-lg font-semibold font-serif px-2 rounded-lg">
+        <legend className="font-semibold font-serif px-2 rounded-lg">
           Producto
         </legend>
         {/* Inputs */}
@@ -107,7 +107,7 @@ export const Form = ({
             className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/4">Nombre:</p>
+            <p className=" mr-1 font-serif text-center w-1/4">Nombre:</p>
             <input
               name="name"
               onChange={handlers.handlerInputTextForm}
@@ -122,7 +122,7 @@ export const Form = ({
             className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/4">
+            <p className=" mr-1 font-serif text-center w-1/4">
               Proveedor:
             </p>
             {newProvider ? (
@@ -173,7 +173,7 @@ export const Form = ({
             className="font-medium items-center w-full  flex justify-between"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/4">
+            <p className=" mr-1 font-serif text-center w-1/4">
               Categoria:
             </p>
             {newCategory ? (
@@ -220,14 +220,14 @@ export const Form = ({
         </div>
         {/* costo y precio */}
         <fieldset className="w-full  flex border-2 p-3 rounded-lg mb-5">
-          <legend className="text-lg font-semibold font-serif px-4 rounded-lg">
+          <legend className=" font-semibold font-serif px-4 rounded-lg">
             $
           </legend>
           <label
             className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/2 ">Costo:</p>
+            <p className=" mr-1 font-serif text-center w-1/2 ">Costo:</p>
             <input
               name="cost"
               className="focus:outline-none rounded-md w-1/2  bg-white/5 shadow-black/20 shadow-inner pl-2"
@@ -239,7 +239,7 @@ export const Form = ({
             className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/2">Venta:</p>
+            <p className=" mr-1 font-serif text-center w-1/2">Venta:</p>
             <input
               name="sell"
               className="focus:outline-none rounded-md w-1/2 shadow-black/20  shadow-inner bg-white/5 pl-2"
@@ -249,8 +249,8 @@ export const Form = ({
           </label>
         </fieldset>
         {/* Propiedades */}
-        <fieldset className="w-full  flex flex-wrap border-2 p-3 rounded-lg mb-5">
-          <legend className="text-lg font-semibold font-serif px-4 rounded-lg">
+        <fieldset className="w-full flex flex-wrap border-2 p-3 rounded-lg mb-5">
+          <legend className=" font-semibold font-serif px-4 rounded-lg">
             Propiedades
           </legend>
           {inputProperties?.map((input) => (
@@ -259,7 +259,7 @@ export const Form = ({
               className="font-medium items-center w-1/2 flex justify-around my-2"
               htmlFor=""
             >
-              <p className="text-lg mr-1 font-serif text-center w-1/2 ">
+              <p className=" mr-1 font-serif text-center w-1/2 ">
                 {input.title}:
               </p>
               <input
@@ -273,14 +273,14 @@ export const Form = ({
         </fieldset>
         {/* Cantidades */}
         <fieldset className="w-full  flex border-2 p-3 rounded-lg mb-5">
-          <legend className="text-lg font-semibold font-serif px-4 rounded-lg">
+          <legend className=" font-semibold font-serif px-4 rounded-lg">
             Cantidad
           </legend>
           <label
             className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/2 ">
+            <p className=" mr-1 font-serif text-center w-1/2 ">
               Almacen:
             </p>
             <input
@@ -294,7 +294,7 @@ export const Form = ({
             className="font-medium items-center w-1/2 flex justify-center"
             htmlFor=""
           >
-            <p className="text-lg mr-1 font-serif text-center w-1/2">Local:</p>
+            <p className=" mr-1 font-serif text-center w-1/2">Local:</p>
             <input
               name="local_amount"
               className="focus:outline-none rounded-md w-1/2 bg-white/5 shadow-black/20 shadow-inner pl-2"

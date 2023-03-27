@@ -9,6 +9,7 @@ import { ModalViewVentas } from "./modalViewVentas";
 
 export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
   const [viewDay, setViewDay] = useState("close");
+  const [dayToView, setDayToView] = useState({});
   let totalVenta = 0;
   let totalDueño = 0;
 
@@ -32,12 +33,15 @@ export const TablaVentas = ({ dbMensual, user, EliminarDiaCuadre }) => {
               totalDueño += dia.dueño;
               return (
                 <tr
-                  onClick={() => setViewDay("open")}
+                  onClick={() => {
+                    setViewDay("open");
+                    setDayToView(dia);
+                  }}
                   className="hover:bg-black/10  hover:cursor-pointer transition-all rounded"
                   key={dia.id}
                 >
                   {viewDay === "open" && (
-                    <ModalViewVentas dia={dia} setViewDay={setViewDay} />
+                    <ModalViewVentas dia={dayToView} setViewDay={setViewDay} />
                   )}
                   <td className="text-center">
                     <h4 className="py-2 flex justify-center items-baseline md:m-2 shadow-lg  rounded-lg bg-white/5 text-xs">

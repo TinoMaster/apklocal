@@ -4,8 +4,8 @@ import { ModalPortal } from "../modalPortal/modalPortal";
 export const ModalViewVentas = ({ dia, setViewDay }) => {
   return (
     <ModalPortal>
-      <div className="flex z-50 flex-col justify-center items-center rounded-lg w-full h-full fixed md:absolute bg-black/50">
-        <div className="flex flex-col justify-center w-11/12 h-10/12 md:w-2/3 lg:w-1/4 relative m-auto bg-white rounded-lg shadow-2xl shadow-white/30 items-center">
+      <div className="flex z-50 flex-col justify-center items-center rounded-lg w-full h-full fixed md:absolute bg-black/10">
+        <div className="flex flex-col justify-center w-11/12 h-10/12 md:w-2/3 lg:w-1/4 relative m-auto bg-white rounded-lg  items-center">
           {/* fecha */}
           <p className="absolute bg-primary text-lightMode top-2 text-xs font-serif p-2 rounded-md left-2 ">
             {dia.fecha}
@@ -37,11 +37,8 @@ export const ModalViewVentas = ({ dia, setViewDay }) => {
             }`}</p>
             <p className="text-xs font-semibold text-green-500">{`total ${
               dia.hasOwnProperty("hojas")
-                ? dia.hojas.rest_bn
-                  ? dia.hojas.rest_bn
-                  : 0 + dia.hojas.rest_color
-                  ? dia.hojas.rest_color
-                  : 0
+                ? (dia.hojas.rest_bn ? dia.hojas.rest_bn : 0) +
+                  (dia.hojas.rest_color ? dia.hojas.rest_color : 0)
                 : 0
             }`}</p>
           </div>
