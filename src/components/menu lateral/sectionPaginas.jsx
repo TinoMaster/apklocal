@@ -77,11 +77,11 @@ const SectionPaginas = () => {
             to="/mirones"
           >
             <FontAwesomeIcon className="mx-1" icon={faDatabase} /> Miron
-            <div className="absolute flex items-center justify-end h-full w-full -right-4">
+            {/* <div className="absolute flex items-center justify-end h-full w-full -right-4">
               <p className=" bg-primary/70 font-serif text-lightMode px-1 rounded-md shadow-md shadow-black/40">
                 Nuevo
               </p>
-            </div>
+            </div> */}
           </NavLink>
         </li>
         <li className="link w-full font-light rounded hover:translate-x-2 transition-transform text-sm md:text-base hover:bg-black/5">

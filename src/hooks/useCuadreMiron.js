@@ -88,6 +88,9 @@ export const UseCuadreMiron = (setErrorsForm) => {
     } else if (!cantHojas.bn || !cantHojas.color) {
       err.name = `Complete las hojas`;
       return err;
+    } else if (restHojas.bn < 0 || restHojas.color < 0) {
+      err.name = `Numeros invalidos del test de inyectores`;
+      return err;
     }
 
     return err;
