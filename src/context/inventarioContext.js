@@ -15,7 +15,7 @@ const InventarioProvider = ({ children }) => {
 
   const urlGetInsumos = `${apiConfig.api.url}/inventario/insumos`;
   const urlPostInsumos = `${apiConfig.api.url}/inventario`;
-  const urlGetMediosBasicos = `${apiConfig.api.url}/inventario/mediosBasicos`;
+  /* const urlGetMediosBasicos = `${apiConfig.api.url}/inventario/mediosBasicos`; */
 
   const addDataToArray = (object) => {
     if (object.tipo === "insumos") {

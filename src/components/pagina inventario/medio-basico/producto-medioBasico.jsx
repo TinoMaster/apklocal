@@ -1,11 +1,11 @@
 import {
-  faEdit,
+  /* faEdit, */
   faPaperPlane,
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
-import AuthContext from "../../../context/authContext";
+import React, { /* useContext, */ useState } from "react";
+/* import AuthContext from "../../../context/authContext"; */
 
 const ProductoMedioBasico = ({
   MBasico,
@@ -18,10 +18,10 @@ const ProductoMedioBasico = ({
 }) => {
   const [modalEditar, setModalEditar] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  /* const { user } = useContext(AuthContext); */
 
   return (
-    <div className="w-full my-2 rounded-md shadow-md flex justify-between">
+    <>
       {!modalEditar ? (
         <div className=" w-2/12 text-center">
           <h4 className=" p-2 text-xs md:text-sm bg-white/5 font-medium">
@@ -107,7 +107,7 @@ const ProductoMedioBasico = ({
           <h4 className="p-2 w-full text-xs md:text-sm bg-white/5 font-medium">
             {MBasico.local === 0 ? "-" : MBasico.local}
           </h4>
-          {!botonEditOff && user?.role === "admin" && (
+          {/* {!botonEditOff && user?.role === "admin" && (
             <div
               onClick={() => {
                 setModalEditar(true);
@@ -120,7 +120,7 @@ const ProductoMedioBasico = ({
                 icon={faEdit}
               />
             </div>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="relative w-2/12 text-center flex">
@@ -160,7 +160,7 @@ const ProductoMedioBasico = ({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

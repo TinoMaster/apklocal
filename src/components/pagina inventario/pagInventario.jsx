@@ -4,7 +4,7 @@ import MedioBasico from "./medio-basico";
 
 const PagInventario = () => {
   return (
-    <div className="relative max-w-1080p m-auto w-full flex flex-wrap h-screen overflow-auto">
+    <div className="relative max-w-1080p m-auto w-full flex flex-wrap h-screen">
       {/* Caja Insumos */}
       <Insumos />
       {/* medio Basico */}

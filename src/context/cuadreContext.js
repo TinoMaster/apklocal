@@ -201,7 +201,7 @@ const CuadreProvider = ({ children }) => {
     return { bn, color, total };
   };
 
-  const restarHojasPagInicio = () => {
+  const restarHojasPagInicio = async () => {
     let bn;
     let color;
     if (Object.keys(ultimaVenta).length === 0) {
@@ -228,7 +228,9 @@ const CuadreProvider = ({ children }) => {
     let api = httpHelper();
     let urlEdit = `${apiConfig.api.url}/inventario/${id}`;
 
-    api.put(urlEdit, options);
+    const res = await api.put(urlEdit, options);
+    if (res.error) return false;
+    return true;
   };
 
   const existCuadre = async () => {
@@ -308,8 +310,23 @@ const CuadreProvider = ({ children }) => {
       headers: { "content-type": "application/json" },
     };
 
-    await httpHelper().post(urlSave, options);
-    await httpHelper().post(`${apiConfig.api.url}/testInyectores`, optionsTest);
+    const saveCuadre = await httpHelper().post(urlSave, options);
+    const saveTest = await httpHelper().post(
+      `${apiConfig.api.url}/testInyectores`,
+      optionsTest
+    );
+
+    let success;
+    await Promise.all([saveCuadre, saveTest])
+      .then((res) => (success = res))
+      .catch((err) => console.log(err));
+    let ready = true;
+    await success.forEach((resp) => {
+      if (!resp?.success) {
+        ready = false;
+      }
+    });
+    return ready;
   };
 
   const validarData = async () => {
@@ -327,19 +344,33 @@ const CuadreProvider = ({ children }) => {
         setError({ error: true, message: "El cuadre de hoy ya existe" });
       } else {
         setError({});
-        await sendData();
-        await restarHojasPagInicio();
-        setLoading(false);
-        httpHelper().del(urlGetOrPostCards);
-        setSuccess({
-          success: true,
-          message: "Registro satisfactorio",
-        });
-        setTimeout(() => {
-          setModalCuadre(false);
-          setSuccess({});
-        }, 2000);
-        window.location.reload();
+        const restHojas = await restarHojasPagInicio();
+        if (!restHojas) {
+          setLoading(false);
+          setError({
+            error: true,
+            message: "Revise su conexion, no se han enviado los datos",
+          });
+        } else {
+          const isSend = await sendData();
+          if (isSend) {
+            setLoading(false);
+            httpHelper().del(urlGetOrPostCards);
+            setSuccess({
+              success: true,
+              message: "Registro satisfactorio",
+            });
+            setTimeout(() => {
+              setModalCuadre(false);
+              setSuccess({});
+            }, 2000);
+            window.location.reload();
+          } else
+            setError({
+              error: true,
+              message: "Verifique!!,No se ah completado el proceso completo",
+            });
+        }
       }
     }
   };
