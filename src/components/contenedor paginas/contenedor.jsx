@@ -15,8 +15,11 @@ import { EstadisticasTienda } from "../tienda/estadisticas tienda";
 import { EditProduct } from "../tienda/edit product";
 import { SeeProduct } from "../tienda/see product";
 import { PagMirones } from "../pag mirones";
+import { PagDeudas } from "../pagina deudas";
+import { CajaDeudas } from "../pagina deudas/cajaDeudas";
+import { PagInicioDeudas } from "../pagina deudas/pagInicio";
 
-const Contenedor = ({ setMenuActive, notasActive }) => {
+const Contenedor = ({ setMenuActive, notasActive, user }) => {
   return (
     <div className=" relative rounded-md h-full overflow-hidden">
       <div
@@ -48,7 +51,13 @@ const Contenedor = ({ setMenuActive, notasActive }) => {
             <Route path="historial" element={<Historial />} />
             <Route path="estadisticas" element={<EstadisticasTienda />} />
           </Route>
-            <Route path="/mirones" element={<PagMirones />} />
+          <Route path="/mirones" element={<PagMirones />} />
+          {user?.role === "admin" && (
+            <Route path="/deudas" element={<PagDeudas />}>
+              <Route index element={<PagInicioDeudas />} />
+              <Route path="prueba" element={<CajaDeudas />} />
+            </Route>
+          )}
           <Route path="/*" element={<PagInicio />} />
         </Routes>
       </div>

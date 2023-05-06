@@ -15,6 +15,18 @@ export const TablaMirones = ({ mirones }) => {
       setDataToView({ pc1Reporte: result[0], pc2Reporte: result[1] });
     } else setDataToView({ pc1Reporte: result[0] });
   };
+  const regex = /(?<=\s)\d+(?=\/)/;
+
+  mirones.sort((a, b) => {
+    if (Number(a.fecha.match(regex)[0]) > Number(b.fecha.match(regex)[0])) {
+      return 1;
+    } else if (
+      Number(a.fecha.match(regex)[0]) < Number(b.fecha.match(regex)[0])
+    ) {
+      return -1;
+    }
+    return 0;
+  });
 
   const totalMirones = () => {
     const pc1pc2 = [
@@ -34,7 +46,7 @@ export const TablaMirones = ({ mirones }) => {
           mirones={dataToView}
         />
       )}
-      {mirones?.map((dia, index, array) =>
+      {mirones.map((dia, index, array) =>
         index !== 0 && dia.fecha === array[index - 1]?.fecha ? (
           <div
             key={dia.id}
@@ -153,7 +165,11 @@ export const TablaMirones = ({ mirones }) => {
           )
         )
       )}
-      {mirones.length === 0 && <p className="w-full p-2 text-center text-violet-500">No hay datos de este mes</p>}
+      {mirones.length === 0 && (
+        <p className="w-full p-2 text-center text-violet-500">
+          No hay datos de este mes
+        </p>
+      )}
     </div>
   );
 };

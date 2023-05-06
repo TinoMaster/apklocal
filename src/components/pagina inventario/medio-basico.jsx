@@ -89,7 +89,7 @@ const MedioBasico = () => {
                         key={MBasico._id}
                         className="w-full my-2 rounded-md shadow-md flex justify-between items-center relative"
                       >
-                        <p className="absolute ml-1">{`${index + 1}`}</p>
+                        <p className="absolute ml-1 text-xs">{`${index + 1}`}</p>
                         <ProductoMedioBasico
                           MBasico={MBasico}
                           mBasicoToEdit={mBasicoToEdit}

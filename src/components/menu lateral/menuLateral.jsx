@@ -54,7 +54,7 @@ const MenuLateral = ({
         <ButtonModeDark />
       </h1>
       <SectionPaginas />
-      <SectionEntradas />
+      <SectionEntradas user={user} />
 
       {/* Test Ayer, Fondo y add Tarjeta*/}
       <div

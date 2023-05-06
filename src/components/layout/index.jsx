@@ -10,7 +10,7 @@ import MenuLateral from "../menu lateral/menuLateral";
 import Menu from "../menu/menuPrincipal";
 
 export const Layout = () => {
-  const { darkMode, isConnected } = useContext(AuthContext);
+  const { darkMode, isConnected, user } = useContext(AuthContext);
   const [menuActive, setMenuActive] = useState(false);
   const [notasActive, setNotasActive] = useState(false);
   const [addTarget, setAddTarget] = useState(false);
@@ -44,6 +44,7 @@ export const Layout = () => {
                 setMenuActive={setMenuActive}
                 setNotasActive={setNotasActive}
                 notasActive={notasActive}
+                user={user}
               />
             </section>
           </main>
