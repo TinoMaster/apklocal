@@ -355,7 +355,7 @@ const CuadreProvider = ({ children }) => {
           const isSend = await sendData();
           if (isSend) {
             setLoading(false);
-            httpHelper().del(urlGetOrPostCards);
+            await httpHelper().del(urlGetOrPostCards);
             setSuccess({
               success: true,
               message: "Registro satisfactorio",

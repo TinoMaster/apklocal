@@ -3,16 +3,18 @@ import { httpHelper } from "../helpers/httpHelper";
 import dbConfig from "../config/api.config.json";
 
 export const useDeudas = () => {
+  /* General States */
   const [deudas, setDeudas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
+  /* Modal States */
+  const [modalCreateCollection, setModalCreateCollection] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     httpHelper()
       .get(`${dbConfig.api.url}/deudas`)
       .then((res) => {
-        console.log(res);
         if (!res.success) {
           setLoading(false);
           setError(res);
@@ -24,5 +26,7 @@ export const useDeudas = () => {
       });
   }, []);
 
-  return { deudas, error, loading };
+  const modales = { modalCreateCollection, setModalCreateCollection };
+
+  return { deudas, error, loading, modales };
 };
