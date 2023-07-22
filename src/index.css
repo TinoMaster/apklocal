@@ -55,3 +55,11 @@ focus:border-slate-300 mt-1;
 .imputCheckedNotas:checked +label{
   @apply shadow-md shadow-green-400/30 text-green-500;
 }
+
+.imputCheckedAddDebt {
+  @apply hidden;
+}
+
+.imputCheckedAddDebt:checked +label{
+  @apply shadow shadow-black/20 bg-black/40;
+}

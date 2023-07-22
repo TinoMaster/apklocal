@@ -142,12 +142,12 @@ const EstadisticasProvider = ({ children }) => {
   const ventaPorTurno = (bd) => {
     let result = {};
 
-    if (bd?.length) {
+    if (bd?.length > 0) {
       result = bd.reduce((object, element) => {
         const turno =
-          element.turno.trabajador1 +
-          (element.turno.trabajador2 !== ""
-            ? " y " + element.turno.trabajador2
+          element?.turno?.trabajador1 +
+          (element?.turno?.trabajador2 !== ""
+            ? " y " + element?.turno?.trabajador2
             : "");
 
         if (!object[turno]) {
@@ -200,11 +200,11 @@ const EstadisticasProvider = ({ children }) => {
     else {
       bd.forEach((dia) => {
         if (
-          dia.turno.trabajador1 === worker ||
-          dia.turno.trabajador1 === `${worker}(S)`
+          dia?.turno?.trabajador1 === worker ||
+          dia?.turno?.trabajador1 === `${worker}(S)`
         ) {
           salario += dia.salario1;
-        } else if (dia.turno.trabajador2 === worker) salario += dia.salario2;
+        } else if (dia?.turno?.trabajador2 === worker) salario += dia.salario2;
       });
       return salario;
     }

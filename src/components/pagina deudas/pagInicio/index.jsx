@@ -2,9 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useDeudas } from "../../../hooks/useDeudas";
 import { ModalPortal } from "../../modalPortal/modalPortal";
+import { ModalCreateDebt } from "../modalCreateDebt";
 
 export const PagInicioDeudas = () => {
-  const { modales, handlerFunctions } = useDeudas();
+  const { modales, handlerFunctions, workers } = useDeudas();
   const {
     modalCreateCollection,
     setModalCreateCollection,
@@ -65,76 +66,11 @@ export const PagInicioDeudas = () => {
       )}
       {modalCreateDebt && (
         <ModalPortal>
-          <motion.div
-            initial={{ scale: 0, y: -180, x: 200 }}
-            animate={{ scale: 1, y: 0, x: 0 }}
-            className="bg-primary text-lightMode px-10 py-4 rounded-md"
-          >
-            {/* Encabezado */}
-            <h2 className="text-lg font-semibold w-full text-center">
-              Nueva Deuda
-            </h2>
-            {/* Elegir tipo de deuda */}
-            <div className="flex flex-wrap justify-around p-2 border-2 border-dashed my-5">
-              <h3 className="w-full text-center pb-2">Escoge el tipo de deuda</h3>
-              <label
-                htmlFor="debo"
-                className="p-2 bg-black/20 w-24 text-center rounded-md"
-              >
-                Debo
-              </label>
-              <input
-                type="radio"
-                name="debtTipe"
-                id="debo"
-                className="hidden"
-              />
-              <label
-                htmlFor="meDeben"
-                className="p-2 bg-black/20 w-24 text-center rounded-md"
-              >
-                Me deben
-              </label>
-              <input
-                type="radio"
-                name="debtTipe"
-                id="meDeben"
-                className="hidden"
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <h4 className="">Introduzca el nombre de su coleccion</h4>
-              <input
-                onChange={handlerCreateDebt}
-                type="text"
-                className="shadow-inner shadow-black/30 p-2 text-darkMode font-medium rounded-md my-2 focus:outline-none"
-              />
-            </div>
-            <div className="flex justify-center py-2">
-              <motion.button
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0px 0px 8px rgb(255,255,255)",
-                }}
-                transition={{ duration: 0.4, type: "spring", stiffness: 500 }}
-                className="p-2 mx-2 bg-black/30 rounded-md shadow"
-                onClick={() => setModalCreateCollection(false)}
-              >
-                Aceptar
-              </motion.button>
-              <motion.button
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0px 0px 8px rgb(255,255,255)",
-                }}
-                transition={{ duration: 0.4, type: "spring", stiffness: 500 }}
-                className="p-2 mx-2 bg-black/30 rounded-md shadow"
-                onClick={() => setModalCreateDebt(false)}
-              >
-                Cancelar
-              </motion.button>
-            </div>
-          </motion.div>
+          <ModalCreateDebt
+            modales={modales}
+            handlerFunctions={handlerFunctions}
+            workers={workers}
+          />
         </ModalPortal>
       )}
       {/* Caja izquierda */}
