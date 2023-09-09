@@ -1,6 +1,7 @@
 {
   "api": {
-    "url2": "https://apilocal.onrender.com",
-    "url": "http://localhost:5000"
+    "url": "https://apilocal.onrender.com",
+    "url2": "https://api-local-cy15-dev.fl0.io",
+    "url3": "http://localhost:5000"
   }
 }
